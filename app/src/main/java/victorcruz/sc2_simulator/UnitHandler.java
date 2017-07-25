@@ -7,11 +7,11 @@ import android.widget.TextView;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
-import java.util.function.IntSupplier;
 
 import victorcruz.sc2_simulator.Units.Army.Roach;
 import victorcruz.sc2_simulator.Units.Army.Zergling;
 import victorcruz.sc2_simulator.Units.Unit;
+import victorcruz.sc2_simulator.Units.UnitAttackInfo;
 import victorcruz.sc2_simulator.Units.Workers.Drone.Drone;
 import victorcruz.sc2_simulator.Units.Workers.Drone.MiningDrone;
 
@@ -28,6 +28,8 @@ public class UnitHandler {
     private Handler handler = new Handler(); // used on unitProduction
 
     private int workerNumber = 12, lingNumber = 0, roachNumber = 0, supply = 12, supplyMax = 14;
+
+    private Unit[] xUnit;
 
     // The unit objects with "x" are just so the handler can have access to info like resource cost
     private Drone xDrone;
@@ -46,8 +48,14 @@ public class UnitHandler {
         xZergling = new Zergling(0);
         xRoach = new Roach(0);
 
-        
+        xUnit[0] = new Unit("Drone", 50, -1, 50, 0, 1, 0, -1, -1, 0, 1, -1, -1, 1, 8, 12000, 3.94, 3.94, new String[]{"Larva"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, null);
     }
+
+    // I had a class dedicated to every unit in the game, but then i had to write a bunch of
+    // code to create each different unit, as you can see on the comments down there(makeUnit method).
+    // The way i figured out not to have a giant method with every unit specified, was to make
+    // "Unit" the universal class and the field name is what compares each unit ingame.
+
 
     public void unitProduction(final long currentTime) {
         if (priorityQueue.peek() != null && 1000 > priorityQueue.peek().getReady() - currentTime) {
@@ -85,12 +93,25 @@ public class UnitHandler {
         supplyTextView.setText(Integer.toString(supply));
     }
 
+    public int checkUnitIndex(String buttonText){
+        for (int i = 0; i < xUnit.length; i++){
+            if (buttonText.equals(xUnit[i].getName())){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
     public void makeUnit(View view){
 
         Button button = (Button) view;
 
+        int index = checkUnitIndex(button.getText().toString());
+        Unit unit = xUnit[index];
+        priorityQueue.add(unit);
 
-        if (button.getText().equals("+DRONE")){
+        /*if(button.getText().equals("+DRONE")){
             // the ifelse inside is to pass the correct time when the button is clicked
             // the problem is that elapsedRealtime() keeps counting even if the chronometer is paused, so we can`t always use it
             // the if outside is to check if the player has enough resources to pay for the unit
@@ -129,7 +150,7 @@ public class UnitHandler {
                     priorityQueue.add(new Roach(-timeHandler.getTimeWhenStopped()));
                 //roachNumber++;
             }
-        }
+        }*/
 
     }
 

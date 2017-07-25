@@ -143,4 +143,6 @@ public class MainSimulator extends AppCompatActivity {
     entender melhor a concorrencia das duas prioritie queues
     penser melhor em um modo de nao ter q fazer 10 linhas pra cada unidade no makeUnit
 
+
+    new Unit(roach.name, roach.life, roach.mincost...)
  */
