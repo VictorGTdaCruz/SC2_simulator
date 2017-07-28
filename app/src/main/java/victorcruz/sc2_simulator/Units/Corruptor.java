@@ -1,8 +1,8 @@
-package victorcruz.sc2_simulator.Units.Army;
+package victorcruz.sc2_simulator.Units;
 
-import victorcruz.sc2_simulator.Units.Unit;
-import victorcruz.sc2_simulator.Units.UnitAbility;
-import victorcruz.sc2_simulator.Units.UnitAttackInfo;
+import victorcruz.sc2_simulator.Unit;
+import victorcruz.sc2_simulator.UnitAbility;
+import victorcruz.sc2_simulator.UnitAttackInfo;
 
 public class Corruptor extends Unit {
 

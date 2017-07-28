@@ -1,7 +1,6 @@
-package victorcruz.sc2_simulator.Units.Army;
+package victorcruz.sc2_simulator.Units;
 
-import victorcruz.sc2_simulator.Units.Unit;
-import victorcruz.sc2_simulator.Units.UnitAttackInfo;
+import victorcruz.sc2_simulator.Unit;
 
 public class Overlord extends Unit {
 

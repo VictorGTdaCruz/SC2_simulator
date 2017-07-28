@@ -1,7 +1,7 @@
-package victorcruz.sc2_simulator.Units.Army;
+package victorcruz.sc2_simulator.Units;
 
-import victorcruz.sc2_simulator.Units.Unit;
-import victorcruz.sc2_simulator.Units.UnitAttackInfo;
+import victorcruz.sc2_simulator.Unit;
+import victorcruz.sc2_simulator.UnitAttackInfo;
 
 public class Hydralisk extends Unit {
 

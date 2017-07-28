@@ -1,7 +1,7 @@
-package victorcruz.sc2_simulator.Units.Army;
+package victorcruz.sc2_simulator.Units;
 
-import victorcruz.sc2_simulator.Units.Unit;
-import victorcruz.sc2_simulator.Units.UnitAbility;
+import victorcruz.sc2_simulator.Unit;
+import victorcruz.sc2_simulator.UnitAbility;
 
 public class Viper extends Unit {
 

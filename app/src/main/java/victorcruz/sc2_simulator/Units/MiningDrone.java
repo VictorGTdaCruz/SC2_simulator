@@ -1,16 +1,17 @@
-package victorcruz.sc2_simulator.Units.Workers.Drone;
+package victorcruz.sc2_simulator.Units;
 
 import java.util.Random;
 
-import victorcruz.sc2_simulator.Units.Workers.Worker;
+import victorcruz.sc2_simulator.Unit;
 
-public class MiningDrone extends Worker {
+public class MiningDrone extends Unit {
 
     public boolean isFirstMineAction, isMiningHandlered;
 
     private Random randomGenerator;
 
     public MiningDrone(long orderedTime, boolean isFirstMineAction){
+        super();
         //variables of a drone
         name = "Drone";
         minCost = 50;

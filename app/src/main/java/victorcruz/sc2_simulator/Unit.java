@@ -1,4 +1,4 @@
-package victorcruz.sc2_simulator.Units;
+package victorcruz.sc2_simulator;
 
 
 public class Unit {
@@ -6,13 +6,13 @@ public class Unit {
     public String name;
     public int life, lifeUp, shield, minCost, gasCost, supply, supplyMax, energyInitial, energyMax, armor, armorScalability,
                 shieldArmor, shieldArmorScalability, cargoSize, sight;
-    public long productionTime, ready;
+    public long productionTime, orderedTime, ready;
     public double speed, speedOnCreep, speedWithSpeedUpgrade;
     public String[] requisites, attributes;
     public UnitAttackInfo[] attacks;
     public UnitAbility[] abilities;
 
-    public Unit(String name, int life, int shield, int minCost, int gasCost, int supply, int supplyMax, int energyInitial, int energyMax, int armor, int armorScalability,
+    public Unit(long orderedTime, String name, int life, int shield, int minCost, int gasCost, int supply, int supplyMax, int energyInitial, int energyMax, int armor, int armorScalability,
                int shieldArmor, int shieldArmorScalability, int cargoSize, int sight, long productionTime, double speed, double speedOnCreep,
                 String[] requisites, String[] attributes, UnitAttackInfo[] attacks, UnitAbility[] abilities){
 
@@ -38,12 +38,30 @@ public class Unit {
         this.attributes = attributes;
         this.attacks = attacks;
         this.abilities = abilities;
+
+
+        this.orderedTime = orderedTime;
+        ready = orderedTime + productionTime;
+        System.out.println(name + " ordered:" + ready + " " + orderedTime);
+
+    }
+
+    public Unit() {
+
     }
 
     // requisites, attack, attributes, armor, attack and armor after upgrades, cargo size, abilities
 
-    // units not implemented: Zerg(cocoon, locust, broodling, infested terran, changeling), Terran(), Protoss()
+    // units not implemented:
+    // Zerg: cocoon, locust, broodling, infested terran, changeling
+    // Terran:
+    // Protoss:
 
+    public void setOrderedTime(long orderedTime){
+        this.orderedTime = orderedTime;
+        ready = orderedTime + productionTime;
+
+    }
 
     public String getName(){
         return name;

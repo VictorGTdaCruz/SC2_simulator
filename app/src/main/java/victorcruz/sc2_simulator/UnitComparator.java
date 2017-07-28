@@ -2,8 +2,6 @@ package victorcruz.sc2_simulator;
 
 import java.util.Comparator;
 
-import victorcruz.sc2_simulator.Units.Unit;
-
 public class UnitComparator implements Comparator<Unit>{
 
     @Override
