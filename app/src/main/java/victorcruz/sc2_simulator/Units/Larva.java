@@ -5,7 +5,7 @@ import victorcruz.sc2_simulator.Unit;
 
 public class Larva extends Unit {
 
-    public Larva(long orderedTime){
+    public Larva(long ready){
         name = "Larva";
         life = 25;
         minCost = 0;
@@ -20,7 +20,7 @@ public class Larva extends Unit {
         sight = 5;
         attributes = new String[]{"Biological", "Light"};
 
-        ready = orderedTime + productionTime;
-        System.out.println(name + " ordered:" + ready + " " + orderedTime);
+        this.ready = ready; // orderedTime + productionTime;
+        System.out.println(name + " ready:" + ready );
     }
 }

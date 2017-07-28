@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 
+import victorcruz.sc2_simulator.Units.Larva;
+
 public class TimeHandler {
 
     private Chronometer chronometer;
@@ -13,7 +15,10 @@ public class TimeHandler {
 
     private ResourcesHandler resourcesHandler;
 
+    private UnitHandler unitHandler;
+
     private long timeWhenStopped;
+
 
     public TimeHandler (Chronometer chronometer, Button optButton34, ResourcesHandler resourcesHandler){
 

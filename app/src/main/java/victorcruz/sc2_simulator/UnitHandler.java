@@ -7,13 +7,15 @@ import android.widget.TextView;
 
 
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 
+import victorcruz.sc2_simulator.Units.Larva;
 import victorcruz.sc2_simulator.Units.MiningDrone;
 
 public class UnitHandler {
 
-    private TextView supplyTextView, supplyMaxTextView;
+    private TextView supplyTextView, supplyMaxTextView, larvaTextView;
 
     private PriorityQueue<Unit> priorityQueue;
     private Comparator<Unit> comparator = new UnitComparator();
@@ -21,7 +23,8 @@ public class UnitHandler {
     private ResourcesHandler resourcesHandler;
     private TimeHandler timeHandler;
 
-    private Handler handler = new Handler(); // used on unitProduction
+    private Handler prodHandler = new Handler(); // used on unitProduction
+    public Handler larvaHandler = new Handler(); // used on growLarva
 
     // zerg units
     private int overlordNumber = 0, queenNumber = 0, lingNumber = 0, banelingNumber = 0, roachNumber = 0,
@@ -30,8 +33,17 @@ public class UnitHandler {
 
     private Unit[] xUnit;
 
+    private int hatcheryNumber = 1;
 
-    public UnitHandler(ResourcesHandler resourcesHandler, TimeHandler timeHandler, TextView supplyTextView, TextView supplyMaxTextView){
+
+
+    public LinkedList<PriorityQueue<Larva>> larvaSystem;
+    public int[] larvaCount;
+    public boolean[] isProducingLarva;
+
+
+    public UnitHandler(ResourcesHandler resourcesHandler, TimeHandler timeHandler, TextView supplyTextView,
+                       TextView supplyMaxTextView, TextView larvaTextView){
         priorityQueue = new PriorityQueue<>(10, comparator);
         this.resourcesHandler = resourcesHandler;
         this.timeHandler = timeHandler;
@@ -40,6 +52,19 @@ public class UnitHandler {
         this.supplyMaxTextView = supplyMaxTextView;
         supplyTextView.setText(Integer.toString(supply));
         supplyMaxTextView.setText(Integer.toString(supplyMax));
+
+        this.larvaTextView = larvaTextView;
+        larvaTextView.setText(Integer.toString(3));
+        larvaSystem = new LinkedList<>();
+        larvaSystem.add(new PriorityQueue<Larva>(19, comparator));
+
+        larvaSystem.get(0).add(new Larva(-11000));
+        larvaSystem.get(0).add(new Larva(-11000));
+        larvaSystem.get(0).add(new Larva(-11000));
+        larvaCount = new int[1];
+        larvaCount[0] = 3;
+        isProducingLarva = new boolean[1];
+        isProducingLarva[0] = false;
 
 
         xUnit = new Unit[15];
@@ -61,6 +86,41 @@ public class UnitHandler {
     // The way i figured out not to have a giant method with every unit specified, was to make
     // "Unit" the universal class and the NAME variable is what compares each unit ingame.
 
+    public void useLarva(long currentTime){
+
+        int larvaSystemIndex = 0;
+        for (;larvaSystemIndex < larvaSystem.size(); larvaSystemIndex++){
+
+            if (larvaSystem.get(larvaSystemIndex).peek() != null){
+                larvaSystem.get(larvaSystemIndex).remove();
+                larvaCount[larvaSystemIndex]--;
+                larvaTextView.setText(Integer.toString(larvaCount[larvaSystemIndex]));
+                growLarva(currentTime, larvaSystemIndex);
+                break;
+            }
+
+        }
+    }
+
+
+    public void growLarva(final long currentTime, final int larvaSystemIndex){
+
+        if (larvaSystem.get(larvaSystemIndex).size() < 3 && !(isProducingLarva[larvaSystemIndex])) {
+            isProducingLarva[larvaSystemIndex] = true;
+            larvaHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    larvaSystem.get(larvaSystemIndex).add(new Larva(currentTime + 11000));
+                    larvaCount[larvaSystemIndex]++;
+                    larvaTextView.setText(Integer.toString(larvaCount[larvaSystemIndex]));
+                    growLarva(currentTime + 11000, larvaSystemIndex);
+                }
+            }, 11000);
+        } else isProducingLarva[larvaSystemIndex] = false;
+
+
+    }
+
 
     public void unitProduction(final long currentTime) {
         if (priorityQueue.peek() != null && 1000 > priorityQueue.peek().getReady() - currentTime) {
@@ -70,7 +130,7 @@ public class UnitHandler {
             final long productionTime = priorityQueue.peek().getProductionTime();
             final int supplyMax = priorityQueue.peek().getSupplyMax();
 
-            handler.postDelayed(new Runnable() {
+            prodHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     System.out.println("UNIT IS READY:" + name);
@@ -136,10 +196,13 @@ public class UnitHandler {
 
         if (resourcesHandler.getMinerals() >= unit.getMinCost() && resourcesHandler.getGas() >= unit.getGasCost()
                 && supply + xUnit[index].getSupply() <= supplyMax) {
-            if (timeHandler.isTimeRunning())
+            if (timeHandler.isTimeRunning()) {
                 unit.setOrderedTime(timeHandler.getTime());
-            else
+                useLarva(timeHandler.getTime());
+            } else{
                 unit.setOrderedTime(-timeHandler.getTimeWhenStopped());
+                useLarva(-timeHandler.getTimeWhenStopped());
+            }
             resourcesHandler.decreaseMin(unit.getMinCost());
             resourcesHandler.decreaseGas(unit.getGasCost());
             increaseSupply(unit.getSupply());

@@ -19,6 +19,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/LarvaTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3"
+                android:textSize="25sp"
+                android:layout_below="@+id/chronometer"
+                android:layout_toEndOf="@+id/chronometer"
+                android:layout_marginStart="83dp"/>
+
             <Chronometer
                 android:id="@+id/chronometer"
                 android:layout_width="wrap_content"
