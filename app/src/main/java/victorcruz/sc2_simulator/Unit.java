@@ -50,8 +50,6 @@ public class Unit {
 
     }
 
-    // requisites, attack, attributes, armor, attack and armor after upgrades, cargo size, abilities
-
     // units not implemented:
     // Zerg: cocoon, locust, broodling, infested terran, changeling
     // Terran:

@@ -92,7 +92,7 @@ public class MainSimulator extends AppCompatActivity {
 
         // handlers
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
-        timeHandler = new TimeHandler(chronometer, optButton34, resourcesHandler);
+        timeHandler = new TimeHandler(chronometer, optButton34);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyTextView, supplyMaxTextView, larvaTextView);
 
         // onTick method
@@ -106,6 +106,7 @@ public class MainSimulator extends AppCompatActivity {
                     System.out.println("CurrentTime at Main:" + currentTime);
 
                     unitHandler.unitProduction(currentTime);
+                    unitHandler.growLarva(currentTime);
                     resourcesHandler.resourceMining(currentTime);
 
                 }
@@ -139,7 +140,10 @@ public class MainSimulator extends AppCompatActivity {
 }
 
 /*  Cronometro pula um segundo la pros 6 min e pouco pq ele conta de 1002 milisegundos ao inves de 1000.
-    repensar a estrutura das classes e pacotes (worker.class eh inutil)
+    repensar a estrutura das classes e pacotes
+    excluir as classes individuais de cada unidade
 
-    resolver problema do postdelayed da larva priority queue
+    larva implemented
+    implementar um handler apenas pras larvas?
+    implementar estruturas?
  */
