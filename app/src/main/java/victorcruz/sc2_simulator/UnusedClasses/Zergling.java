@@ -1,8 +1,8 @@
-package victorcruz.sc2_simulator.Units;
+package victorcruz.sc2_simulator.UnusedClasses;
 
 import victorcruz.sc2_simulator.Unit;
 import victorcruz.sc2_simulator.UnitAttackInfo;
-
+/*
 public class Zergling extends Unit{
 
     public Zergling (long orderedTime){
@@ -29,4 +29,4 @@ public class Zergling extends Unit{
 
     }
 
-}
+}*/

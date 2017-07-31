@@ -141,9 +141,8 @@ public class MainSimulator extends AppCompatActivity {
 
 /*  Cronometro pula um segundo la pros 6 min e pouco pq ele conta de 1002 milisegundos ao inves de 1000.
     repensar a estrutura das classes e pacotes
-    excluir as classes individuais de cada unidade
 
-    larva implemented
+    implementar o cronometro modificado
     implementar um handler apenas pras larvas?
     implementar estruturas?
  */

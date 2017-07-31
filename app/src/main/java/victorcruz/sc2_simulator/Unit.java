@@ -46,9 +46,6 @@ public class Unit {
 
     }
 
-    public Unit() {
-
-    }
 
     // units not implemented:
     // Zerg: cocoon, locust, broodling, infested terran, changeling

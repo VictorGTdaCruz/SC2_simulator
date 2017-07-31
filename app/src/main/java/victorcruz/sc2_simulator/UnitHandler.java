@@ -40,8 +40,12 @@ public class UnitHandler {
 
     // larva mechanic variables
     private LinkedList<PriorityQueue<Larva>> larvaSystem;
+    private Comparator<Larva> larvaComparator = new LarvaComparator();
     private int[] larvaCount;
     private boolean[] isProducingLarva;
+
+    //aux variables
+    private boolean consumedLarva = false; // used on makeUnit method
 
 
     public UnitHandler(ResourcesHandler resourcesHandler, TimeHandler timeHandler, TextView supplyTextView,
@@ -64,8 +68,8 @@ public class UnitHandler {
         // first 2 PriorityQueues representing the first hatchery
         // the first represents the available larva
         // the second represents the larva production cycle
-        larvaSystem.add(new PriorityQueue<Larva>(19, comparator));
-        larvaSystem.add(new PriorityQueue<Larva>(4, comparator));
+        larvaSystem.add(new PriorityQueue<Larva>(19, larvaComparator));
+        larvaSystem.add(new PriorityQueue<Larva>(4, larvaComparator));
 
         // it starts with 3 larva
         larvaSystem.get(0).add(new Larva(-11000));
@@ -78,7 +82,7 @@ public class UnitHandler {
         isProducingLarva = new boolean[2];
         isProducingLarva[1] = false;
 
-
+        //xUnit[X] = new Unit(-1, "+LARVA", 25, -1, 0, 0, 0, 0, -1, -1, 10, 1, -1, -1, 1, -1, 11000, 0, 0, new String[]{"Larva"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
         xUnit = new Unit[15];
         xUnit[0] = new Unit(-1, "+DRONE", 50, -1, 50, 0, 1, 0, -1, -1, 0, 1, -1, -1, 1, 8, 12000, 3.94, 3.94, new String[]{"Larva"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
         xUnit[1] = new Unit(-1, "+OVERL", 200, -1, 100, 0, 0, 8, -1, -1, 0, 1, -1, -1, -1, 11, 18000, 0.82, -1, new String[]{"Larva"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
@@ -111,7 +115,7 @@ public class UnitHandler {
      If a hachery is created in the future with less than 3 larva, wich it will, I should trigger
      the scheduleLarva method manually.
     */
-    public void useLarva(long currentTime){
+    public boolean useLarva(long currentTime){
 
         // Chooses a larva to be used/destroyed and then calls scheduleLarva
         int larvaSystemIndex = 0;
@@ -121,11 +125,15 @@ public class UnitHandler {
                 larvaSystem.get(larvaSystemIndex).remove();
                 larvaCount[larvaSystemIndex]--;
                 larvaTextView.setText(Integer.toString(larvaCount[larvaSystemIndex]));
+                System.out.println(larvaSystem.get(larvaSystemIndex).size());
                 scheduleLarva(currentTime, larvaSystemIndex);
-                break;
-            }
+                return true;
 
+            }
         }
+
+        return false;
+
     }
 
 
@@ -247,18 +255,19 @@ public class UnitHandler {
         if (resourcesHandler.getMinerals() >= unit.getMinCost() && resourcesHandler.getGas() >= unit.getGasCost()
                 && supply + xUnit[index].getSupply() <= supplyMax) {
             if (timeHandler.isTimeRunning()) {
+                consumedLarva = useLarva(timeHandler.getTime());
                 unit.setOrderedTime(timeHandler.getTime());
-                useLarva(timeHandler.getTime());
             } else{
+                consumedLarva = useLarva(-timeHandler.getTimeWhenStopped());
                 unit.setOrderedTime(-timeHandler.getTimeWhenStopped());
-                useLarva(-timeHandler.getTimeWhenStopped());
             }
-            resourcesHandler.decreaseMin(unit.getMinCost());
-            resourcesHandler.decreaseGas(unit.getGasCost());
-            increaseSupply(unit.getSupply());
-            priorityQueue.add(unit);
-            System.out.println("UNIT ORDERED: " + unit.getName());
-
+            if (consumedLarva) {
+                resourcesHandler.decreaseMin(unit.getMinCost());
+                resourcesHandler.decreaseGas(unit.getGasCost());
+                increaseSupply(unit.getSupply());
+                priorityQueue.add(unit);
+                System.out.println("UNIT ORDERED: " + unit.getName());
+            }
         }
 
 

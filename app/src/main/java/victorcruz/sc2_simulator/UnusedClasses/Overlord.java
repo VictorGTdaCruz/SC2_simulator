@@ -1,7 +1,7 @@
-package victorcruz.sc2_simulator.Units;
+package victorcruz.sc2_simulator.UnusedClasses;
 
 import victorcruz.sc2_simulator.Unit;
-
+/*
 public class Overlord extends Unit {
 
     public Overlord(long orderedTime){
@@ -23,4 +23,4 @@ public class Overlord extends Unit {
         System.out.println(name + " ordered:" + ready + " " + orderedTime);
     }
 
-}
+}*/

@@ -1,26 +1,21 @@
 package victorcruz.sc2_simulator.Units;
 
+public class Larva {
 
-import victorcruz.sc2_simulator.Unit;
-
-public class Larva extends Unit {
+    private String name;
+    public long ready;
+    private long productionTime;
 
     public Larva(long orderedTime){
         name = "Larva";
-        life = 25;
-        minCost = 0;
-        gasCost = 0;
-        supply = 0;
-        supplyMax = 0;
+
         productionTime = 11000;
-        speed = 0;
-        armor = 10;
-        armorScalability = 1;
-        cargoSize = 1;
-        sight = 5;
-        attributes = new String[]{"Biological", "Light"};
 
         this.ready =  orderedTime + productionTime;
         System.out.println(name + " ready:" + ready );
+    }
+
+    public long getReady(){
+        return ready;
     }
 }
