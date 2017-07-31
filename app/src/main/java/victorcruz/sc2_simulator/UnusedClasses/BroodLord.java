@@ -1,8 +1,8 @@
-package victorcruz.sc2_simulator.Units.Army;
+package victorcruz.sc2_simulator.UnusedClasses;
 
-import victorcruz.sc2_simulator.Units.Unit;
-import victorcruz.sc2_simulator.Units.UnitAttackInfo;
-
+import victorcruz.sc2_simulator.Unit;
+import victorcruz.sc2_simulator.UnitAttackInfo;
+/*
 public class BroodLord extends Unit {
 
     public BroodLord(long orderedTime){
@@ -25,4 +25,4 @@ public class BroodLord extends Unit {
         ready = orderedTime + productionTime;
         System.out.println(name + " ordered:" + ready + " " + orderedTime);
     }
-}
+}*/

@@ -2,10 +2,12 @@ package victorcruz.sc2_simulator;
 
 import java.util.Comparator;
 
-public class UnitComparator implements Comparator<Unit>{
+import victorcruz.sc2_simulator.Units.Larva;
+
+public class LarvaComparator implements Comparator<Larva>{
 
     @Override
-    public int compare(Unit o1, Unit o2) {
+    public int compare(Larva o1, Larva o2) {
 
         if (o1.ready > o2.ready) return 1;
         if (o1.ready < o2.ready) return -1;

@@ -1,24 +1,22 @@
-package victorcruz.sc2_simulator.Units.Workers.Drone;
+package victorcruz.sc2_simulator.Units;
 
 import java.util.Random;
 
-import victorcruz.sc2_simulator.Units.Workers.Worker;
+import victorcruz.sc2_simulator.Unit;
 
-public class MiningDrone extends Worker {
+public class MiningDrone {
 
+    private String name;
+    private long ready, productionTime;
     public boolean isFirstMineAction, isMiningHandlered;
 
     private Random randomGenerator;
 
+
     public MiningDrone(long orderedTime, boolean isFirstMineAction){
-        //variables of a drone
+
         name = "Drone";
-        minCost = 50;
-        gasCost = 0;
-        supply = 1;
-        supplyMax = 0;
         productionTime = 12000;
-        speed = 3.94;
 
         //aux variable to make everything work
         ready = orderedTime + productionTime;
@@ -38,9 +36,9 @@ public class MiningDrone extends Worker {
         return ready;
     }
 
-    public void setIsMiningHandlered(boolean isMiningHandlered){this.isMiningHandlered = isMiningHandlered;}
+    //public void setIsMiningHandlered(boolean isMiningHandlered){this.isMiningHandlered = isMiningHandlered;}
 
-    public boolean getIsMiningHandlered(){return isMiningHandlered;}
+    //public boolean getIsMiningHandlered(){return isMiningHandlered;}
 
     public long calcDistance(){
 

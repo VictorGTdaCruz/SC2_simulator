@@ -1,8 +1,8 @@
-package victorcruz.sc2_simulator.Units.Army;
+package victorcruz.sc2_simulator.UnusedClasses;
 
-import victorcruz.sc2_simulator.Units.Unit;
-import victorcruz.sc2_simulator.Units.UnitAttackInfo;
-
+import victorcruz.sc2_simulator.Unit;
+import victorcruz.sc2_simulator.UnitAttackInfo;
+/*
 public class Mutalisk extends Unit {
 
     public Mutalisk(long orderedTime){
@@ -24,4 +24,4 @@ public class Mutalisk extends Unit {
         ready = orderedTime + productionTime;
         System.out.println(name + " ordered:" + ready + " " + orderedTime);
     }
-}
+}*/

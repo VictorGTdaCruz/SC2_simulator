@@ -11,15 +11,13 @@ public class TimeHandler {
     private Chronometer chronometer;
     private Button optButton34;
 
-    private ResourcesHandler resourcesHandler;
-
     private long timeWhenStopped;
 
-    public TimeHandler (Chronometer chronometer, Button optButton34, ResourcesHandler resourcesHandler){
+
+    public TimeHandler (Chronometer chronometer, Button optButton34){
 
         this.chronometer = chronometer;
         this.optButton34 = optButton34;
-        this.resourcesHandler = resourcesHandler;
 
     }
 

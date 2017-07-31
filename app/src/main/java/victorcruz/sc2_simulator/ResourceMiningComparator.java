@@ -2,8 +2,7 @@ package victorcruz.sc2_simulator;
 
 import java.util.Comparator;
 
-import victorcruz.sc2_simulator.Units.Workers.Drone.Drone;
-import victorcruz.sc2_simulator.Units.Workers.Drone.MiningDrone;
+import victorcruz.sc2_simulator.Units.MiningDrone;
 
 public class ResourceMiningComparator implements Comparator<MiningDrone>{
 

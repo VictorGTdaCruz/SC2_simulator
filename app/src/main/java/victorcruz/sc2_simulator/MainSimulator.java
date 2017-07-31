@@ -15,23 +15,22 @@ import android.widget.TextView;
 
 public class MainSimulator extends AppCompatActivity {
 
+    // Android components
     private GridLayout optionsLayout;
 
     private Button optButton34, optButton14;
 
     private Chronometer chronometer;
 
-    private TextView supplyTextView, minTextView, gasTextView;
+    private TextView minTextView, gasTextView, supplyTextView, supplyMaxTextView, larvaTextView;
 
     // aux variables
     private long currentTime = 0, lastTick = 0;// used on onTick
 
-    // player variables
-    /*private int supply = 5, supplyMax;*/
-
-    private UnitHandler unitHandler;
+    // Handlers
     private ResourcesHandler resourcesHandler;
     private TimeHandler timeHandler;
+    private UnitHandler unitHandler;
 
 
 
@@ -88,11 +87,13 @@ public class MainSimulator extends AppCompatActivity {
         minTextView = (TextView) findViewById(R.id.MinTextView);
         gasTextView = (TextView) findViewById(R.id.GasTextView);
         supplyTextView = (TextView) findViewById(R.id.SupplyTextView);
+        supplyMaxTextView = (TextView) findViewById(R.id.SupplyMaxTextView);
+        larvaTextView = (TextView) findViewById(R.id.LarvaTextView);
 
         // handlers
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
-        timeHandler = new TimeHandler(chronometer, optButton34, resourcesHandler);
-        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyTextView);
+        timeHandler = new TimeHandler(chronometer, optButton34);
+        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyTextView, supplyMaxTextView, larvaTextView);
 
         // onTick method
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -105,6 +106,7 @@ public class MainSimulator extends AppCompatActivity {
                     System.out.println("CurrentTime at Main:" + currentTime);
 
                     unitHandler.unitProduction(currentTime);
+                    unitHandler.growLarva(currentTime);
                     resourcesHandler.resourceMining(currentTime);
 
                 }
@@ -118,10 +120,10 @@ public class MainSimulator extends AppCompatActivity {
         timeHandler.startChrono(view);
     }
 
-    public void resetTime(View view){
+    public void resetMatch(View view){
         timeHandler.resetChrono(view);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
-        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyTextView);
+        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyTextView, supplyMaxTextView, larvaTextView);
     }
 
     public void makeUnit(View view){
@@ -129,18 +131,18 @@ public class MainSimulator extends AppCompatActivity {
     }
 
     public void printQueue(View view){
-        while(resourcesHandler.miningPriorityQueue.size() != 0){
-            System.out.println(resourcesHandler.miningPriorityQueue.peek().getReady());
-            System.out.println(resourcesHandler.miningPriorityQueue.remove());
+        while(resourcesHandler.minPriorityQueue.size() != 0){
+            System.out.println(resourcesHandler.minPriorityQueue.peek().getReady());
+            System.out.println(resourcesHandler.minPriorityQueue.remove());
         }
     }
 
 }
 
 /*  Cronometro pula um segundo la pros 6 min e pouco pq ele conta de 1002 milisegundos ao inves de 1000.
-    repensar a estrutura das classes e pacotes (worker.class eh inutil)
-    nao deixar os recursos ficarem negativos
-    entender melhor a concorrencia das duas prioritie queues
-    penser melhor em um modo de nao ter q fazer 10 linhas pra cada unidade no makeUnit
+    repensar a estrutura das classes e pacotes
 
+    implementar o cronometro modificado
+    implementar um handler apenas pras larvas?
+    implementar estruturas?
  */

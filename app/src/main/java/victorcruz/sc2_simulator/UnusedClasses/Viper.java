@@ -1,8 +1,8 @@
-package victorcruz.sc2_simulator.Units.Army;
+package victorcruz.sc2_simulator.UnusedClasses;
 
-import victorcruz.sc2_simulator.Units.Unit;
-import victorcruz.sc2_simulator.Units.UnitAbility;
-
+import victorcruz.sc2_simulator.Unit;
+import victorcruz.sc2_simulator.UnitAbility;
+/*
 public class Viper extends Unit {
 
     public Viper(long orderedTime){
@@ -26,4 +26,4 @@ public class Viper extends Unit {
         ready = orderedTime + productionTime;
         System.out.println(name + " ordered:" + ready + " " + orderedTime);
     }
-}
+}*/
