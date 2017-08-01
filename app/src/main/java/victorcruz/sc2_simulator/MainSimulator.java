@@ -21,6 +21,8 @@ public class MainSimulator extends AppCompatActivity {
     private Button optButton34, optButton14;
 
     private Chronometer chronometer;
+    private ChronometerTest chronometerTest;
+
 
     private TextView minTextView, gasTextView, supplyTextView, supplyMaxTextView, larvaTextView;
 
@@ -82,6 +84,7 @@ public class MainSimulator extends AppCompatActivity {
 
         //game variables
         chronometer = (Chronometer) findViewById(R.id.chronometer);
+        chronometerTest = (ChronometerTest) findViewById(R.id.chronometerTest);
 
         // player variables
         minTextView = (TextView) findViewById(R.id.MinTextView);
@@ -92,7 +95,7 @@ public class MainSimulator extends AppCompatActivity {
 
         // handlers
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
-        timeHandler = new TimeHandler(chronometer, optButton34);
+        timeHandler = new TimeHandler(chronometer, optButton34, chronometerTest);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyTextView, supplyMaxTextView, larvaTextView);
 
         // onTick method
@@ -112,6 +115,14 @@ public class MainSimulator extends AppCompatActivity {
                 }
 
                 lastTick = SystemClock.elapsedRealtime() - chronometer.getBase();
+            }
+        });
+
+        chronometerTest.setOnChronometerTickListener(new ChronometerTest.OnChronometerTickListener() {
+            @Override
+            public void onChronometerTick(ChronometerTest chronometerTest) {
+                System.out.println("TICKED!!!!!!!");
+                timeHandler.getTestTime();
             }
         });
     }
