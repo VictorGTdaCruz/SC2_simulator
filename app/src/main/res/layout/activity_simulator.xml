@@ -28,7 +28,8 @@
                 android:textSize="25sp"
                 android:layout_below="@+id/chronometerModified"
                 android:layout_alignEnd="@+id/chronometerModified"
-                android:layout_marginTop="13dp"/>
+                android:layout_marginEnd="13dp"
+                android:layout_marginTop="77dp"/>
 
             <victorcruz.sc2_simulator.Time.ChronometerModified
                 android:id="@+id/chronometerModified"
@@ -86,6 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:text="14"
                 android:textSize="25sp"/>
 

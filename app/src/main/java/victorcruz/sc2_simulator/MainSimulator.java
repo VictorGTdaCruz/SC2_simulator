@@ -151,7 +151,7 @@ public class MainSimulator extends AppCompatActivity {
         timeHandler.startChrono(view);
     }
 
-    public void resetMatch(View view){
+    public void resetMatch(View view) throws InterruptedException {
         timeHandler.resetChrono(view);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyTextView, supplyMaxTextView, larvaTextView);
@@ -172,6 +172,6 @@ public class MainSimulator extends AppCompatActivity {
 
 /*  Cronometro pula um segundo la pros 6 min e pouco pq ele conta de 1002 milisegundos ao inves de 1000.
 
-    implementar um handler apenas pras larvas?
+    implementar um handler apenas pras larvas
     implementar estruturas?
  */

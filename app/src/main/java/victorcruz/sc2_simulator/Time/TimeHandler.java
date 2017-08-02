@@ -69,17 +69,21 @@ public class TimeHandler {
         }
     }
 
-    public void resetChrono(View view){
+    public void resetChrono(View view) throws InterruptedException {
         /*chronometer.setBase(SystemClock.elapsedRealtime());
         chronometer.stop();
         timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
         */
 
+
+        Thread.sleep(200);
+
         optButton34.setText("START");
 
-        chronometerModified.setBase(SystemClock.elapsedRealtime());
         chronometerModified.stop();
+        chronometerModified.setBase(SystemClock.elapsedRealtime());
         timeWhenStoppedModified = chronometerModified.getBase() - SystemClock.elapsedRealtime();
+        //wait(150);
     }
 
     public boolean isTimeRunning (){
