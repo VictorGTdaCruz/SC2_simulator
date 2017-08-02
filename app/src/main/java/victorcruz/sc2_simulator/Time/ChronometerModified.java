@@ -1,4 +1,4 @@
-package victorcruz.sc2_simulator;
+package victorcruz.sc2_simulator.Time;
 
 import android.content.Context;
 import android.os.Handler;
@@ -8,13 +8,13 @@ import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import java.text.DecimalFormat;
 
-public class ChronometerTest extends AppCompatTextView {
+public class ChronometerModified extends AppCompatTextView {
     @SuppressWarnings("unused")
     private static final String TAG = "Chronometer";
 
     public interface OnChronometerTickListener {
 
-        void onChronometerTick(ChronometerTest chronometerTest);
+        void onChronometerTick(ChronometerModified chronometerModified);
     }
 
     private long mBase;
@@ -27,15 +27,15 @@ public class ChronometerTest extends AppCompatTextView {
 
     private long timeElapsed;
 
-    public ChronometerTest(Context context) {
+    public ChronometerModified(Context context) {
         this (context, null, 0);
     }
 
-    public ChronometerTest(Context context, AttributeSet attrs) {
+    public ChronometerModified(Context context, AttributeSet attrs) {
         this (context, attrs, 0);
     }
 
-    public ChronometerTest(Context context, AttributeSet attrs, int defStyle) {
+    public ChronometerModified(Context context, AttributeSet attrs, int defStyle) {
         super (context, attrs, defStyle);
 
         init();

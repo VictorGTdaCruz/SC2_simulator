@@ -1,4 +1,4 @@
-package victorcruz.sc2_simulator;
+package victorcruz.sc2_simulator.Units;
 
 import android.os.Handler;
 import android.view.View;
@@ -10,8 +10,9 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
-import victorcruz.sc2_simulator.Units.Larva;
-import victorcruz.sc2_simulator.Units.MiningDrone;
+import victorcruz.sc2_simulator.Resources.MiningDrone;
+import victorcruz.sc2_simulator.Resources.ResourcesHandler;
+import victorcruz.sc2_simulator.Time.TimeHandler;
 
 public class UnitHandler {
 
@@ -156,7 +157,7 @@ public class UnitHandler {
         int larvaSystemIndex = 0;
         for (; larvaSystemIndex < larvaSystem.size(); larvaSystemIndex = larvaSystemIndex + 2){
             if (larvaSystem.get(larvaSystemIndex + 1).peek() != null &&
-                    1000 > larvaSystem.get(larvaSystemIndex + 1).peek().getReady() - currentTime){
+                    150 > larvaSystem.get(larvaSystemIndex + 1).peek().getReady() - currentTime){
 
                 final int finalLarvaSystemIndex = larvaSystemIndex;
                 final long timeofPostDelayed =  larvaSystem.get(finalLarvaSystemIndex + 1).peek().getReady() - currentTime;
@@ -181,7 +182,7 @@ public class UnitHandler {
 
 
     public void unitProduction(final long currentTime) {
-        if (priorityQueue.peek() != null && 1000 > priorityQueue.peek().getReady() - currentTime) {
+        if (priorityQueue.peek() != null && 150 > priorityQueue.peek().getReady() - currentTime) {
 
             final String name = priorityQueue.peek().getName();
             final long ready = priorityQueue.peek().getReady();

@@ -1,8 +1,6 @@
-package victorcruz.sc2_simulator.Units;
+package victorcruz.sc2_simulator.Resources;
 
 import java.util.Random;
-
-import victorcruz.sc2_simulator.Unit;
 
 public class MiningDrone {
 

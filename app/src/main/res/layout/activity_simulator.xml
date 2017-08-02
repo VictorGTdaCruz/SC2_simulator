@@ -26,24 +26,16 @@
                 android:layout_height="wrap_content"
                 android:text="3"
                 android:textSize="25sp"
-                android:layout_below="@+id/chronometer"
-                android:layout_toEndOf="@+id/chronometer"
-                android:layout_marginStart="83dp"/>
+                android:layout_below="@+id/chronometerModified"
+                android:layout_alignEnd="@+id/chronometerModified"
+                android:layout_marginTop="13dp"/>
 
-            <Chronometer
-                android:id="@+id/chronometer"
+            <victorcruz.sc2_simulator.Time.ChronometerModified
+                android:id="@+id/chronometerModified"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="startTime"
-                android:textSize="50sp"/>
-
-            <victorcruz.sc2_simulator.ChronometerTest
-                android:id="@+id/chronometerTest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/OptionsLayout"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="33dp"
+                android:layout_alignParentTop="true"
                 android:textSize="50sp"/>
 
 
@@ -51,23 +43,23 @@
                 android:id="@+id/MinTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="15dp"
-                android:text="50"
-                android:textSize="25sp"
                 android:layout_alignBaseline="@+id/GasTextView"
                 android:layout_alignBottom="@+id/GasTextView"
-                android:layout_toStartOf="@+id/GasTextView"/>
+                android:layout_toStartOf="@+id/GasTextView"
+                android:paddingRight="15dp"
+                android:text="50"
+                android:textSize="25sp"/>
 
             <TextView
                 android:id="@+id/GasTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="15dp"
-                android:text="0"
-                android:textSize="25sp"
                 android:layout_alignBaseline="@+id/SupplyTextView"
                 android:layout_alignBottom="@+id/SupplyTextView"
-                android:layout_toStartOf="@+id/SupplyTextView"/>
+                android:layout_toStartOf="@+id/SupplyTextView"
+                android:paddingRight="15dp"
+                android:text="0"
+                android:textSize="25sp"/>
 
             <TextView
                 android:id="@+id/SupplyTextView"
@@ -83,21 +75,19 @@
                 android:id="@+id/BarTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="/"
-                android:textSize="25sp"
                 android:layout_alignBaseline="@+id/SupplyTextView"
                 android:layout_alignBottom="@+id/SupplyTextView"
-                android:layout_toStartOf="@+id/SupplyMaxTextView"/>
+                android:layout_toStartOf="@+id/SupplyMaxTextView"
+                android:text="/"
+                android:textSize="25sp"/>
 
             <TextView
                 android:id="@+id/SupplyMaxTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:text="14"
-                android:textSize="25sp"
-                android:layout_alignBaseline="@+id/chronometer"
-                android:layout_alignBottom="@+id/chronometer"
-                android:layout_alignParentEnd="true"/>
+                android:textSize="25sp"/>
 
             <GridLayout
                 android:id="@+id/OptionsLayout"

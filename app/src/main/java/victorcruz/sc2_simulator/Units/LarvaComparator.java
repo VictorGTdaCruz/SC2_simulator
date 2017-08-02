@@ -1,4 +1,4 @@
-package victorcruz.sc2_simulator;
+package victorcruz.sc2_simulator.Units;
 
 import java.util.Comparator;
 

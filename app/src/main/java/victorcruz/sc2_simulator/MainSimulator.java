@@ -12,6 +12,11 @@ import android.widget.Chronometer;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
+import victorcruz.sc2_simulator.Resources.ResourcesHandler;
+import victorcruz.sc2_simulator.Time.ChronometerModified;
+import victorcruz.sc2_simulator.Time.TimeHandler;
+import victorcruz.sc2_simulator.Units.UnitHandler;
+
 
 public class MainSimulator extends AppCompatActivity {
 
@@ -20,14 +25,14 @@ public class MainSimulator extends AppCompatActivity {
 
     private Button optButton34, optButton14;
 
-    private Chronometer chronometer;
-    private ChronometerTest chronometerTest;
+    //private Chronometer chronometer;
+    private ChronometerModified chronometerModified;
 
 
     private TextView minTextView, gasTextView, supplyTextView, supplyMaxTextView, larvaTextView;
 
     // aux variables
-    private long currentTime = 0, lastTick = 0;// used on onTick
+    private long currentTime = 0, currentTimeModified = 0, lastTick = 0;// used on onTick
 
     // Handlers
     private ResourcesHandler resourcesHandler;
@@ -83,8 +88,8 @@ public class MainSimulator extends AppCompatActivity {
         optButton14 = (Button) findViewById(R.id.optButton14);
 
         //game variables
-        chronometer = (Chronometer) findViewById(R.id.chronometer);
-        chronometerTest = (ChronometerTest) findViewById(R.id.chronometerTest);
+        //chronometer = (Chronometer) findViewById(R.id.chronometer);
+        chronometerModified = (ChronometerModified) findViewById(R.id.chronometerModified);
 
         // player variables
         minTextView = (TextView) findViewById(R.id.MinTextView);
@@ -95,11 +100,12 @@ public class MainSimulator extends AppCompatActivity {
 
         // handlers
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
-        timeHandler = new TimeHandler(chronometer, optButton34, chronometerTest);
+        //timeHandler = new TimeHandler(chronometer, optButton34, chronometerModified);
+        timeHandler = new TimeHandler(optButton34, chronometerModified);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyTextView, supplyMaxTextView, larvaTextView);
 
         // onTick method
-        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+        /*chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
 
@@ -116,13 +122,27 @@ public class MainSimulator extends AppCompatActivity {
 
                 lastTick = SystemClock.elapsedRealtime() - chronometer.getBase();
             }
-        });
+        });*/
 
-        chronometerTest.setOnChronometerTickListener(new ChronometerTest.OnChronometerTickListener() {
+        chronometerModified.setOnChronometerTickListener(new ChronometerModified.OnChronometerTickListener() {
             @Override
-            public void onChronometerTick(ChronometerTest chronometerTest) {
-                System.out.println("TICKED!!!!!!!");
-                timeHandler.getTestTime();
+            public void onChronometerTick(ChronometerModified chronometerModified) {
+                /*System.out.println("TICKED!!!!!!!");
+                timeHandler.getTestTime();*/
+
+                currentTimeModified = SystemClock.elapsedRealtime() - chronometerModified.getBase();
+
+                if ((currentTimeModified / 100) > (lastTick / 100) ) {
+                    System.out.println("CurrentTime at Main:" + currentTimeModified);
+
+                    unitHandler.unitProduction(currentTimeModified);
+                    unitHandler.growLarva(currentTimeModified);
+                    resourcesHandler.resourceMining(currentTimeModified);
+
+                }
+
+                lastTick = SystemClock.elapsedRealtime() - chronometerModified.getBase();
+
             }
         });
     }
@@ -151,9 +171,7 @@ public class MainSimulator extends AppCompatActivity {
 }
 
 /*  Cronometro pula um segundo la pros 6 min e pouco pq ele conta de 1002 milisegundos ao inves de 1000.
-    repensar a estrutura das classes e pacotes
 
-    implementar o cronometro modificado
     implementar um handler apenas pras larvas?
     implementar estruturas?
  */

@@ -1,6 +1,5 @@
 package victorcruz.sc2_simulator.UnusedClasses;
 
-import victorcruz.sc2_simulator.Unit;
 /*
 public class Overlord extends Unit {
 

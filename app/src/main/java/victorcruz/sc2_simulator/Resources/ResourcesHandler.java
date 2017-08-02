@@ -1,11 +1,12 @@
-package victorcruz.sc2_simulator;
+package victorcruz.sc2_simulator.Resources;
 
 import android.os.Handler;
 import android.widget.TextView;
 
 import java.util.PriorityQueue;
 
-import victorcruz.sc2_simulator.Units.MiningDrone;
+import victorcruz.sc2_simulator.Resources.MiningDrone;
+import victorcruz.sc2_simulator.Resources.ResourceMiningComparator;
 
 
 public class ResourcesHandler {
@@ -49,7 +50,7 @@ public class ResourcesHandler {
 
     public void resourceMining(final long currentTime){
 
-        if (minPriorityQueue.peek() != null  && 1000 >= minPriorityQueue.peek().getReady() - currentTime) {
+        if (minPriorityQueue.peek() != null  && 150 >= minPriorityQueue.peek().getReady() - currentTime) {
 
             //System.out.print("--- DRONE MINED AT ");
             //System.out.print(currentTime + (miningPriorityQueue.peek().getReady() - currentTime));

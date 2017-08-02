@@ -1,6 +1,8 @@
-package victorcruz.sc2_simulator;
+package victorcruz.sc2_simulator.Units;
 
 import java.util.Comparator;
+
+import victorcruz.sc2_simulator.Units.Unit;
 
 public class UnitComparator implements Comparator<Unit>{
 

@@ -1,8 +1,5 @@
 package victorcruz.sc2_simulator.UnusedClasses;
 
-import victorcruz.sc2_simulator.Unit;
-import victorcruz.sc2_simulator.UnitAbility;
-import victorcruz.sc2_simulator.UnitAttackInfo;
 /*
 public class Drone extends Unit {
     public Drone(long orderedTime, String name, int life, int shield, int minCost, int gasCost, int supply, int supplyMax, int energyInitial, int energyMax, int armor, int armorScalability, int shieldArmor, int shieldArmorScalability, int cargoSize, int sight, long productionTime, double speed, double speedOnCreep, String[] requisites, String[] attributes, UnitAttackInfo[] attacks, UnitAbility[] abilities) {
