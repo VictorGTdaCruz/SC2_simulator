@@ -1,8 +1,6 @@
-package victorcruz.sc2_simulator.Units;
+package victorcruz.sc2_simulator.Units.LarvaMechanics;
 
 import java.util.Comparator;
-
-import victorcruz.sc2_simulator.Units.Larva;
 
 public class LarvaComparator implements Comparator<Larva>{
 

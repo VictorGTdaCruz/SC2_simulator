@@ -1,4 +1,4 @@
-package victorcruz.sc2_simulator.Units;
+package victorcruz.sc2_simulator.Units.LarvaMechanics;
 
 public class Larva {
 

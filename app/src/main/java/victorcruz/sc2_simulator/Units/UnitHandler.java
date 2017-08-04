@@ -13,6 +13,9 @@ import java.util.PriorityQueue;
 import victorcruz.sc2_simulator.Resources.MiningDrone;
 import victorcruz.sc2_simulator.Resources.ResourcesHandler;
 import victorcruz.sc2_simulator.Time.TimeHandler;
+import victorcruz.sc2_simulator.Units.LarvaMechanics.Larva;
+import victorcruz.sc2_simulator.Units.LarvaMechanics.LarvaComparator;
+import victorcruz.sc2_simulator.Units.LarvaMechanics.LarvaHandler;
 
 public class UnitHandler {
 
@@ -22,10 +25,11 @@ public class UnitHandler {
     // handlers
     private ResourcesHandler resourcesHandler;
     private TimeHandler timeHandler;
+    private LarvaHandler larvaHandler;
 
     // handlers to use postDelayed method
     private Handler prodHandler = new Handler(); // used on unitProduction
-    private Handler larvaHandler = new Handler(); // used on growLarva
+//    private Handler larvaHandler = new Handler(); // used on growLarva
 
     // Unit array to use as mold
     private Unit[] xUnit;
@@ -39,14 +43,6 @@ public class UnitHandler {
     private PriorityQueue<Unit> priorityQueue;
     private Comparator<Unit> comparator = new UnitComparator();
 
-    // larva mechanic variables
-    private LinkedList<PriorityQueue<Larva>> larvaSystem;
-    private Comparator<Larva> larvaComparator = new LarvaComparator();
-    private int[] larvaCount;
-    private boolean[] isProducingLarva;
-
-    //aux variables
-    private boolean consumedLarva = false; // used on makeUnit method
 
 
     public UnitHandler(ResourcesHandler resourcesHandler, TimeHandler timeHandler, TextView supplyTextView,
@@ -63,25 +59,8 @@ public class UnitHandler {
         this.larvaTextView = larvaTextView;
         larvaTextView.setText(Integer.toString(3));
 
-        // Linked list to manage all PriorityQueues
-        larvaSystem = new LinkedList<>();
+        larvaHandler = new LarvaHandler(larvaTextView);
 
-        // first 2 PriorityQueues representing the first hatchery
-        // the first represents the available larva
-        // the second represents the larva production cycle
-        larvaSystem.add(new PriorityQueue<Larva>(19, larvaComparator));
-        larvaSystem.add(new PriorityQueue<Larva>(4, larvaComparator));
-
-        // it starts with 3 larva
-        larvaSystem.get(0).add(new Larva(-11000));
-        larvaSystem.get(0).add(new Larva(-11000));
-        larvaSystem.get(0).add(new Larva(-11000));
-
-        larvaCount = new int[2];
-        larvaCount[0] = 3;
-
-        isProducingLarva = new boolean[2];
-        isProducingLarva[1] = false;
 
         //xUnit[X] = new Unit(-1, "+LARVA", 25, -1, 0, 0, 0, 0, -1, -1, 10, 1, -1, -1, 1, -1, 11000, 0, 0, new String[]{"Larva"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
         xUnit = new Unit[15];
@@ -104,80 +83,10 @@ public class UnitHandler {
      "Unit" the universal class and the NAME variable is what compares each unit ingame.
     */
 
-    /*
-     Larva Mechanics: The ideal larva number on a hatchery is 3. When the user clicks on a unit,
-     one larva is spent and scheduleLarva is triggered. It only creates a larva object on the
-     correct PriorityQueue. The growLarva runs every second, checking if a larva is scheduled to
-     the current second. If it is, it runs postDelayed to precisely create a new Larva object on the
-     "available to spend" PriorityQueue (Now thinking, this didnt need to be a PQ, but its cool).
-     If the available larva number is now 3, the cycle will end by the ScheduleLarva if, being
-     triggered if a larva is spent once again.
-
-     If a hachery is created in the future with less than 3 larva, wich it will, I should trigger
-     the scheduleLarva method manually.
-    */
-    public boolean useLarva(long currentTime){
-
-        // Chooses a larva to be used/destroyed and then calls scheduleLarva
-        int larvaSystemIndex = 0;
-        for (;larvaSystemIndex < larvaSystem.size(); larvaSystemIndex = larvaSystemIndex + 2){
-
-            if (larvaSystem.get(larvaSystemIndex).peek() != null){
-                larvaSystem.get(larvaSystemIndex).remove();
-                larvaCount[larvaSystemIndex]--;
-                larvaTextView.setText(Integer.toString(larvaCount[larvaSystemIndex]));
-                System.out.println(larvaSystem.get(larvaSystemIndex).size());
-                scheduleLarva(currentTime, larvaSystemIndex);
-                return true;
-
-            }
-        }
-
-        return false;
-
-    }
 
 
-    public void scheduleLarva(final long currentTime, final int larvaSystemIndex){
-
-        // Creates a larva in the "hatchery is producing larva" PriorityQueue
-        if (larvaSystem.get(larvaSystemIndex).size() < 3 && !(isProducingLarva[larvaSystemIndex + 1])) {
-            System.out.println("Larva number: " + larvaSystem.get(larvaSystemIndex).size());
-            isProducingLarva[larvaSystemIndex + 1] = true;
-            System.out.println("Producing larva...");
-            larvaSystem.get(larvaSystemIndex + 1).add(new Larva(currentTime));
-        }
-
-    }
-
-    public void growLarva(final long currentTime){
-
-        // Checks if its the right second to remove the larva scheduled and add it to the
-        // available larva PriorityQueue
-        int larvaSystemIndex = 0;
-        for (; larvaSystemIndex < larvaSystem.size(); larvaSystemIndex = larvaSystemIndex + 2){
-            if (larvaSystem.get(larvaSystemIndex + 1).peek() != null &&
-                    150 > larvaSystem.get(larvaSystemIndex + 1).peek().getReady() - currentTime){
-
-                final int finalLarvaSystemIndex = larvaSystemIndex;
-                final long timeofPostDelayed =  larvaSystem.get(finalLarvaSystemIndex + 1).peek().getReady() - currentTime;
-
-                larvaHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        larvaSystem.get(finalLarvaSystemIndex).add(new Larva(currentTime + timeofPostDelayed - 11000));
-                        larvaCount[finalLarvaSystemIndex]++;
-                        larvaTextView.setText(Integer.toString(larvaCount[finalLarvaSystemIndex]));
-                        isProducingLarva[finalLarvaSystemIndex + 1] = false;
-                        scheduleLarva(currentTime + timeofPostDelayed, finalLarvaSystemIndex);
-                    }
-                }, larvaSystem.get(larvaSystemIndex + 1).peek().getReady() - currentTime);
-
-                larvaSystem.get(larvaSystemIndex + 1).remove();
-
-            }
-        }
-
+    public void growLarva(long currentTimeModified){
+        larvaHandler.growLarva(currentTimeModified);
     }
 
 
@@ -187,7 +96,6 @@ public class UnitHandler {
             final String name = priorityQueue.peek().getName();
             final long ready = priorityQueue.peek().getReady();
             final long productionTime = priorityQueue.peek().getProductionTime();
-            final int supplyMax = priorityQueue.peek().getSupplyMax();
 
             prodHandler.postDelayed(new Runnable() {
                 @Override
@@ -256,13 +164,19 @@ public class UnitHandler {
         if (resourcesHandler.getMinerals() >= unit.getMinCost() && resourcesHandler.getGas() >= unit.getGasCost()
                 && supply + xUnit[index].getSupply() <= supplyMax) {
             if (timeHandler.isTimeRunning()) {
-                consumedLarva = useLarva(timeHandler.getTime());
+                //consumedLarva = useLarva(timeHandler.getTime());
+
+                //set consumedLarva, a flow control variable that checks if the player had a larva to use and used it
+                larvaHandler.setConsumedLarva(larvaHandler.useLarva(timeHandler.getTime()));
                 unit.setOrderedTime(timeHandler.getTime());
             } else{
-                consumedLarva = useLarva(-timeHandler.getTimeWhenStopped());
+                //consumedLarva = useLarva(-timeHandler.getTimeWhenStopped());
+
+                //set consumedLarva, a flow control variable that checks if the player had a larva to use and used it
+                larvaHandler.setConsumedLarva(larvaHandler.useLarva(timeHandler.getTime()));
                 unit.setOrderedTime(-timeHandler.getTimeWhenStopped());
             }
-            if (consumedLarva) {
+            if (larvaHandler.getConsumedLarva()) {
                 resourcesHandler.decreaseMin(unit.getMinCost());
                 resourcesHandler.decreaseGas(unit.getGasCost());
                 increaseSupply(unit.getSupply());
