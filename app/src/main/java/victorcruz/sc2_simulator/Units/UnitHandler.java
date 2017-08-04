@@ -160,28 +160,29 @@ public class UnitHandler {
         int index = checkUnitIndex(button.getText().toString());
         Unit unit = xUnit[index];
 
+        if (timeHandler.isGameStarted()){
+            if (resourcesHandler.getMinerals() >= unit.getMinCost() && resourcesHandler.getGas() >= unit.getGasCost()
+                    && supply + xUnit[index].getSupply() <= supplyMax) {
+                if (timeHandler.isTimeRunning()) {
+                    //consumedLarva = useLarva(timeHandler.getTime());
+    
+                    //set consumedLarva, a flow control variable that checks if the player had a larva to use and used it
+                    larvaHandler.setConsumedLarva(larvaHandler.useLarva(timeHandler.getTime()));
+                    unit.setOrderedTime(timeHandler.getTime());
+                } else {
+                    //consumedLarva = useLarva(-timeHandler.getTimeWhenStopped());
 
-        if (resourcesHandler.getMinerals() >= unit.getMinCost() && resourcesHandler.getGas() >= unit.getGasCost()
-                && supply + xUnit[index].getSupply() <= supplyMax) {
-            if (timeHandler.isTimeRunning()) {
-                //consumedLarva = useLarva(timeHandler.getTime());
-
-                //set consumedLarva, a flow control variable that checks if the player had a larva to use and used it
-                larvaHandler.setConsumedLarva(larvaHandler.useLarva(timeHandler.getTime()));
-                unit.setOrderedTime(timeHandler.getTime());
-            } else{
-                //consumedLarva = useLarva(-timeHandler.getTimeWhenStopped());
-
-                //set consumedLarva, a flow control variable that checks if the player had a larva to use and used it
-                larvaHandler.setConsumedLarva(larvaHandler.useLarva(timeHandler.getTime()));
-                unit.setOrderedTime(-timeHandler.getTimeWhenStopped());
-            }
-            if (larvaHandler.getConsumedLarva()) {
-                resourcesHandler.decreaseMin(unit.getMinCost());
-                resourcesHandler.decreaseGas(unit.getGasCost());
-                increaseSupply(unit.getSupply());
-                priorityQueue.add(unit);
-                System.out.println("UNIT ORDERED: " + unit.getName());
+                    //set consumedLarva, a flow control variable that checks if the player had a larva to use and used it
+                    larvaHandler.setConsumedLarva(larvaHandler.useLarva(timeHandler.getTime()));
+                    unit.setOrderedTime(-timeHandler.getTimeWhenStopped());
+                }
+                if (larvaHandler.getConsumedLarva()) {
+                    resourcesHandler.decreaseMin(unit.getMinCost());
+                    resourcesHandler.decreaseGas(unit.getGasCost());
+                    increaseSupply(unit.getSupply());
+                    priorityQueue.add(unit);
+                    System.out.println("UNIT ORDERED: " + unit.getName());
+                }
             }
         }
 
