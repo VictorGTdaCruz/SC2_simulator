@@ -36,7 +36,7 @@ public class UnitHandler {
     // zerg units
     private int overlordNumber = 0, queenNumber = 0, lingNumber = 0, banelingNumber = 0, roachNumber = 0,
                 ravagerNumber = 0, overseerNumber = 0, hydraliskNumber = 0, lurkerNumber = 0;
-    private int workerNumber = 12, supply = 12, supplyMax = 14;
+    private int workerNumber = 12;
 
     // unit production mechanic variables
     public PriorityQueue<Unit> unitPriorityQueue;
@@ -50,11 +50,6 @@ public class UnitHandler {
         this.supplyHandler = supplyHandler;
         this.resourcesHandler = resourcesHandler;
         this.timeHandler = timeHandler;
-
-        this.supplyTextView = supplyTextView;
-        this.supplyMaxTextView = supplyMaxTextView;
-        supplyTextView.setText(Integer.toString(supply));
-        supplyMaxTextView.setText(Integer.toString(supplyMax));
 
         this.larvaTextView = larvaTextView;
         larvaTextView.setText(Integer.toString(3));
@@ -151,7 +146,7 @@ public class UnitHandler {
 
         if (timeHandler.isGameStarted()){
             if (resourcesHandler.getMinerals() >= unit.getMinCost() && resourcesHandler.getGas() >= unit.getGasCost()
-                    && supply + xUnit[index].getSupply() <= supplyMax) {
+                    && supplyHandler.getSupply() + xUnit[index].getSupply() <= supplyHandler.getSupplyMax()) {
                 if (timeHandler.isTimeRunning()) {
                     //set consumedLarva, a flow control variable that checks if the player had a larva to use and used it
                     larvaHandler.setConsumedLarva(larvaHandler.useLarva(timeHandler.getTime()));

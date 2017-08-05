@@ -12,19 +12,19 @@ public class TimeHandler {
 
     //private Chronometer chronometer;
     private ChronometerModified chronometerModified;
-    private Button optButton34;
+    private Button stcButton34;
 
-    private long timeWhenStopped;
+    //private long timeWhenStopped;
     private long timeWhenStoppedModified;
 
     private boolean gameStarted;
 
 
-    public TimeHandler (Button optButton34, ChronometerModified chronometerModified){
+    public TimeHandler (Button stcButton34, ChronometerModified chronometerModified){
 
         //this.chronometer = chronometer;
         this.chronometerModified = chronometerModified;
-        this.optButton34 = optButton34;
+        this.stcButton34 = stcButton34;
 
         gameStarted = false;
 
@@ -33,43 +33,43 @@ public class TimeHandler {
     public void startChrono(View view) {
         switch (view.getId()) {
             case R.id.chronometer:
-                if (optButton34.getText().equals("START")) {
+                if (stcButton34.getText().equals("START")) {
                     //chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
                     //chronometer.start();
 
                     chronometerModified.setBase(SystemClock.elapsedRealtime() + timeWhenStoppedModified);
                     chronometerModified.start();
 
-                    optButton34.setText("STOP");
+                    stcButton34.setText("STOP");
                     if (!(gameStarted)) gameStarted = true;
-                } else if (optButton34.getText().equals("STOP")) {
+                } else if (stcButton34.getText().equals("STOP")) {
                     //timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
                     //chronometer.stop();
 
                     timeWhenStoppedModified = chronometerModified.getBase() - SystemClock.elapsedRealtime();
                     chronometerModified.stop();
 
-                    optButton34.setText("START");
+                    stcButton34.setText("START");
                 }
                 break;
-            case R.id.optButton34:
-                if (optButton34.getText().equals("START")) {
+            case R.id.stcButton34:
+                if (stcButton34.getText().equals("START")) {
                     //chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
                     //chronometer.start();
 
                     chronometerModified.setBase(SystemClock.elapsedRealtime() + timeWhenStoppedModified);
                     chronometerModified.start();
 
-                    optButton34.setText("STOP");
+                    stcButton34.setText("STOP");
                     if (!(gameStarted)) gameStarted = true;
-                } else if (optButton34.getText().equals("STOP")) {
+                } else if (stcButton34.getText().equals("STOP")) {
                     //timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
                     //chronometer.stop();
 
                     timeWhenStoppedModified = chronometerModified.getBase() - SystemClock.elapsedRealtime();
                     chronometerModified.stop();
 
-                    optButton34.setText("START");
+                    stcButton34.setText("START");
                 }
                 break;
         }
@@ -84,7 +84,7 @@ public class TimeHandler {
 
         Thread.sleep(200);
 
-        optButton34.setText("START");
+        stcButton34.setText("START");
 
         chronometerModified.stop();
         chronometerModified.setBase(SystemClock.elapsedRealtime());
@@ -93,7 +93,7 @@ public class TimeHandler {
     }
 
     public boolean isTimeRunning (){
-        if (optButton34.getText().equals("STOP")) return true;
+        if (stcButton34.getText().equals("STOP")) return true;
         else return false;
     }
 

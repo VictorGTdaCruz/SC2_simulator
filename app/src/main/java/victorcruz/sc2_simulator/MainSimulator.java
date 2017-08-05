@@ -22,9 +22,9 @@ import victorcruz.sc2_simulator.Units.UnitHandler;
 public class MainSimulator extends AppCompatActivity {
 
     // Android components
-    private GridLayout optionsLayout;
+    private GridLayout shortcutsLayout, unitsLayout;
 
-    private Button optButton34, optButton14;
+    private Button stcButton34;
 
     //private Chronometer chronometer;
     private ChronometerModified chronometerModified;
@@ -50,17 +50,21 @@ public class MainSimulator extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    optionsLayout.setVisibility(View.INVISIBLE);
-                    return true;
-                case R.id.navigation_dashboard:
-                    optionsLayout.setVisibility(View.INVISIBLE);
-                    return true;
-                case R.id.navigation_notifications:
-                    optionsLayout.setVisibility(View.INVISIBLE);
-                    return true;
                 case R.id.navigation_options:
-                    optionsLayout.setVisibility(View.VISIBLE);
+                    unitsLayout.setVisibility(View.INVISIBLE);
+                    shortcutsLayout.setVisibility(View.INVISIBLE);
+                    return true;
+                case R.id.navigation_buildings:
+                    unitsLayout.setVisibility(View.INVISIBLE);
+                    shortcutsLayout.setVisibility(View.INVISIBLE);
+                    return true;
+                case R.id.navigation_units:
+                    unitsLayout.setVisibility(View.VISIBLE);
+                    shortcutsLayout.setVisibility(View.INVISIBLE);
+                    return true;
+                case R.id.navigation_shortcuts:
+                    unitsLayout.setVisibility(View.INVISIBLE);
+                    shortcutsLayout.setVisibility(View.VISIBLE);
                     return true;
             }
             return false;
@@ -84,11 +88,11 @@ public class MainSimulator extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // layouts
-        optionsLayout = (GridLayout) findViewById(R.id.OptionsLayout);
+        unitsLayout = (GridLayout) findViewById(R.id.UnitsLayout);
+        shortcutsLayout = (GridLayout) findViewById(R.id.ShortcutsLayout);
 
         // buttons
-        optButton34 = (Button) findViewById(R.id.optButton34);
-        optButton14 = (Button) findViewById(R.id.optButton14);
+        stcButton34 = (Button) findViewById(R.id.stcButton34);
 
         //game variables
         //chronometer = (Chronometer) findViewById(R.id.chronometer);
@@ -104,7 +108,7 @@ public class MainSimulator extends AppCompatActivity {
         // handlers
         supplyHandler = new SupplyHandler(supplyTextView, supplyMaxTextView);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
-        timeHandler = new TimeHandler(optButton34, chronometerModified);
+        timeHandler = new TimeHandler(stcButton34, chronometerModified);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, larvaTextView);
         buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler);
 
