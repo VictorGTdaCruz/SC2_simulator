@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import victorcruz.sc2_simulator.Buildings.BuildingHandler;
 import victorcruz.sc2_simulator.Resources.ResourcesHandler;
+import victorcruz.sc2_simulator.Supply.SupplyHandler;
 import victorcruz.sc2_simulator.Time.ChronometerModified;
 import victorcruz.sc2_simulator.Time.TimeHandler;
 import victorcruz.sc2_simulator.Units.UnitHandler;
@@ -35,6 +36,7 @@ public class MainSimulator extends AppCompatActivity {
     private long currentTimeModified = 0, lastTick = 0;// used on onTick
 
     // Handlers
+    private SupplyHandler supplyHandler;
     private ResourcesHandler resourcesHandler;
     private TimeHandler timeHandler;
     private UnitHandler unitHandler;
@@ -100,10 +102,11 @@ public class MainSimulator extends AppCompatActivity {
         larvaTextView = (TextView) findViewById(R.id.LarvaTextView);
 
         // handlers
+        supplyHandler = new SupplyHandler(supplyTextView, supplyMaxTextView);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
         timeHandler = new TimeHandler(optButton34, chronometerModified);
-        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyTextView, supplyMaxTextView, larvaTextView);
-        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyMaxTextView);
+        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, larvaTextView);
+        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler);
 
         // onTick method
         /*chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -156,8 +159,8 @@ public class MainSimulator extends AppCompatActivity {
     public void resetMatch(View view) throws InterruptedException {
         timeHandler.resetChrono(view);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
-        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyTextView, supplyMaxTextView, larvaTextView);
-        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyMaxTextView);
+        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, larvaTextView);
+        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler);
     }
 
     public void makeUnit(View view){
@@ -179,6 +182,5 @@ public class MainSimulator extends AppCompatActivity {
 
     implementar novo painel com botoes para estruturas
     melhorar printlns pra facilitar entendimento do que esta acontecendo
-    implementar supplyhandler
     implementar estruturas?
  */

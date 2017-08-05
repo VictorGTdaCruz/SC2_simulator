@@ -73,7 +73,7 @@ public class LarvaHandler {
                 larvaSystem.get(larvaSystemIndex).remove();
                 larvaCount[larvaSystemIndex]--;
                 larvaTextView.setText(Integer.toString(larvaCount[larvaSystemIndex]));
-                System.out.println(larvaSystem.get(larvaSystemIndex).size());
+                //System.out.println(larvaSystem.get(larvaSystemIndex).size());
                 scheduleLarva(currentTime, larvaSystemIndex);
                 return true;
 
@@ -89,7 +89,7 @@ public class LarvaHandler {
 
         // Creates a larva in the "hatchery is producing larva" PriorityQueue
         if (larvaSystem.get(larvaSystemIndex).size() < 3 && !(isProducingLarva[larvaSystemIndex + 1])) {
-            System.out.println("Larva number: " + larvaSystem.get(larvaSystemIndex).size());
+            //System.out.println("Larva number: " + larvaSystem.get(larvaSystemIndex).size());
             isProducingLarva[larvaSystemIndex + 1] = true;
             System.out.println("Producing larva...");
             larvaSystem.get(larvaSystemIndex + 1).add(new Larva(currentTime));

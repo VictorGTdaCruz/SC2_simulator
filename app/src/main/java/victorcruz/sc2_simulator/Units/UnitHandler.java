@@ -11,6 +11,7 @@ import java.util.PriorityQueue;
 
 import victorcruz.sc2_simulator.Resources.MiningDrone;
 import victorcruz.sc2_simulator.Resources.ResourcesHandler;
+import victorcruz.sc2_simulator.Supply.SupplyHandler;
 import victorcruz.sc2_simulator.Time.TimeHandler;
 import victorcruz.sc2_simulator.Units.LarvaMechanics.LarvaHandler;
 
@@ -20,6 +21,7 @@ public class UnitHandler {
     private TextView supplyTextView, supplyMaxTextView, larvaTextView;
 
     // handlers
+    private SupplyHandler supplyHandler;
     private ResourcesHandler resourcesHandler;
     private TimeHandler timeHandler;
     private LarvaHandler larvaHandler;
@@ -42,9 +44,10 @@ public class UnitHandler {
 
 
 
-    public UnitHandler(ResourcesHandler resourcesHandler, TimeHandler timeHandler, TextView supplyTextView,
-                       TextView supplyMaxTextView, TextView larvaTextView){
+    public UnitHandler(ResourcesHandler resourcesHandler, TimeHandler timeHandler,
+                       SupplyHandler supplyHandler, TextView larvaTextView){
         unitPriorityQueue = new PriorityQueue<>(10, comparator);
+        this.supplyHandler = supplyHandler;
         this.resourcesHandler = resourcesHandler;
         this.timeHandler = timeHandler;
 
@@ -97,7 +100,7 @@ public class UnitHandler {
             prodHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    System.out.println("UNIT IS READY:" + name);
+                    System.out.println("UNIT IS READY: " + name + " " + (ready - currentTime));
 
                     if (name.equals("+DRONE")){
                         ResourcesHandler.minPriorityQueue.add(new MiningDrone(ready - productionTime, true));
@@ -105,7 +108,7 @@ public class UnitHandler {
                     }
                     else if (name.equals("+OVERL")) {
                         overlordNumber++;
-                        increaseSupplyMax(8);
+                        supplyHandler.increaseSupplyMax(8);
                     }
                     else if (name.equals("+QUEEN")) queenNumber++;
                     else if (name.equals("+LING")) lingNumber = lingNumber + 2;
@@ -127,17 +130,6 @@ public class UnitHandler {
 
     public int getWorkerNumber(){
         return workerNumber;
-    }
-
-    public void increaseSupply(int amount){
-        supply = supply + amount;
-        supplyTextView.setText(Integer.toString(supply));
-    }
-
-    public void increaseSupplyMax(int amount){
-        supplyMax = supplyMax + amount;
-        supplyMaxTextView.setText(Integer.toString(supplyMax));
-
     }
 
     public int checkUnitIndex(String buttonText){
@@ -172,7 +164,7 @@ public class UnitHandler {
                 if (larvaHandler.getConsumedLarva()) {
                     resourcesHandler.decreaseMin(unit.getMinCost());
                     resourcesHandler.decreaseGas(unit.getGasCost());
-                    increaseSupply(unit.getSupply());
+                    supplyHandler.increaseSupply(unit.getSupply());
                     unitPriorityQueue.add(unit);
                     System.out.println("UNIT ORDERED: " + unit.getName());
                 }

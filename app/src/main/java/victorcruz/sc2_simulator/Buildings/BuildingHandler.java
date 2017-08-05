@@ -10,14 +10,13 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 import victorcruz.sc2_simulator.Resources.ResourcesHandler;
+import victorcruz.sc2_simulator.Supply.SupplyHandler;
 import victorcruz.sc2_simulator.Time.TimeHandler;
 
 public class BuildingHandler {
 
-    // android components
-    private TextView supplyMaxTextView;
-
     // handlers
+    private SupplyHandler supplyHandler;
     private ResourcesHandler resourcesHandler;
     private TimeHandler timeHandler;
 
@@ -35,11 +34,11 @@ public class BuildingHandler {
     private Comparator<Building> buildingComparator = new BuildingComparator();
 
 
-    public BuildingHandler(ResourcesHandler resourcesHandler, TimeHandler timeHandler, TextView supplyMaxTextView){
+    public BuildingHandler(ResourcesHandler resourcesHandler, TimeHandler timeHandler, SupplyHandler supplyHandler){
 
         this.resourcesHandler = resourcesHandler;
         this.timeHandler = timeHandler;
-        this.supplyMaxTextView = supplyMaxTextView;
+        this.supplyHandler = supplyHandler;
 
         buildingPriorityQueue = new PriorityQueue<>(10, buildingComparator);
 
@@ -55,6 +54,7 @@ public class BuildingHandler {
             final String name = buildingPriorityQueue.peek().getName();
             final long ready = buildingPriorityQueue.peek().getReady();
             final long productionTime = buildingPriorityQueue.peek().getProductionTime();
+            final int supplyMax = buildingPriorityQueue.peek().getSupplyMax();
 
             prodHandler.postDelayed(new Runnable() {
                 @Override
@@ -63,6 +63,7 @@ public class BuildingHandler {
 
                     if (name.equals("+HATCH")){
                         // new hatchery larva
+                        supplyHandler.increaseSupply(supplyMax);
                         hatcheryNumber++;
                     }
                     else if (name.equals("+POOL")) {

@@ -12,7 +12,7 @@ public class Larva {
         productionTime = 11000;
 
         this.ready =  orderedTime + productionTime;
-        System.out.println(name + " ready:" + ready );
+        //System.out.println(name + " ready:" + ready );
     }
 
     public long getReady(){
