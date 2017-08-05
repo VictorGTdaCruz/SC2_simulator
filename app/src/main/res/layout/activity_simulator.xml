@@ -121,7 +121,8 @@
                     android:layout_columnWeight="1"
                     android:layout_row="0"
                     android:layout_rowWeight="1"
-                    />
+                    android:onClick="makeBuilding"
+                    android:text="+HATCH"/>
 
                 <Button
                     android:id="@+id/optButton13"
@@ -163,7 +164,8 @@
                     android:layout_columnWeight="1"
                     android:layout_row="1"
                     android:layout_rowWeight="1"
-                    />
+                    android:onClick="makeBuilding"
+                    android:text="+POOL"/>
 
                 <Button
                     android:id="@+id/optButton23"

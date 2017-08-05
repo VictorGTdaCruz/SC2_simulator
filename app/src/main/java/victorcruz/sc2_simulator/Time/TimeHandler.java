@@ -17,12 +17,16 @@ public class TimeHandler {
     private long timeWhenStopped;
     private long timeWhenStoppedModified;
 
+    private boolean gameStarted;
+
 
     public TimeHandler (Button optButton34, ChronometerModified chronometerModified){
 
         //this.chronometer = chronometer;
         this.chronometerModified = chronometerModified;
         this.optButton34 = optButton34;
+
+        gameStarted = false;
 
     }
 
@@ -37,6 +41,7 @@ public class TimeHandler {
                     chronometerModified.start();
 
                     optButton34.setText("STOP");
+                    if (!(gameStarted)) gameStarted = true;
                 } else if (optButton34.getText().equals("STOP")) {
                     //timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
                     //chronometer.stop();
@@ -56,6 +61,7 @@ public class TimeHandler {
                     chronometerModified.start();
 
                     optButton34.setText("STOP");
+                    if (!(gameStarted)) gameStarted = true;
                 } else if (optButton34.getText().equals("STOP")) {
                     //timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
                     //chronometer.stop();
@@ -83,7 +89,7 @@ public class TimeHandler {
         chronometerModified.stop();
         chronometerModified.setBase(SystemClock.elapsedRealtime());
         timeWhenStoppedModified = chronometerModified.getBase() - SystemClock.elapsedRealtime();
-        //wait(150);
+        gameStarted = false;
     }
 
     public boolean isTimeRunning (){
@@ -100,5 +106,9 @@ public class TimeHandler {
     }
 
     public void getTestTime(){ System.out.println(SystemClock.elapsedRealtime() - chronometerModified.getBase());   }
+
+    public boolean isGameStarted(){
+        return gameStarted;
+    }
 
 }

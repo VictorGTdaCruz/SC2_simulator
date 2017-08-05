@@ -7,14 +7,11 @@ import android.widget.TextView;
 
 
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 import victorcruz.sc2_simulator.Resources.MiningDrone;
 import victorcruz.sc2_simulator.Resources.ResourcesHandler;
 import victorcruz.sc2_simulator.Time.TimeHandler;
-import victorcruz.sc2_simulator.Units.LarvaMechanics.Larva;
-import victorcruz.sc2_simulator.Units.LarvaMechanics.LarvaComparator;
 import victorcruz.sc2_simulator.Units.LarvaMechanics.LarvaHandler;
 
 public class UnitHandler {
@@ -40,14 +37,14 @@ public class UnitHandler {
     private int workerNumber = 12, supply = 12, supplyMax = 14;
 
     // unit production mechanic variables
-    private PriorityQueue<Unit> priorityQueue;
+    public PriorityQueue<Unit> unitPriorityQueue;
     private Comparator<Unit> comparator = new UnitComparator();
 
 
 
     public UnitHandler(ResourcesHandler resourcesHandler, TimeHandler timeHandler, TextView supplyTextView,
                        TextView supplyMaxTextView, TextView larvaTextView){
-        priorityQueue = new PriorityQueue<>(10, comparator);
+        unitPriorityQueue = new PriorityQueue<>(10, comparator);
         this.resourcesHandler = resourcesHandler;
         this.timeHandler = timeHandler;
 
@@ -91,11 +88,11 @@ public class UnitHandler {
 
 
     public void unitProduction(final long currentTime) {
-        if (priorityQueue.peek() != null && 150 > priorityQueue.peek().getReady() - currentTime) {
+        if (unitPriorityQueue.peek() != null && 150 > unitPriorityQueue.peek().getReady() - currentTime) {
 
-            final String name = priorityQueue.peek().getName();
-            final long ready = priorityQueue.peek().getReady();
-            final long productionTime = priorityQueue.peek().getProductionTime();
+            final String name = unitPriorityQueue.peek().getName();
+            final long ready = unitPriorityQueue.peek().getReady();
+            final long productionTime = unitPriorityQueue.peek().getProductionTime();
 
             prodHandler.postDelayed(new Runnable() {
                 @Override
@@ -121,8 +118,8 @@ public class UnitHandler {
 
 
                 }
-            }, priorityQueue.peek().getReady() - currentTime);
-            priorityQueue.remove();
+            }, unitPriorityQueue.peek().getReady() - currentTime);
+            unitPriorityQueue.remove();
             unitProduction(currentTime);
 
         }
@@ -158,20 +155,16 @@ public class UnitHandler {
         Button button = (Button) view;
 
         int index = checkUnitIndex(button.getText().toString());
-        Unit unit = xUnit[index];
+        Unit unit = new Unit(xUnit[index]);
 
         if (timeHandler.isGameStarted()){
             if (resourcesHandler.getMinerals() >= unit.getMinCost() && resourcesHandler.getGas() >= unit.getGasCost()
                     && supply + xUnit[index].getSupply() <= supplyMax) {
                 if (timeHandler.isTimeRunning()) {
-                    //consumedLarva = useLarva(timeHandler.getTime());
-    
                     //set consumedLarva, a flow control variable that checks if the player had a larva to use and used it
                     larvaHandler.setConsumedLarva(larvaHandler.useLarva(timeHandler.getTime()));
                     unit.setOrderedTime(timeHandler.getTime());
                 } else {
-                    //consumedLarva = useLarva(-timeHandler.getTimeWhenStopped());
-
                     //set consumedLarva, a flow control variable that checks if the player had a larva to use and used it
                     larvaHandler.setConsumedLarva(larvaHandler.useLarva(timeHandler.getTime()));
                     unit.setOrderedTime(-timeHandler.getTimeWhenStopped());
@@ -180,7 +173,7 @@ public class UnitHandler {
                     resourcesHandler.decreaseMin(unit.getMinCost());
                     resourcesHandler.decreaseGas(unit.getGasCost());
                     increaseSupply(unit.getSupply());
-                    priorityQueue.add(unit);
+                    unitPriorityQueue.add(unit);
                     System.out.println("UNIT ORDERED: " + unit.getName());
                 }
             }
@@ -197,9 +190,9 @@ public class UnitHandler {
                 supply = supply + xDrone.getSupply();
                 supplyMax = supplyMax + xDrone.getSupplyMax();
                 if (timeHandler.isTimeRunning())
-                    priorityQueue.add(new Drone(timeHandler.getTime()));
+                    unitPriorityQueue.add(new Drone(timeHandler.getTime()));
                 else
-                    priorityQueue.add(new Drone(-timeHandler.getTimeWhenStopped()));
+                    unitPriorityQueue.add(new Drone(-timeHandler.getTimeWhenStopped()));
             }
         }
         if (button.getText().equals("+LING")){
@@ -209,9 +202,9 @@ public class UnitHandler {
                 supply = supply + xZergling.getSupply();
                 supplyMax = supplyMax + xZergling.getSupplyMax();
                 if (timeHandler.isTimeRunning())
-                    priorityQueue.add(new Zergling(timeHandler.getTime()));
+                    unitPriorityQueue.add(new Zergling(timeHandler.getTime()));
                 else
-                    priorityQueue.add(new Zergling(-timeHandler.getTimeWhenStopped()));
+                    unitPriorityQueue.add(new Zergling(-timeHandler.getTimeWhenStopped()));
             }
         }
         if (button.getText().equals("+ROACH")){
@@ -221,9 +214,9 @@ public class UnitHandler {
                 supply = supply + xRoach.getSupply();
                 supplyMax = supplyMax + xRoach.getSupplyMax();
                 if (timeHandler.isTimeRunning())
-                    priorityQueue.add(new Roach(timeHandler.getTime()));
+                    unitPriorityQueue.add(new Roach(timeHandler.getTime()));
                 else
-                    priorityQueue.add(new Roach(-timeHandler.getTimeWhenStopped()));
+                    unitPriorityQueue.add(new Roach(-timeHandler.getTimeWhenStopped()));
                 //roachNumber++;
             }
         }*/

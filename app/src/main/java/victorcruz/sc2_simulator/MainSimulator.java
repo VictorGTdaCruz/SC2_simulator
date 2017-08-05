@@ -8,10 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
+import victorcruz.sc2_simulator.Buildings.BuildingHandler;
 import victorcruz.sc2_simulator.Resources.ResourcesHandler;
 import victorcruz.sc2_simulator.Time.ChronometerModified;
 import victorcruz.sc2_simulator.Time.TimeHandler;
@@ -32,12 +32,13 @@ public class MainSimulator extends AppCompatActivity {
     private TextView minTextView, gasTextView, supplyTextView, supplyMaxTextView, larvaTextView;
 
     // aux variables
-    private long currentTime = 0, currentTimeModified = 0, lastTick = 0;// used on onTick
+    private long currentTimeModified = 0, lastTick = 0;// used on onTick
 
     // Handlers
     private ResourcesHandler resourcesHandler;
     private TimeHandler timeHandler;
     private UnitHandler unitHandler;
+    private BuildingHandler buildingHandler;
 
 
 
@@ -100,9 +101,9 @@ public class MainSimulator extends AppCompatActivity {
 
         // handlers
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
-        //timeHandler = new TimeHandler(chronometer, optButton34, chronometerModified);
         timeHandler = new TimeHandler(optButton34, chronometerModified);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyTextView, supplyMaxTextView, larvaTextView);
+        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyMaxTextView);
 
         // onTick method
         /*chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -138,6 +139,7 @@ public class MainSimulator extends AppCompatActivity {
                     unitHandler.unitProduction(currentTimeModified);
                     unitHandler.growLarva(currentTimeModified);
                     resourcesHandler.resourceMining(currentTimeModified);
+                    buildingHandler.buildingProduction(currentTimeModified);
 
                 }
 
@@ -155,16 +157,19 @@ public class MainSimulator extends AppCompatActivity {
         timeHandler.resetChrono(view);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyTextView, supplyMaxTextView, larvaTextView);
+        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyMaxTextView);
     }
 
     public void makeUnit(View view){
         unitHandler.makeUnit(view);
     }
 
+    public void makeBuilding(View view){buildingHandler.makeBuilding(view);}
+
     public void printQueue(View view){
-        while(resourcesHandler.minPriorityQueue.size() != 0){
-            System.out.println(resourcesHandler.minPriorityQueue.peek().getReady());
-            System.out.println(resourcesHandler.minPriorityQueue.remove());
+        while(unitHandler.unitPriorityQueue.size() != 0){
+            System.out.println(unitHandler.unitPriorityQueue.peek().getReady());
+            System.out.println(unitHandler.unitPriorityQueue.remove());
         }
     }
 
@@ -172,5 +177,8 @@ public class MainSimulator extends AppCompatActivity {
 
 /*  Cronometro pula um segundo la pros 6 min e pouco pq ele conta de 1002 milisegundos ao inves de 1000.
 
+    implementar novo painel com botoes para estruturas
+    melhorar printlns pra facilitar entendimento do que esta acontecendo
+    implementar supplyhandler
     implementar estruturas?
  */
