@@ -77,6 +77,8 @@ public class MainSimulator extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simulator);
 
+
+
         initializeVariables();
     }
 

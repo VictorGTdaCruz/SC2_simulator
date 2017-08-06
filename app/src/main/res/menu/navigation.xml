@@ -4,27 +4,22 @@
 
     <item
         android:id="@+id/navigation_options"
-        android:icon="@drawable/config_icon"
+        android:icon="@drawable/ic_config"
         android:title="@string/title_options"/>
-    <!-- android:icon="@drawable/ic_home_black_24dp" -->
 
     <item
         android:id="@+id/navigation_buildings"
-        android:icon="@drawable/zergbuilding"
+        android:icon="@drawable/ic_hatchery"
         android:title="@string/title_buildings"/>
-    <!-- android:icon="@drawable/ic_dashboard_black_24dp" -->
-
 
     <item
         android:id="@+id/navigation_units"
-        android:icon="@drawable/drone"
+        android:icon="@drawable/ic_drone"
         android:title="@string/title_units"/>
-    <!-- android:icon="@drawable/ic_notifications_black_24dp" -->
-
 
     <item
         android:id="@+id/navigation_shortcuts"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_shortcut"
         android:title="@string/title_shortcuts"/>
 
 </menu>
