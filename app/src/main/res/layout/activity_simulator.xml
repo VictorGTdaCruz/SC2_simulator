@@ -92,6 +92,298 @@
                 android:textSize="25sp"/>
 
             <GridLayout
+                android:id="@+id/StatsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="bottom"
+                android:background="@android:color/darker_gray"
+                android:columnCount="4"
+                android:rowCount="4"
+                android:visibility="visible">
+
+            </GridLayout>
+
+            <GridLayout
+                android:id="@+id/OptionsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="bottom"
+                android:background="@android:color/darker_gray"
+                android:columnCount="4"
+                android:rowCount="4"
+                android:visibility="invisible">
+
+                <Button
+                    android:id="@+id/optButton11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/optButton12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/optButton13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/optButton14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:layout_columnWeight="1"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/optButton21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/optButton22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/optButton23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/optButton24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:layout_columnWeight="1"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:background="@drawable/pool5"
+                    android:onClick="makeBuilding"
+                    android:tag="+POOL"
+                    />
+
+                <Button
+                    android:id="@+id/optButton31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:layout_row="2"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/optButton32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_row="2"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/optButton33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:layout_row="2"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/optButton34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:layout_columnWeight="1"
+                    android:layout_row="2"
+                    android:layout_rowWeight="1"
+                    android:background="@drawable/hatch5"
+                    android:onClick="makeBuilding"
+                    android:tag="+HATCH"/>
+
+            </GridLayout>
+
+            <GridLayout
+                android:id="@+id/BuildingsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="bottom"
+                android:background="@android:color/darker_gray"
+                android:columnCount="4"
+                android:rowCount="4"
+                android:visibility="invisible">
+
+                <Button
+                    android:id="@+id/bdButton11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/bdButton12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/bdButton13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/bdButton14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:layout_columnWeight="1"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/bdButton21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/bdButton22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/bdButton23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/bdButton24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:layout_columnWeight="1"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:background="@drawable/pool5"
+                    android:onClick="makeBuilding"
+                    android:tag="+POOL"
+                    />
+
+                <Button
+                    android:id="@+id/bdButton31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:layout_row="2"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/bdButton32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_row="2"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/bdButton33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:layout_row="2"
+                    android:layout_rowWeight="1"
+                    />
+
+                <Button
+                    android:id="@+id/bdButton34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:layout_columnWeight="1"
+                    android:layout_row="2"
+                    android:layout_rowWeight="1"
+                    android:background="@drawable/hatch5"
+                    android:onClick="makeBuilding"
+                    android:tag="+HATCH"/>
+
+            </GridLayout>
+
+            <GridLayout
                 android:id="@+id/UnitsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
@@ -111,7 +403,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="0"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/drone3"
+                    android:onClick="makeUnit"
+                    android:tag="Drone"/>
 
                 <Button
                     android:id="@+id/unitButton12"
@@ -121,7 +415,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="0"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/over5"
+                    android:onClick="makeUnit"
+                    android:tag="Overlord"/>
 
                 <Button
                     android:id="@+id/unitButton13"
@@ -131,7 +427,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="0"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/ling5"
+                    android:onClick="makeUnit"
+                    android:tag="Zergling"/>
 
                 <Button
                     android:id="@+id/unitButton14"
@@ -141,7 +439,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="0"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/roach5"
+                    android:onClick="makeUnit"
+                    android:tag="Roach"/>
 
                 <Button
                     android:id="@+id/unitButton21"
@@ -151,7 +451,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="1"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/hydra5"
+                    android:onClick="makeUnit"
+                    android:tag="Hydralisk"/>
 
                 <Button
                     android:id="@+id/unitButton22"
@@ -161,7 +463,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="1"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/muta5"
+                    android:onClick="makeUnit"
+                    android:tag="Mutalisk"/>
 
                 <Button
                     android:id="@+id/unitButton23"
@@ -171,7 +475,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="1"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/corruptor5"
+                    android:onClick="makeUnit"
+                    android:tag="Corruptor"/>
 
                 <Button
                     android:id="@+id/unitButton24"
@@ -181,8 +487,10 @@
                     android:layout_columnWeight="1"
                     android:layout_row="1"
                     android:layout_rowWeight="1"
-                    android:onClick="makeBuilding"
-                    android:text="+POOL"/>
+                    android:background="@drawable/infestor5"
+                    android:onClick="makeUnit"
+                    android:tag="Infestor"
+                    />
 
                 <Button
                     android:id="@+id/unitButton31"
@@ -192,7 +500,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="2"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/viper5"
+                    android:onClick="makeUnit"
+                    android:tag="Viper"/>
 
                 <Button
                     android:id="@+id/unitButton32"
@@ -202,7 +512,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="2"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/ultra5"
+                    android:onClick="makeUnit"
+                    android:tag="Ultralisk"/>
 
                 <Button
                     android:id="@+id/unitButton33"
@@ -212,7 +524,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="2"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/sh5"
+                    android:onClick="makeUnit"
+                    android:tag="SwarmHost"/>
 
                 <Button
                     android:id="@+id/unitButton34"
@@ -222,8 +536,7 @@
                     android:layout_columnWeight="1"
                     android:layout_row="2"
                     android:layout_rowWeight="1"
-                    android:onClick="makeBuilding"
-                    android:text="+HATCH"/>
+                    android:text="EXTRA"/>
 
             </GridLayout>
 
@@ -237,7 +550,7 @@
                 android:background="@android:color/darker_gray"
                 android:columnCount="4"
                 android:rowCount="4"
-                android:visibility="visible">
+                android:visibility="invisible">
 
                 <Button
                     android:id="@+id/stcButton11"
@@ -278,8 +591,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="0"
                     android:layout_rowWeight="1"
+                    android:background="@drawable/drone3"
                     android:onClick="makeUnit"
-                    android:text="+DRONE"/>
+                    android:tag="+DRONE"/>
 
                 <Button
                     android:id="@+id/stcButton21"
@@ -309,8 +623,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="1"
                     android:layout_rowWeight="1"
+                    android:background="@drawable/roach5"
                     android:onClick="makeUnit"
-                    android:text="+ROACH"/>
+                    android:tag="+ROACH"/>
 
                 <Button
                     android:id="@+id/stcButton24"
@@ -341,8 +656,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="2"
                     android:layout_rowWeight="1"
+                    android:background="@drawable/over5"
                     android:onClick="makeUnit"
-                    android:text="+OVERL"/>
+                    android:tag="+OVERL"/>
 
                 <Button
                     android:id="@+id/stcButton33"
@@ -352,8 +668,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="2"
                     android:layout_rowWeight="1"
+                    android:background="@drawable/ling5"
                     android:onClick="makeUnit"
-                    android:text="+LING"/>
+                    android:tag="+LING"/>
 
                 <Button
                     android:id="@+id/stcButton34"

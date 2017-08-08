@@ -63,7 +63,8 @@ public class BuildingHandler {
 
                     if (name.equals("+HATCH")){
                         // new hatchery larva
-                        supplyHandler.increaseSupply(supplyMax);
+                        supplyHandler.increaseSupplyMax(supplyMax);
+                        System.out.println("hatch ready............");
                         hatcheryNumber++;
                     }
                     else if (name.equals("+POOL")) {
@@ -104,7 +105,7 @@ public class BuildingHandler {
 
         Button button = (Button) view;
 
-        int index = checkBuildingIndex(button.getText().toString());
+        int index = checkBuildingIndex(button.getTag().toString());
         Building building = new Building(xBuilding[index]);
 
         if (timeHandler.isGameStarted()) {

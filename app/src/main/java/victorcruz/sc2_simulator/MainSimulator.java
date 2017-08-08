@@ -22,7 +22,7 @@ import victorcruz.sc2_simulator.Units.UnitHandler;
 public class MainSimulator extends AppCompatActivity {
 
     // Android components
-    private GridLayout shortcutsLayout, unitsLayout;
+    private GridLayout statsLayouts, optionsLayouts, buildingsLayouts, unitsLayout, shortcutsLayout;
 
     private Button stcButton34;
 
@@ -50,19 +50,38 @@ public class MainSimulator extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
+                case R.id.navigation_stats:
+                    statsLayouts.setVisibility(View.VISIBLE);
+                    optionsLayouts.setVisibility(View.INVISIBLE);
+                    buildingsLayouts.setVisibility(View.INVISIBLE);
+                    unitsLayout.setVisibility(View.INVISIBLE);
+                    shortcutsLayout.setVisibility(View.INVISIBLE);
+                    return true;
                 case R.id.navigation_options:
+                    statsLayouts.setVisibility(View.INVISIBLE);
+                    optionsLayouts.setVisibility(View.VISIBLE);
+                    buildingsLayouts.setVisibility(View.INVISIBLE);
                     unitsLayout.setVisibility(View.INVISIBLE);
                     shortcutsLayout.setVisibility(View.INVISIBLE);
                     return true;
                 case R.id.navigation_buildings:
+                    statsLayouts.setVisibility(View.INVISIBLE);
+                    optionsLayouts.setVisibility(View.INVISIBLE);
+                    buildingsLayouts.setVisibility(View.VISIBLE);
                     unitsLayout.setVisibility(View.INVISIBLE);
                     shortcutsLayout.setVisibility(View.INVISIBLE);
                     return true;
                 case R.id.navigation_units:
+                    statsLayouts.setVisibility(View.INVISIBLE);
+                    optionsLayouts.setVisibility(View.INVISIBLE);
+                    buildingsLayouts.setVisibility(View.INVISIBLE);
                     unitsLayout.setVisibility(View.VISIBLE);
                     shortcutsLayout.setVisibility(View.INVISIBLE);
                     return true;
                 case R.id.navigation_shortcuts:
+                    statsLayouts.setVisibility(View.INVISIBLE);
+                    optionsLayouts.setVisibility(View.INVISIBLE);
+                    buildingsLayouts.setVisibility(View.INVISIBLE);
                     unitsLayout.setVisibility(View.INVISIBLE);
                     shortcutsLayout.setVisibility(View.VISIBLE);
                     return true;
@@ -90,6 +109,9 @@ public class MainSimulator extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // layouts
+        statsLayouts = (GridLayout) findViewById(R.id.StatsLayout);
+        optionsLayouts = (GridLayout) findViewById(R.id.OptionsLayout);
+        buildingsLayouts = (GridLayout) findViewById(R.id.BuildingsLayout);
         unitsLayout = (GridLayout) findViewById(R.id.UnitsLayout);
         shortcutsLayout = (GridLayout) findViewById(R.id.ShortcutsLayout);
 
@@ -175,6 +197,10 @@ public class MainSimulator extends AppCompatActivity {
 
     public void makeBuilding(View view){buildingHandler.makeBuilding(view);}
 
+    public void showExtraUnitsLayout (View view){}
+
+    public void showExtraBuildingsLayout(View view){}
+
     public void printQueue(View view){
         while(unitHandler.unitPriorityQueue.size() != 0){
             System.out.println(unitHandler.unitPriorityQueue.peek().getReady());
@@ -186,7 +212,11 @@ public class MainSimulator extends AppCompatActivity {
 
 /*  Cronometro pula um segundo la pros 6 min e pouco pq ele conta de 1002 milisegundos ao inves de 1000.
 
-    implementar novo painel com botoes para estruturas
+    corrigir supplymax inicial, nao eh 14, eh 0 com 8 de suserano e 6 da hatch
+    implementar estrutura de dados que possui todas as unidades vivas (precisa?)
+    implementar diferentes extensoes da classe UNIT
+    ver se precisa de fragmentos
+    colocar todas as figurinhas nos botoes
     melhorar printlns pra facilitar entendimento do que esta acontecendo
     implementar estruturas?
  */

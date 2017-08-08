@@ -58,17 +58,24 @@ public class UnitHandler {
 
 
         //xUnit[X] = new Unit(-1, "+LARVA", 25, -1, 0, 0, 0, 0, -1, -1, 10, 1, -1, -1, 1, -1, 11000, 0, 0, new String[]{"Larva"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit = new Unit[15];
-        xUnit[0] = new Unit(-1, "+DRONE", 50, -1, 50, 0, 1, 0, -1, -1, 0, 1, -1, -1, 1, 8, 12000, 3.94, 3.94, new String[]{"Larva"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[1] = new Unit(-1, "+OVERL", 200, -1, 100, 0, 0, 8, -1, -1, 0, 1, -1, -1, -1, 11, 18000, 0.82, -1, new String[]{"Larva"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[2] = new Unit(-1, "+QUEEN", 175, -1, 150, 0, 2, 0, 25, 200, 1, 1, -1, -1, 2, 9, 36000, 1.31, 3.5, new String[]{"Hatchery", "Spawning Pool"}, new String[]{"Biological", "Psionic"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[3] = new Unit(-1, "+LING", 35, -1, 50, 0, 1, 0, -1, -1, 0, 1, -1, -1, 1, 8, 17000, 4.13, 5.37, new String[]{"Larva", "Spawning Pool"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[4] = new Unit(-1, "+BANE", 30, -1, 25, 25, 0, 0, -1, -1, 0, 1, -1, -1, 2, 8, 14000, 3.5, 4.55, new String[]{"Zergling", "Baneling Nest"}, new String[]{"Biological"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[5] = new Unit(-1, "+ROACH", 145, -1, 75, 25, 2, 0, -1, -1, 1, 1, -1, -1, 2, 9, 19000, 3.15, 4.09, new String[]{"Larva", "Roach Warren"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[6] = new Unit(-1, "+RAVAG", 120, -1, 25, 75, 1, 0, -1, -1, 1, 1, -1, -1, 4, 9, 9000, 3.85, 5, new String[]{"Roach", "Roach Warren"}, new String[]{"Biological"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[7] = new Unit(-1, "+OVERS", 200, -1, 50, 50, 1, 0, -1, -1, 1, 1, -1, -1, -1, 11, 12000, 2.62, -1, new String[]{"Overlord", "Lair"}, new String[]{"Biological", "Armored", "Detector"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[8] = new Unit(-1, "+HYDRA", 90, -1, 100, 50, 2, 0, -1, -1, 0, 1, -1, -1, 2, 9, 24000, 3.15, 4.09, new String[]{"Larva", "Hydralisk Den"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[9] = new Unit(-1, "+LURKER", 200, -1, 50, 100, 1, 0, -1, -1, 1, 1, -1, -1, 4, -1, 18000, 4.13, 5.37, new String[]{"Hydralisk", "Lurker Den"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit = new Unit[17];
+        xUnit[0] = new Unit(-1, "Drone", 50, -1, 50, 0, 1, 0, -1, -1, 0, 1, -1, -1, 1, 8, 12000, 3.94, 3.94, new String[]{"Larva"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[1] = new Unit(-1, "Overlord", 200, -1, 100, 0, 0, 8, -1, -1, 0, 1, -1, -1, -1, 11, 18000, 0.82, -1, new String[]{"Larva"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[2] = new Unit(-1, "Queen", 175, -1, 150, 0, 2, 0, 25, 200, 1, 1, -1, -1, 2, 9, 36000, 1.31, 3.5, new String[]{"Hatchery", "SpawningPool"}, new String[]{"Biological", "Psionic"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[3] = new Unit(-1, "Zergling", 35, -1, 50, 0, 1, 0, -1, -1, 0, 1, -1, -1, 1, 8, 17000, 4.13, 5.37, new String[]{"Larva", "SpawningPool"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[4] = new Unit(-1, "Baneling", 30, -1, 25, 25, 0, 0, -1, -1, 0, 1, -1, -1, 2, 8, 14000, 3.5, 4.55, new String[]{"Zergling", "BanelingNest"}, new String[]{"Biological"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[5] = new Unit(-1, "Roach", 145, -1, 75, 25, 2, 0, -1, -1, 1, 1, -1, -1, 2, 9, 19000, 3.15, 4.09, new String[]{"Larva", "RoachWarren"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[6] = new Unit(-1, "Ravager", 120, -1, 25, 75, 1, 0, -1, -1, 1, 1, -1, -1, 4, 9, 9000, 3.85, 5, new String[]{"Roach", "RoachWarren"}, new String[]{"Biological"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[7] = new Unit(-1, "Overseer", 200, -1, 50, 50, 1, 0, -1, -1, 1, 1, -1, -1, -1, 11, 12000, 2.62, -1, new String[]{"Overlord", "Lair"}, new String[]{"Biological", "Armored", "Detector"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[8] = new Unit(-1, "Hydralisk", 90, -1, 100, 50, 2, 0, -1, -1, 0, 1, -1, -1, 2, 9, 24000, 3.15, 4.09, new String[]{"Larva", "HydraliskDen"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[9] = new Unit(-1, "Lurker", 200, -1, 50, 100, 1, 0, -1, -1, 1, 1, -1, -1, 4, -1, 18000, 4.13, 5.37, new String[]{"Hydralisk", "LurkerDen"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[10] = new Unit(-1, "Mutalisk", 120, -1, 100, 100, 2, 0, -1, -1, 0, 1, -1, -1, -1, 11, 24000, 5.6, -1, new String[]{"Larva", "Spire"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[11] = new Unit(-1, "Corruptor", 200, -1, 150, 100, 2, 0, -1, -1, 2, 1, -1, -1, -1, 10, 29000, 4.725, -1, new String[]{"Larva", "Spire"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[12] = new Unit(-1, "Infestor", 90, -1, 100, 150, 2, 0, 50, 200, 0, 1, -1, -1, 2, 10, 36000, 3.15, 4.09, new String[]{"Larva", "InfestationPit"}, new String[]{"Biological", "Armored", "Psionic"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[13] = new Unit(-1, "SwarmHost", 160, -1, 100, 75, 3, 0, -1, -1, 1, 1, -1, -1, 4, 10, 29000, 4.13, 5.37, new String[]{"Larva", "InfestationPit"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[14] = new Unit(-1, "Viper", 150, -1, 100, 200, 3, 0, 50, 200, 1, 1, -1, -1, -1, 11, 29000, 4.13, -1, new String[]{"Larva", "Hive"}, new String[]{"Biological", "Armored", "Psionic"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[15] = new Unit(-1, "Ultralisk", 500, -1, 300, 200, 6, 0, -1, -1, 2, 1, -1, -1, 8, 9, 39000, 4.13, 5.37, new String[]{"Larva", "UltraliskCavern"}, new String[]{"Biological", "Armored", "Massive"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[16] = new Unit(-1, "BroodLord", 25, -1, 150, 150, 2, 0, -1, -1, 1, 1, -1, -1, -1, 12, 24000, 1.97, -1, new String[]{"Corruptor", "Greater Spire"}, new String[]{"Biological", "Armored", "Massive"}, new UnitAttackInfo[]{}, new UnitAbility[]{} );
 
     }
     /*
@@ -97,22 +104,22 @@ public class UnitHandler {
                 public void run() {
                     System.out.println("UNIT IS READY: " + name + " " + (ready - currentTime));
 
-                    if (name.equals("+DRONE")){
+                    if (name.equals("Drone")){
                         ResourcesHandler.minPriorityQueue.add(new MiningDrone(ready - productionTime, true));
                         workerNumber++;
                     }
-                    else if (name.equals("+OVERL")) {
+                    else if (name.equals("Overlord")) {
                         overlordNumber++;
                         supplyHandler.increaseSupplyMax(8);
                     }
-                    else if (name.equals("+QUEEN")) queenNumber++;
-                    else if (name.equals("+LING")) lingNumber = lingNumber + 2;
-                    else if (name.equals("+BANE")) banelingNumber++;
-                    else if (name.equals("+ROACH")) roachNumber++;
-                    else if (name.equals("+RAVAG")) ravagerNumber++;
-                    else if (name.equals("+OVERS")) overseerNumber++;
-                    else if (name.equals("+HYDRA")) hydraliskNumber++;
-                    else if (name.equals("+LURKER")) lurkerNumber++;
+                    else if (name.equals("Queen")) queenNumber++;
+                    else if (name.equals("Zergling")) lingNumber = lingNumber + 2;
+                    else if (name.equals("Baneling")) banelingNumber++;
+                    else if (name.equals("Roach")) roachNumber++;
+                    else if (name.equals("Ravager")) ravagerNumber++;
+                    else if (name.equals("Overseer")) overseerNumber++;
+                    else if (name.equals("Hydralisk")) hydraliskNumber++;
+                    else if (name.equals("Lurker")) lurkerNumber++;
 
 
                 }
@@ -127,9 +134,9 @@ public class UnitHandler {
         return workerNumber;
     }
 
-    public int checkUnitIndex(String buttonText){
+    public int checkUnitIndex(String buttonTag){
         for (int i = 0; i < xUnit.length; i++){
-            if (buttonText.equals(xUnit[i].getName())){
+            if (buttonTag.equals(xUnit[i].getName())){
                 return i;
             }
         }
@@ -141,7 +148,7 @@ public class UnitHandler {
 
         Button button = (Button) view;
 
-        int index = checkUnitIndex(button.getText().toString());
+        int index = checkUnitIndex(button.getTag().toString());
         Unit unit = new Unit(xUnit[index]);
 
         if (timeHandler.isGameStarted()){
