@@ -210,13 +210,13 @@ public class MainSimulator extends AppCompatActivity {
 
 }
 
-/*  Cronometro pula um segundo la pros 6 min e pouco pq ele conta de 1002 milisegundos ao inves de 1000.
-
-    corrigir supplymax inicial, nao eh 14, eh 0 com 8 de suserano e 6 da hatch
+/*
+    corrigir supplymax inicial, nao eh 14, eh 0 com 8 de suserano e 6 da hatch (acho q n precisa pq nunca unidades vao morrer)
     implementar estrutura de dados que possui todas as unidades vivas (precisa?)
-    implementar diferentes extensoes da classe UNIT
+
+    implementar diferentes construtores na classe UNIT
     ver se precisa de fragmentos
-    colocar todas as figurinhas nos botoes
-    melhorar printlns pra facilitar entendimento do que esta acontecendo
-    implementar estruturas?
+    implementar paines mutation e colocar todas as figurinhas nos botoes
+    talvez n precise ter drone nos requirements, o codigo ja faz a checkagem igual faz com larva
+    melhorar income
  */

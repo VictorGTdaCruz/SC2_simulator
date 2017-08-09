@@ -98,7 +98,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_gravity="bottom"
-                android:background="@android:color/darker_gray"
+                android:background="@android:color/background_dark"
                 android:columnCount="4"
                 android:rowCount="4"
                 android:visibility="visible">
@@ -112,7 +112,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_gravity="bottom"
-                android:background="@android:color/darker_gray"
+                android:background="@android:color/background_dark"
                 android:columnCount="4"
                 android:rowCount="4"
                 android:visibility="invisible">
@@ -251,7 +251,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_gravity="bottom"
-                android:background="@android:color/darker_gray"
+                android:background="@android:color/background_dark"
                 android:columnCount="4"
                 android:rowCount="4"
                 android:visibility="invisible">
@@ -264,7 +264,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="0"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/hatch5"
+                    android:onClick="makeBuilding"
+                    android:tag="Hatchery"/>
 
                 <Button
                     android:id="@+id/bdButton12"
@@ -274,7 +276,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="0"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/extractor5"
+                    android:onClick="makeBuilding"
+                    android:tag="Extractor"/>
 
                 <Button
                     android:id="@+id/bdButton13"
@@ -284,7 +288,8 @@
                     android:layout_columnWeight="1"
                     android:layout_row="0"
                     android:layout_rowWeight="1"
-                    />
+                    android:onClick="makeBuilding"
+                    android:visibility="invisible"/>
 
                 <Button
                     android:id="@+id/bdButton14"
@@ -294,7 +299,8 @@
                     android:layout_columnWeight="1"
                     android:layout_row="0"
                     android:layout_rowWeight="1"
-                    />
+                    android:onClick="makeBuilding"
+                    android:visibility="invisible"/>
 
                 <Button
                     android:id="@+id/bdButton21"
@@ -304,7 +310,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="1"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/pool5"
+                    android:onClick="makeBuilding"
+                    android:tag="SpawningPool"/>
 
                 <Button
                     android:id="@+id/bdButton22"
@@ -314,7 +322,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="1"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/evochamber5"
+                    android:onClick="makeBuilding"
+                    android:tag="EvolutionChamber"/>
 
                 <Button
                     android:id="@+id/bdButton23"
@@ -324,7 +334,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="1"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/roachwarren5"
+                    android:onClick="makeBuilding"
+                    android:tag="RoachWarren"/>
 
                 <Button
                     android:id="@+id/bdButton24"
@@ -334,10 +346,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="1"
                     android:layout_rowWeight="1"
-                    android:background="@drawable/pool5"
+                    android:background="@drawable/banelingnest5"
                     android:onClick="makeBuilding"
-                    android:tag="+POOL"
-                    />
+                    android:tag="BanelingNest"/>
 
                 <Button
                     android:id="@+id/bdButton31"
@@ -347,7 +358,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="2"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/spinecrawler5"
+                    android:onClick="makeBuilding"
+                    android:tag="SpineCrawler"/>
 
                 <Button
                     android:id="@+id/bdButton32"
@@ -357,7 +370,9 @@
                     android:layout_columnWeight="1"
                     android:layout_row="2"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/sporecrawler5"
+                    android:onClick="makeBuilding"
+                    android:tag="SporeCrawler"/>
 
                 <Button
                     android:id="@+id/bdButton33"
@@ -367,7 +382,8 @@
                     android:layout_columnWeight="1"
                     android:layout_row="2"
                     android:layout_rowWeight="1"
-                    />
+                    android:background="@drawable/zergadvbuilding5"
+                    android:visibility="visible"/>
 
                 <Button
                     android:id="@+id/bdButton34"
@@ -377,9 +393,7 @@
                     android:layout_columnWeight="1"
                     android:layout_row="2"
                     android:layout_rowWeight="1"
-                    android:background="@drawable/hatch5"
-                    android:onClick="makeBuilding"
-                    android:tag="+HATCH"/>
+                    android:text="MUTATION"/>
 
             </GridLayout>
 
@@ -390,7 +404,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_gravity="bottom"
-                android:background="@android:color/darker_gray"
+                android:background="@android:color/background_dark"
                 android:columnCount="4"
                 android:rowCount="4"
                 android:visibility="invisible">
@@ -536,7 +550,7 @@
                     android:layout_columnWeight="1"
                     android:layout_row="2"
                     android:layout_rowWeight="1"
-                    android:text="EXTRA"/>
+                    android:text="MUTATION"/>
 
             </GridLayout>
 
@@ -547,7 +561,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_gravity="bottom"
-                android:background="@android:color/darker_gray"
+                android:background="@android:color/background_dark"
                 android:columnCount="4"
                 android:rowCount="4"
                 android:visibility="invisible">

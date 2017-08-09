@@ -4,14 +4,94 @@ package victorcruz.sc2_simulator.Buildings;
 public class Building {
 
     public String name;
-    public int life, shield, minCost, gasCost, supplyMax, energyInitial, energyMax, armor, shieldArmor, sight;
+    public int life, shield, minCost, gasCost, supplyMax, energyInitial, energyMax, armor, shieldArmor;
     public long productionTime, orderedTime, ready;
     public String[] requisites, attributes;
 
 
+    // Normal building
+    public Building(long orderedTime, String name, int life, int minCost, int gasCost,
+                    int supplyMax, long productionTime, int armor, String[] requisites,
+                    String[] attributes){
+
+        this.name = name;
+        this.life = life;
+        this.shield = -1;
+        this.minCost = minCost;
+        this.gasCost = gasCost;
+        this.supplyMax = supplyMax;
+        this.energyInitial = -1;
+        this.energyMax = -1;
+        this.armor = armor;
+        this.shieldArmor = -1;
+        this.productionTime = productionTime;
+        this.requisites = requisites;
+        this.attributes = attributes;
+
+
+        this.orderedTime = orderedTime;
+        ready = orderedTime + productionTime;
+        System.out.println(name + " ordered:" + ready + " " + orderedTime);
+
+    }
+
+    // Protoss building
     public Building(long orderedTime, String name, int life, int shield, int minCost, int gasCost,
-                    int supplyMax, int energyInitial, int energyMax, int armor, int shieldArmor,
-                    int sight, long productionTime, String[] requisites, String[] attributes){
+                    int supplyMax, long productionTime, int armor, int shieldArmor,
+                    String[] requisites, String[] attributes){
+
+        this.name = name;
+        this.life = life;
+        this.shield = shield;
+        this.minCost = minCost;
+        this.gasCost = gasCost;
+        this.supplyMax = supplyMax;
+        this.energyInitial = -1;
+        this.energyMax = -1;
+        this.armor = armor;
+        this.shieldArmor = shieldArmor;
+        this.productionTime = productionTime;
+        this.requisites = requisites;
+        this.attributes = attributes;
+
+
+        this.orderedTime = orderedTime;
+        ready = orderedTime + productionTime;
+        System.out.println(name + " ordered:" + ready + " " + orderedTime);
+
+    }
+
+    // Caster building
+    public Building(long orderedTime, String name,int life, int minCost, int gasCost, int supplyMax,
+                    int energyInitial, int energyMax, long productionTime, int armor,
+                    String[] requisites, String[] attributes){
+
+        this.name = name;
+        this.life = life;
+        this.shield = -1;
+        this.minCost = minCost;
+        this.gasCost = gasCost;
+        this.supplyMax = supplyMax;
+        this.energyInitial = energyInitial;
+        this.energyMax = energyMax;
+        this.armor = armor;
+        this.shieldArmor = -1;
+        this.productionTime = productionTime;
+        this.requisites = requisites;
+        this.attributes = attributes;
+
+
+        this.orderedTime = orderedTime;
+        ready = orderedTime + productionTime;
+        System.out.println(name + " ordered:" + ready + " " + orderedTime);
+
+    }
+
+
+    // Protoss caster building
+    public Building(long orderedTime, String name, int life, int shield, int minCost, int gasCost,
+                    int supplyMax, int energyInitial, int energyMax, long productionTime,  int armor,
+                    int shieldArmor, String[] requisites, String[] attributes){
 
         this.name = name;
         this.life = life;
@@ -23,7 +103,6 @@ public class Building {
         this.energyMax = energyMax;
         this.armor = armor;
         this.shieldArmor = shieldArmor;
-        this.sight = sight;
         this.productionTime = productionTime;
         this.requisites = requisites;
         this.attributes = attributes;
@@ -46,12 +125,13 @@ public class Building {
         this.energyMax = building.getEnergyMax();
         this.armor = building.getArmor();
         this.shieldArmor = building.getShieldArmor();
-        this.sight = building.getSight();
         this.productionTime = building.getProductionTime();
         this.requisites = building.getRequisites();
         this.attributes = building.getAttributes();
 
     }
+
+
 
     public void setOrderedTime(long orderedTime){
         this.orderedTime = orderedTime;
@@ -104,10 +184,6 @@ public class Building {
 
     public int getShieldArmor() {
         return shieldArmor;
-    }
-
-    public int getSight() {
-        return sight;
     }
 
     public long getOrderedTime() {

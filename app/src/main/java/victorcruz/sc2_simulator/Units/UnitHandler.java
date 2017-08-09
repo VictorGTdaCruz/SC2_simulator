@@ -34,7 +34,7 @@ public class UnitHandler {
     private Unit[] xUnit;
 
     // zerg units
-    private int overlordNumber = 0, queenNumber = 0, lingNumber = 0, banelingNumber = 0, roachNumber = 0,
+    private int overlordNumber = 1, queenNumber = 0, lingNumber = 0, banelingNumber = 0, roachNumber = 0,
                 ravagerNumber = 0, overseerNumber = 0, hydraliskNumber = 0, lurkerNumber = 0;
     private int workerNumber = 12;
 
