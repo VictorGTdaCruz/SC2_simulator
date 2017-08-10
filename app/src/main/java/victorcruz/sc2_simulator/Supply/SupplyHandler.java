@@ -20,6 +20,9 @@ public class SupplyHandler {
         this.supplyTextView = supplyTextView;
         this.supplyMaxTextView = supplyMaxTextView;
 
+        supplyTextView.setText(Integer.toString(supply));
+        supplyMaxTextView.setText(Integer.toString(supplyMax));
+        //supply = unithandler.get all units supply();
     }
 
     // used on makebuilding for zerg

@@ -205,6 +205,7 @@ public class MainSimulator extends AppCompatActivity {
 
     public void resetMatch(View view) throws InterruptedException {
         timeHandler.resetChrono(view);
+        supplyHandler = new SupplyHandler(supplyTextView, supplyMaxTextView);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, larvaTextView);
         buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler);
@@ -259,8 +260,9 @@ public class MainSimulator extends AppCompatActivity {
     corrigir supplymax inicial, nao eh 14, eh 0 com 8 de suserano e 6 da hatch (acho q n precisa pq nunca unidades vao morrer)
     implementar estrutura de dados que possui todas as unidades vivas (precisa?)
 
-    melhorar precisao do consumeDrone (drone andando) (dependendo da construcao)
     ver se precisa de fragmentos
-    implementar requisitos
+
+    melhorar precisao do consumeDrone (drone andando) (dependendo da construcao)
     melhorar income
+    implementar requisitos
  */
