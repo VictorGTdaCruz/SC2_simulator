@@ -153,7 +153,7 @@ public class MainSimulator extends AppCompatActivity {
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
         timeHandler = new TimeHandler(stcButton34, chronometerModified);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, larvaTextView);
-        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler);
+        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler);
 
         // onTick method
         /*chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -207,7 +207,7 @@ public class MainSimulator extends AppCompatActivity {
         timeHandler.resetChrono(view);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, larvaTextView);
-        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler);
+        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler);
     }
 
     public void makeUnit(View view){
@@ -260,7 +260,7 @@ public class MainSimulator extends AppCompatActivity {
     implementar estrutura de dados que possui todas as unidades vivas (precisa?)
 
     ver se precisa de fragmentos
-    implementar paines mutation e colocar todas as figurinhas nos botoes (UNIDADES SOH)
+    implementar requisitos
     talvez n precise ter drone nos requirements, o codigo ja faz a checkagem igual faz com larva
     melhorar income
  */

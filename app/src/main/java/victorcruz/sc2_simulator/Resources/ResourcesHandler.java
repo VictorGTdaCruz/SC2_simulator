@@ -70,6 +70,11 @@ public class ResourcesHandler {
         }
     }
 
+    public void miningPQPeekRemove(){
+        minPriorityQueue.remove();
+        System.out.println("PQ size: " + minPriorityQueue.size());
+    }
+
     public int getMinerals(){
         return  minerals;
     }

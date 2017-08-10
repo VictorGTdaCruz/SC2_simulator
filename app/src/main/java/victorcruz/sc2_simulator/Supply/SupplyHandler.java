@@ -22,6 +22,12 @@ public class SupplyHandler {
 
     }
 
+    // used on makebuilding for zerg
+    public void decreaseSupply(int amount){
+        supply = supply - amount;
+        supplyTextView.setText(Integer.toString(supply));
+    }
+
     public void increaseSupply(int amount){
         supply = supply + amount;
         supplyTextView.setText(Integer.toString(supply));

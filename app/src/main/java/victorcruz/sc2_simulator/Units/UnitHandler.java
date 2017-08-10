@@ -130,8 +130,18 @@ public class UnitHandler {
         }
     }
 
-    public int getWorkerNumber(){
-        return workerNumber;
+    // only for zerg makebuilding
+    public boolean hasDrone(){
+        if (workerNumber > 0)
+            return true;
+        else return false;
+    }
+
+    // only for zerg makebuilding
+    public void consumeDrone(){
+        workerNumber--;
+        resourcesHandler.miningPQPeekRemove();
+        supplyHandler.decreaseSupply(xUnit[0].getSupply());
     }
 
     public int checkUnitIndex(String buttonTag){

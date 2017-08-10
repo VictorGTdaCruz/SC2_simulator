@@ -11,6 +11,7 @@ import java.util.PriorityQueue;
 import victorcruz.sc2_simulator.Resources.ResourcesHandler;
 import victorcruz.sc2_simulator.Supply.SupplyHandler;
 import victorcruz.sc2_simulator.Time.TimeHandler;
+import victorcruz.sc2_simulator.Units.UnitHandler;
 
 public class BuildingHandler {
 
@@ -18,6 +19,7 @@ public class BuildingHandler {
     private SupplyHandler supplyHandler;
     private ResourcesHandler resourcesHandler;
     private TimeHandler timeHandler;
+    private UnitHandler unitHandler;
 
     // handlers to use postDelayed method
     private Handler prodHandler = new Handler(); // used on buildingProduction
@@ -33,11 +35,13 @@ public class BuildingHandler {
     private Comparator<Building> buildingComparator = new BuildingComparator();
 
 
-    public BuildingHandler(ResourcesHandler resourcesHandler, TimeHandler timeHandler, SupplyHandler supplyHandler){
+    public BuildingHandler(ResourcesHandler resourcesHandler, TimeHandler timeHandler,
+                           SupplyHandler supplyHandler, UnitHandler unitHandler){
 
         this.resourcesHandler = resourcesHandler;
         this.timeHandler = timeHandler;
         this.supplyHandler = supplyHandler;
+        this.unitHandler = unitHandler;
 
         buildingPriorityQueue = new PriorityQueue<>(10, buildingComparator);
 
@@ -125,12 +129,13 @@ public class BuildingHandler {
         Building building = new Building(xBuilding[index]);
 
         if (timeHandler.isGameStarted()) {
-            if (resourcesHandler.getMinerals() >= building.getMinCost() && resourcesHandler.getGas() >= building.getGasCost()) {
+            if (resourcesHandler.getMinerals() >= building.getMinCost() &&
+                    resourcesHandler.getGas() >= building.getGasCost() && unitHandler.hasDrone()) {
                 if (timeHandler.isTimeRunning()) {
-                    //consume drone method
+                    unitHandler.consumeDrone();
                     building.setOrderedTime(timeHandler.getTime());
                 } else {
-                    //consume drone method
+                    unitHandler.consumeDrone();
                     building.setOrderedTime(-timeHandler.getTimeWhenStopped());
                 }
                 if (true) { // consumed drone

@@ -101,7 +101,7 @@
                 android:background="@android:color/background_dark"
                 android:columnCount="4"
                 android:rowCount="4"
-                android:visibility="visible">
+                android:visibility="invisible">
 
             </GridLayout>
 
@@ -886,7 +886,7 @@
                 android:background="@android:color/background_dark"
                 android:columnCount="4"
                 android:rowCount="4"
-                android:visibility="invisible">
+                android:visibility="visible">
 
                 <Button
                     android:id="@+id/stcButton11"
@@ -929,7 +929,7 @@
                     android:layout_rowWeight="1"
                     android:background="@drawable/drone3"
                     android:onClick="makeUnit"
-                    android:tag="+DRONE"/>
+                    android:tag="Drone"/>
 
                 <Button
                     android:id="@+id/stcButton21"
@@ -961,7 +961,7 @@
                     android:layout_rowWeight="1"
                     android:background="@drawable/roach5"
                     android:onClick="makeUnit"
-                    android:tag="+ROACH"/>
+                    android:tag="Roach"/>
 
                 <Button
                     android:id="@+id/stcButton24"
@@ -994,7 +994,7 @@
                     android:layout_rowWeight="1"
                     android:background="@drawable/over5"
                     android:onClick="makeUnit"
-                    android:tag="+OVERL"/>
+                    android:tag="Overlord"/>
 
                 <Button
                     android:id="@+id/stcButton33"
@@ -1006,7 +1006,7 @@
                     android:layout_rowWeight="1"
                     android:background="@drawable/ling5"
                     android:onClick="makeUnit"
-                    android:tag="+LING"/>
+                    android:tag="Zergling"/>
 
                 <Button
                     android:id="@+id/stcButton34"
