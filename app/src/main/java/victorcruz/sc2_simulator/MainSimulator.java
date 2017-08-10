@@ -259,8 +259,8 @@ public class MainSimulator extends AppCompatActivity {
     corrigir supplymax inicial, nao eh 14, eh 0 com 8 de suserano e 6 da hatch (acho q n precisa pq nunca unidades vao morrer)
     implementar estrutura de dados que possui todas as unidades vivas (precisa?)
 
+    melhorar precisao do consumeDrone (drone andando) (dependendo da construcao)
     ver se precisa de fragmentos
     implementar requisitos
-    talvez n precise ter drone nos requirements, o codigo ja faz a checkagem igual faz com larva
     melhorar income
  */

@@ -47,23 +47,23 @@ public class BuildingHandler {
 
         xBuilding = new Building[18];
 
-        xBuilding[0] = new Building(-1, "Hatchery", 1500, 300, 0, 6, 71000, 1, new String[]{"Drone"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[1] = new Building(-1, "SpawningPool", 1000, 200, 0, 0, 46000, 1, new String[]{"Drone", "Hatchery"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[2] = new Building(-1, "Extractor", 500, 25, 0, 0, 21000, 1, new String[]{"Drone"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[3] = new Building(-1, "EvolutionChamber", 750, 75, 0, 0, 25000, 1, new String[]{"Drone", "Hatchery"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[4] = new Building(-1, "RoachWarren", 850, 150, 0, 0, 39000, 1, new String[]{"Drone", "SpawningPool"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[5] = new Building(-1, "BanelingNest", 850, 100, 50, 0, 43000, 1, new String[]{"Drone", "SpawningPool"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[6] = new Building(-1, "SpineCrawler", 300, 100, 0, 0, 36000, 2, new String[]{"Drone", "SpawningPool"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[7] = new Building(-1, "SporeCrawler", 400, 75, 0, 0, 21000, 1, new String[]{"Drone", "SpawningPool"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[0] = new Building(-1, "Hatchery", 1500, 300, 0, 6, 71000, 1, new String[]{}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[1] = new Building(-1, "SpawningPool", 1000, 200, 0, 0, 46000, 1, new String[]{"Hatchery"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[2] = new Building(-1, "Extractor", 500, 25, 0, 0, 21000, 1, new String[]{}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[3] = new Building(-1, "EvolutionChamber", 750, 75, 0, 0, 25000, 1, new String[]{"Hatchery"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[4] = new Building(-1, "RoachWarren", 850, 150, 0, 0, 39000, 1, new String[]{"SpawningPool"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[5] = new Building(-1, "BanelingNest", 850, 100, 50, 0, 43000, 1, new String[]{"SpawningPool"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[6] = new Building(-1, "SpineCrawler", 300, 100, 0, 0, 36000, 2, new String[]{"SpawningPool"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[7] = new Building(-1, "SporeCrawler", 400, 75, 0, 0, 21000, 1, new String[]{"SpawningPool"}, new String[]{"Structure", "Armored", "Biological"});
         xBuilding[8] = new Building(-1, "Lair", 2000, 150, 100, 0, 57000, 1, new String[]{"Hatchery", "SpawningPool"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[9] = new Building(-1, "HydraliskDen", 850, 100, 100, 0, 29000, 1, new String[]{"Drone", "Lair"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[9] = new Building(-1, "HydraliskDen", 850, 100, 100, 0, 29000, 1, new String[]{"Lair"}, new String[]{"Structure", "Armored", "Biological"});
         xBuilding[10] = new Building(-1, "LurkerDen", 850, 150, 150, 0, 86000, 1, new String[]{"HydraliskDen", "Lair"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[11] = new Building(-1, "Spire", 850, 200, 200, 0, 71000, 1, new String[]{"Drone", "Lair"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[12] = new Building(-1, "NydusNetwork", 850, 150, 200, 0, 36000, 1, new String[]{"Drone", "Lair"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[11] = new Building(-1, "Spire", 850, 200, 200, 0, 71000, 1, new String[]{"Lair"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[12] = new Building(-1, "NydusNetwork", 850, 150, 200, 0, 36000, 1, new String[]{"Lair"}, new String[]{"Structure", "Armored", "Biological"});
         xBuilding[13] = new Building(-1, "NydusWorm", 200, 100, 100, 0, 14000, 1, new String[]{"NydusNetwork"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[14] = new Building(-1, "InfestationPit", 850, 100, 100, 0, 36000, 1, new String[]{"Drone", "Lair"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[14] = new Building(-1, "InfestationPit", 850, 100, 100, 0, 36000, 1, new String[]{"Lair"}, new String[]{"Structure", "Armored", "Biological"});
         xBuilding[15] = new Building(-1, "Hive", 2500, 200, 150, 0, 71000, 1, new String[]{"InfestationPit", "Lair"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[16] = new Building(-1, "UltraliskCavern", 850, 150, 200, 0, 46000, 1, new String[]{"Drone", "Hive"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[16] = new Building(-1, "UltraliskCavern", 850, 150, 200, 0, 46000, 1, new String[]{"Hive"}, new String[]{"Structure", "Armored", "Biological"});
         xBuilding[17] = new Building(-1, "GreaterSpire", 1000, 100, 150, 0, 71000, 1, new String[]{"Spire", "Hive"}, new String[]{"Structure", "Armored", "Biological"});
 
     }
