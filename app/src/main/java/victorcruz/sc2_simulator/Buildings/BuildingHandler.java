@@ -41,7 +41,7 @@ public class BuildingHandler {
 
         buildingPriorityQueue = new PriorityQueue<>(10, buildingComparator);
 
-        xBuilding = new Building[17];
+        xBuilding = new Building[18];
 
         xBuilding[0] = new Building(-1, "Hatchery", 1500, 300, 0, 6, 71000, 1, new String[]{"Drone"}, new String[]{"Structure", "Armored", "Biological"});
         xBuilding[1] = new Building(-1, "SpawningPool", 1000, 200, 0, 0, 46000, 1, new String[]{"Drone", "Hatchery"}, new String[]{"Structure", "Armored", "Biological"});
@@ -56,10 +56,11 @@ public class BuildingHandler {
         xBuilding[10] = new Building(-1, "LurkerDen", 850, 150, 150, 0, 86000, 1, new String[]{"HydraliskDen", "Lair"}, new String[]{"Structure", "Armored", "Biological"});
         xBuilding[11] = new Building(-1, "Spire", 850, 200, 200, 0, 71000, 1, new String[]{"Drone", "Lair"}, new String[]{"Structure", "Armored", "Biological"});
         xBuilding[12] = new Building(-1, "NydusNetwork", 850, 150, 200, 0, 36000, 1, new String[]{"Drone", "Lair"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[13] = new Building(-1, "InfestationPit", 850, 100, 100, 0, 36000, 1, new String[]{"Drone", "Lair"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[14] = new Building(-1, "Hive", 2500, 200, 150, 0, 71000, 1, new String[]{"InfestationPit", "Lair"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[15] = new Building(-1, "UltraliskCavern", 850, 150, 200, 0, 46000, 1, new String[]{"Drone", "Hive"}, new String[]{"Structure", "Armored", "Biological"});
-        xBuilding[16] = new Building(-1, "GreaterSpire", 1000, 100, 150, 0, 71000, 1, new String[]{"Spire", "Hive"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[13] = new Building(-1, "NydusWorm", 200, 100, 100, 0, 14000, 1, new String[]{"NydusNetwork"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[14] = new Building(-1, "InfestationPit", 850, 100, 100, 0, 36000, 1, new String[]{"Drone", "Lair"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[15] = new Building(-1, "Hive", 2500, 200, 150, 0, 71000, 1, new String[]{"InfestationPit", "Lair"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[16] = new Building(-1, "UltraliskCavern", 850, 150, 200, 0, 46000, 1, new String[]{"Drone", "Hive"}, new String[]{"Structure", "Armored", "Biological"});
+        xBuilding[17] = new Building(-1, "GreaterSpire", 1000, 100, 150, 0, 71000, 1, new String[]{"Spire", "Hive"}, new String[]{"Structure", "Armored", "Biological"});
 
     }
 

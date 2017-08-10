@@ -12,6 +12,190 @@ public class Unit {
     public UnitAttackInfo[] attacks;
     public UnitAbility[] abilities;
 
+    // normal not caster unit
+    public Unit(long orderedTime, String name, int life, int minCost, int gasCost, int supply,
+                int supplyMax, int armor, int armorScalability, int cargoSize, int sight,
+                long productionTime, double speed, String[] requisites, String[] attributes,
+                UnitAttackInfo[] attacks, UnitAbility[] abilities){
+
+        this.name = name;
+        this.life = life;
+        this.shield = -1;
+        this.minCost = minCost;
+        this.gasCost = gasCost;
+        this.supply = supply;
+        this.supplyMax = supplyMax;
+        this.energyInitial = -1;
+        this.energyMax = -1;
+        this.armor = armor;
+        this.armorScalability = armorScalability;
+        this.shieldArmor = -1;
+        this.shieldArmorScalability = -1;
+        this.cargoSize = cargoSize;
+        this.sight = sight;
+        this.productionTime = productionTime;
+        this.speed = speed;
+        this.speedOnCreep = -1;
+        this.requisites = requisites;
+        this.attributes = attributes;
+        this.attacks = attacks;
+        this.abilities = abilities;
+
+
+        this.orderedTime = orderedTime;
+        ready = orderedTime + productionTime;
+        System.out.println(name + " ordered:" + ready + " " + orderedTime);
+
+    }
+
+    // normal caster unit
+    public Unit(long orderedTime, String name, int life, int minCost, int gasCost, int supply,
+                int supplyMax, int energyInitial, int energyMax, int armor, int armorScalability,
+                int cargoSize, int sight, long productionTime, double speed, String[] requisites,
+                String[] attributes, UnitAttackInfo[] attacks, UnitAbility[] abilities){
+
+        this.name = name;
+        this.life = life;
+        this.shield = -1;
+        this.minCost = minCost;
+        this.gasCost = gasCost;
+        this.supply = supply;
+        this.supplyMax = supplyMax;
+        this.energyInitial = energyInitial;
+        this.energyMax = energyMax;
+        this.armor = armor;
+        this.armorScalability = armorScalability;
+        this.shieldArmor = -1;
+        this.shieldArmorScalability = -1;
+        this.cargoSize = cargoSize;
+        this.sight = sight;
+        this.productionTime = productionTime;
+        this.speed = speed;
+        this.speedOnCreep = -1;
+        this.requisites = requisites;
+        this.attributes = attributes;
+        this.attacks = attacks;
+        this.abilities = abilities;
+
+
+        this.orderedTime = orderedTime;
+        ready = orderedTime + productionTime;
+        System.out.println(name + " ordered:" + ready + " " + orderedTime);
+
+    }
+
+    // zerg not caster unit
+    public Unit(long orderedTime, String name, int life, int minCost, int gasCost,
+                int supply, int supplyMax, int armor, int armorScalability,
+                int cargoSize, int sight, long productionTime,
+                double speed, double speedOnCreep, String[] requisites, String[] attributes,
+                UnitAttackInfo[] attacks, UnitAbility[] abilities){
+
+        this.name = name;
+        this.life = life;
+        this.shield = -1;
+        this.minCost = minCost;
+        this.gasCost = gasCost;
+        this.supply = supply;
+        this.supplyMax = supplyMax;
+        this.energyInitial = -1;
+        this.energyMax = -1;
+        this.armor = armor;
+        this.armorScalability = armorScalability;
+        this.shieldArmor = -1;
+        this.shieldArmorScalability = -1;
+        this.cargoSize = cargoSize;
+        this.sight = sight;
+        this.productionTime = productionTime;
+        this.speed = speed;
+        this.speedOnCreep = speedOnCreep;
+        this.requisites = requisites;
+        this.attributes = attributes;
+        this.attacks = attacks;
+        this.abilities = abilities;
+
+
+        this.orderedTime = orderedTime;
+        ready = orderedTime + productionTime;
+        System.out.println(name + " ordered:" + ready + " " + orderedTime);
+
+    }
+
+    //zerg caster unit
+    public Unit(long orderedTime, String name, int life, int minCost, int gasCost,
+                int supply, int supplyMax, int energyInitial, int energyMax, int armor, int armorScalability,
+                int cargoSize, int sight, long productionTime,
+                double speed, double speedOnCreep, String[] requisites, String[] attributes,
+                UnitAttackInfo[] attacks, UnitAbility[] abilities){
+
+        this.name = name;
+        this.life = life;
+        this.shield = -1;
+        this.minCost = minCost;
+        this.gasCost = gasCost;
+        this.supply = supply;
+        this.supplyMax = supplyMax;
+        this.energyInitial = energyInitial;
+        this.energyMax = energyMax;
+        this.armor = armor;
+        this.armorScalability = armorScalability;
+        this.shieldArmor = -1;
+        this.shieldArmorScalability = -1;
+        this.cargoSize = cargoSize;
+        this.sight = sight;
+        this.productionTime = productionTime;
+        this.speed = speed;
+        this.speedOnCreep = speedOnCreep;
+        this.requisites = requisites;
+        this.attributes = attributes;
+        this.attacks = attacks;
+        this.abilities = abilities;
+
+
+        this.orderedTime = orderedTime;
+        ready = orderedTime + productionTime;
+        System.out.println(name + " ordered:" + ready + " " + orderedTime);
+
+    }
+
+    // protoss not caster unit
+    public Unit(long orderedTime, String name, int life, int shield, int minCost, int gasCost,
+                int supply, int supplyMax, int armor, int armorScalability,
+                int shieldArmor, int shieldArmorScalability, int cargoSize, int sight, long productionTime,
+                double speed, String[] requisites, String[] attributes,
+                UnitAttackInfo[] attacks, UnitAbility[] abilities){
+
+        this.name = name;
+        this.life = life;
+        this.shield = shield;
+        this.minCost = minCost;
+        this.gasCost = gasCost;
+        this.supply = supply;
+        this.supplyMax = supplyMax;
+        this.energyInitial = energyInitial;
+        this.energyMax = energyMax;
+        this.armor = armor;
+        this.armorScalability = armorScalability;
+        this.shieldArmor = shieldArmor;
+        this.shieldArmorScalability = shieldArmorScalability;
+        this.cargoSize = cargoSize;
+        this.sight = sight;
+        this.productionTime = productionTime;
+        this.speed = speed;
+        this.speedOnCreep = speedOnCreep;
+        this.requisites = requisites;
+        this.attributes = attributes;
+        this.attacks = attacks;
+        this.abilities = abilities;
+
+
+        this.orderedTime = orderedTime;
+        ready = orderedTime + productionTime;
+        System.out.println(name + " ordered:" + ready + " " + orderedTime);
+
+    }
+
+    // protoss caster unit
     public Unit(long orderedTime, String name, int life, int shield, int minCost, int gasCost,
                 int supply, int supplyMax, int energyInitial, int energyMax, int armor, int armorScalability,
                 int shieldArmor, int shieldArmorScalability, int cargoSize, int sight, long productionTime,
@@ -48,6 +232,7 @@ public class Unit {
 
     }
 
+    // used to copy
     public Unit(Unit unit){
         this.name = unit.getName();
         this.life = unit.getLife();

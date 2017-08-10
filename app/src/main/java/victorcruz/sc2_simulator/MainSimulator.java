@@ -22,7 +22,8 @@ import victorcruz.sc2_simulator.Units.UnitHandler;
 public class MainSimulator extends AppCompatActivity {
 
     // Android components
-    private GridLayout statsLayouts, optionsLayouts, buildingsLayouts, unitsLayout, shortcutsLayout;
+    private GridLayout statsLayouts, optionsLayouts, buildingsLayouts, advbdLayout, mutbdLayout,
+            unitsLayout, mutUnitsLayout, shortcutsLayout;
 
     private Button stcButton34;
 
@@ -54,35 +55,50 @@ public class MainSimulator extends AppCompatActivity {
                     statsLayouts.setVisibility(View.VISIBLE);
                     optionsLayouts.setVisibility(View.INVISIBLE);
                     buildingsLayouts.setVisibility(View.INVISIBLE);
+                    advbdLayout.setVisibility(View.INVISIBLE);
+                    mutbdLayout.setVisibility(View.INVISIBLE);
                     unitsLayout.setVisibility(View.INVISIBLE);
+                    mutUnitsLayout.setVisibility(View.INVISIBLE);
                     shortcutsLayout.setVisibility(View.INVISIBLE);
                     return true;
                 case R.id.navigation_options:
                     statsLayouts.setVisibility(View.INVISIBLE);
                     optionsLayouts.setVisibility(View.VISIBLE);
                     buildingsLayouts.setVisibility(View.INVISIBLE);
+                    advbdLayout.setVisibility(View.INVISIBLE);
+                    mutbdLayout.setVisibility(View.INVISIBLE);
                     unitsLayout.setVisibility(View.INVISIBLE);
+                    mutUnitsLayout.setVisibility(View.INVISIBLE);
                     shortcutsLayout.setVisibility(View.INVISIBLE);
                     return true;
                 case R.id.navigation_buildings:
                     statsLayouts.setVisibility(View.INVISIBLE);
                     optionsLayouts.setVisibility(View.INVISIBLE);
                     buildingsLayouts.setVisibility(View.VISIBLE);
+                    advbdLayout.setVisibility(View.INVISIBLE);
+                    mutbdLayout.setVisibility(View.INVISIBLE);
                     unitsLayout.setVisibility(View.INVISIBLE);
+                    mutUnitsLayout.setVisibility(View.INVISIBLE);
                     shortcutsLayout.setVisibility(View.INVISIBLE);
                     return true;
                 case R.id.navigation_units:
                     statsLayouts.setVisibility(View.INVISIBLE);
                     optionsLayouts.setVisibility(View.INVISIBLE);
                     buildingsLayouts.setVisibility(View.INVISIBLE);
+                    advbdLayout.setVisibility(View.INVISIBLE);
+                    mutbdLayout.setVisibility(View.INVISIBLE);
                     unitsLayout.setVisibility(View.VISIBLE);
+                    mutUnitsLayout.setVisibility(View.INVISIBLE);
                     shortcutsLayout.setVisibility(View.INVISIBLE);
                     return true;
                 case R.id.navigation_shortcuts:
                     statsLayouts.setVisibility(View.INVISIBLE);
                     optionsLayouts.setVisibility(View.INVISIBLE);
                     buildingsLayouts.setVisibility(View.INVISIBLE);
+                    advbdLayout.setVisibility(View.INVISIBLE);
+                    mutbdLayout.setVisibility(View.INVISIBLE);
                     unitsLayout.setVisibility(View.INVISIBLE);
+                    mutUnitsLayout.setVisibility(View.INVISIBLE);
                     shortcutsLayout.setVisibility(View.VISIBLE);
                     return true;
             }
@@ -112,7 +128,10 @@ public class MainSimulator extends AppCompatActivity {
         statsLayouts = (GridLayout) findViewById(R.id.StatsLayout);
         optionsLayouts = (GridLayout) findViewById(R.id.OptionsLayout);
         buildingsLayouts = (GridLayout) findViewById(R.id.BuildingsLayout);
+        advbdLayout = (GridLayout) findViewById(R.id.AdvBuildingsLayout);
+        mutbdLayout = (GridLayout) findViewById(R.id.MutationBuildingsLayout);
         unitsLayout = (GridLayout) findViewById(R.id.UnitsLayout);
+        mutUnitsLayout = (GridLayout) findViewById(R.id.MutationUnitsLayout);
         shortcutsLayout = (GridLayout) findViewById(R.id.ShortcutsLayout);
 
         // buttons
@@ -197,9 +216,35 @@ public class MainSimulator extends AppCompatActivity {
 
     public void makeBuilding(View view){buildingHandler.makeBuilding(view);}
 
-    public void showExtraUnitsLayout (View view){}
+    public void showUnitsLayout(View view){
+        unitsLayout.setVisibility(View.VISIBLE);
+        mutUnitsLayout.setVisibility(View.INVISIBLE);
+    }
 
-    public void showExtraBuildingsLayout(View view){}
+    public void showMutationUnitsLayout (View view){
+        unitsLayout.setVisibility(View.INVISIBLE);
+        mutUnitsLayout.setVisibility(View.VISIBLE);
+    }
+
+    public void showBuildingsLayout(View view){
+        buildingsLayouts.setVisibility(View.VISIBLE);
+        advbdLayout.setVisibility(View.INVISIBLE);
+        mutbdLayout.setVisibility(View.INVISIBLE);
+    }
+
+    public void showAdvBuildingsLayout(View view){
+        buildingsLayouts.setVisibility(View.INVISIBLE);
+        advbdLayout.setVisibility(View.VISIBLE);
+        mutbdLayout.setVisibility(View.INVISIBLE);
+    }
+
+    public void showMutationBuildingsLayout(View view){
+        buildingsLayouts.setVisibility(View.INVISIBLE);
+        advbdLayout.setVisibility(View.INVISIBLE);
+        mutbdLayout.setVisibility(View.VISIBLE);
+    }
+
+
 
     public void printQueue(View view){
         while(unitHandler.unitPriorityQueue.size() != 0){
@@ -214,9 +259,8 @@ public class MainSimulator extends AppCompatActivity {
     corrigir supplymax inicial, nao eh 14, eh 0 com 8 de suserano e 6 da hatch (acho q n precisa pq nunca unidades vao morrer)
     implementar estrutura de dados que possui todas as unidades vivas (precisa?)
 
-    implementar diferentes construtores na classe UNIT
     ver se precisa de fragmentos
-    implementar paines mutation e colocar todas as figurinhas nos botoes
+    implementar paines mutation e colocar todas as figurinhas nos botoes (UNIDADES SOH)
     talvez n precise ter drone nos requirements, o codigo ja faz a checkagem igual faz com larva
     melhorar income
  */

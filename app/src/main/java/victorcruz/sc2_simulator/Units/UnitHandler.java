@@ -59,23 +59,23 @@ public class UnitHandler {
 
         //xUnit[X] = new Unit(-1, "+LARVA", 25, -1, 0, 0, 0, 0, -1, -1, 10, 1, -1, -1, 1, -1, 11000, 0, 0, new String[]{"Larva"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
         xUnit = new Unit[17];
-        xUnit[0] = new Unit(-1, "Drone", 50, -1, 50, 0, 1, 0, -1, -1, 0, 1, -1, -1, 1, 8, 12000, 3.94, 3.94, new String[]{"Larva"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[1] = new Unit(-1, "Overlord", 200, -1, 100, 0, 0, 8, -1, -1, 0, 1, -1, -1, -1, 11, 18000, 0.82, -1, new String[]{"Larva"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[2] = new Unit(-1, "Queen", 175, -1, 150, 0, 2, 0, 25, 200, 1, 1, -1, -1, 2, 9, 36000, 1.31, 3.5, new String[]{"Hatchery", "SpawningPool"}, new String[]{"Biological", "Psionic"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[3] = new Unit(-1, "Zergling", 35, -1, 50, 0, 1, 0, -1, -1, 0, 1, -1, -1, 1, 8, 17000, 4.13, 5.37, new String[]{"Larva", "SpawningPool"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[4] = new Unit(-1, "Baneling", 30, -1, 25, 25, 0, 0, -1, -1, 0, 1, -1, -1, 2, 8, 14000, 3.5, 4.55, new String[]{"Zergling", "BanelingNest"}, new String[]{"Biological"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[5] = new Unit(-1, "Roach", 145, -1, 75, 25, 2, 0, -1, -1, 1, 1, -1, -1, 2, 9, 19000, 3.15, 4.09, new String[]{"Larva", "RoachWarren"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[6] = new Unit(-1, "Ravager", 120, -1, 25, 75, 1, 0, -1, -1, 1, 1, -1, -1, 4, 9, 9000, 3.85, 5, new String[]{"Roach", "RoachWarren"}, new String[]{"Biological"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[7] = new Unit(-1, "Overseer", 200, -1, 50, 50, 1, 0, -1, -1, 1, 1, -1, -1, -1, 11, 12000, 2.62, -1, new String[]{"Overlord", "Lair"}, new String[]{"Biological", "Armored", "Detector"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[8] = new Unit(-1, "Hydralisk", 90, -1, 100, 50, 2, 0, -1, -1, 0, 1, -1, -1, 2, 9, 24000, 3.15, 4.09, new String[]{"Larva", "HydraliskDen"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[9] = new Unit(-1, "Lurker", 200, -1, 50, 100, 1, 0, -1, -1, 1, 1, -1, -1, 4, -1, 18000, 4.13, 5.37, new String[]{"Hydralisk", "LurkerDen"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[10] = new Unit(-1, "Mutalisk", 120, -1, 100, 100, 2, 0, -1, -1, 0, 1, -1, -1, -1, 11, 24000, 5.6, -1, new String[]{"Larva", "Spire"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[11] = new Unit(-1, "Corruptor", 200, -1, 150, 100, 2, 0, -1, -1, 2, 1, -1, -1, -1, 10, 29000, 4.725, -1, new String[]{"Larva", "Spire"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[12] = new Unit(-1, "Infestor", 90, -1, 100, 150, 2, 0, 50, 200, 0, 1, -1, -1, 2, 10, 36000, 3.15, 4.09, new String[]{"Larva", "InfestationPit"}, new String[]{"Biological", "Armored", "Psionic"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[13] = new Unit(-1, "SwarmHost", 160, -1, 100, 75, 3, 0, -1, -1, 1, 1, -1, -1, 4, 10, 29000, 4.13, 5.37, new String[]{"Larva", "InfestationPit"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[14] = new Unit(-1, "Viper", 150, -1, 100, 200, 3, 0, 50, 200, 1, 1, -1, -1, -1, 11, 29000, 4.13, -1, new String[]{"Larva", "Hive"}, new String[]{"Biological", "Armored", "Psionic"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[15] = new Unit(-1, "Ultralisk", 500, -1, 300, 200, 6, 0, -1, -1, 2, 1, -1, -1, 8, 9, 39000, 4.13, 5.37, new String[]{"Larva", "UltraliskCavern"}, new String[]{"Biological", "Armored", "Massive"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
-        xUnit[16] = new Unit(-1, "BroodLord", 25, -1, 150, 150, 2, 0, -1, -1, 1, 1, -1, -1, -1, 12, 24000, 1.97, -1, new String[]{"Corruptor", "Greater Spire"}, new String[]{"Biological", "Armored", "Massive"}, new UnitAttackInfo[]{}, new UnitAbility[]{} );
+        xUnit[0] = new Unit(-1, "Drone", 40, 50, 0, 1, 0, 0, 1, 1, 8, 12000, 3.94, 3.94, new String[]{"Larva"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[1] = new Unit(-1, "Overlord", 200, 100, 0, 0, 8, 0, 1, -1, 11, 18000, 0.82, -1, new String[]{"Larva"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[2] = new Unit(-1, "Queen", 175, 150, 0, 2, 0, 25, 200, 1, 1, 2, 9, 36000, 1.31, 3.5, new String[]{"Hatchery", "SpawningPool"}, new String[]{"Biological", "Psionic"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[3] = new Unit(-1, "Zergling", 35, 50, 0, 1, 0, 0, 1, 1, 8, 17000, 4.13, 5.37, new String[]{"Larva", "SpawningPool"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[4] = new Unit(-1, "Baneling", 30, 25, 25, 0, 0, 0, 1, 2, 8, 14000, 3.5, 4.55, new String[]{"Zergling", "BanelingNest"}, new String[]{"Biological"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[5] = new Unit(-1, "Roach", 145, 75, 25, 2, 0, 1, 1, 2, 9, 19000, 3.15, 4.09, new String[]{"Larva", "RoachWarren"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[6] = new Unit(-1, "Ravager", 120, 25, 75, 1, 0, 1, 1, 4, 9, 9000, 3.85, 5, new String[]{"Roach", "RoachWarren"}, new String[]{"Biological"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[7] = new Unit(-1, "Overseer", 200, 50, 50, 1, 0, 50, 200, 1, 1, -1, 11, 12000, 2.62, -1, new String[]{"Overlord", "Lair"}, new String[]{"Biological", "Armored", "Detector"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[8] = new Unit(-1, "Hydralisk", 90, 100, 50, 2, 0, 0, 1, 2, 9, 24000, 3.15, 4.09, new String[]{"Larva", "HydraliskDen"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[9] = new Unit(-1, "Lurker", 200, 50, 100, 1, 0, 1, 1, 4, -1, 18000, 4.13, 5.37, new String[]{"Hydralisk", "LurkerDen"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[10] = new Unit(-1, "Mutalisk", 120, 100, 100, 2, 0, 0, 1, -1, 11, 24000, 5.6, -1, new String[]{"Larva", "Spire"}, new String[]{"Biological", "Light"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[11] = new Unit(-1, "Corruptor", 200, 150, 100, 2, 0, 2, 1, -1, 10, 29000, 4.725, -1, new String[]{"Larva", "Spire"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[12] = new Unit(-1, "Infestor", 90,  100, 150, 2, 0, 50, 200, 0, 1, 2, 10, 36000, 3.15, 4.09, new String[]{"Larva", "InfestationPit"}, new String[]{"Biological", "Armored", "Psionic"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[13] = new Unit(-1, "SwarmHost", 160, 100, 75, 3, 0, 1, 1, 4, 10, 29000, 4.13, 5.37, new String[]{"Larva", "InfestationPit"}, new String[]{"Biological", "Armored"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[14] = new Unit(-1, "Viper", 150, 100, 200, 3, 0, 50, 200, 1, 1, -1, 11, 29000, 4.13, -1, new String[]{"Larva", "Hive"}, new String[]{"Biological", "Armored", "Psionic"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[15] = new Unit(-1, "Ultralisk", 500, 300, 200, 6, 0, 2, 1, 8, 9, 39000, 4.13, 5.37, new String[]{"Larva", "UltraliskCavern"}, new String[]{"Biological", "Armored", "Massive"}, new UnitAttackInfo[]{}, new UnitAbility[]{});
+        xUnit[16] = new Unit(-1, "BroodLord", 25, 150, 150, 2, 0, 1, 1, -1, 12, 24000, 1.97, -1, new String[]{"Corruptor", "Greater Spire"}, new String[]{"Biological", "Armored", "Massive"}, new UnitAttackInfo[]{}, new UnitAbility[]{} );
 
     }
     /*
