@@ -8,6 +8,7 @@ import android.widget.Button;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
+import victorcruz.sc2_simulator.Requisites.RequisitesHandler;
 import victorcruz.sc2_simulator.Resources.ResourcesHandler;
 import victorcruz.sc2_simulator.Supply.SupplyHandler;
 import victorcruz.sc2_simulator.Time.TimeHandler;
@@ -20,6 +21,7 @@ public class BuildingHandler {
     private ResourcesHandler resourcesHandler;
     private TimeHandler timeHandler;
     private UnitHandler unitHandler;
+    private RequisitesHandler requisitesHandler;
 
     // handlers to use postDelayed method
     private Handler prodHandler = new Handler(); // used on buildingProduction
@@ -36,12 +38,14 @@ public class BuildingHandler {
 
 
     public BuildingHandler(ResourcesHandler resourcesHandler, TimeHandler timeHandler,
-                           SupplyHandler supplyHandler, UnitHandler unitHandler){
+                           SupplyHandler supplyHandler, UnitHandler unitHandler,
+                           RequisitesHandler requisitesHandler){
 
         this.resourcesHandler = resourcesHandler;
         this.timeHandler = timeHandler;
         this.supplyHandler = supplyHandler;
         this.unitHandler = unitHandler;
+        this.requisitesHandler = requisitesHandler;
 
         buildingPriorityQueue = new PriorityQueue<>(10, buildingComparator);
 
@@ -129,7 +133,8 @@ public class BuildingHandler {
         Building building = new Building(xBuilding[index]);
 
         if (timeHandler.isGameStarted()) {
-            if (resourcesHandler.getMinerals() >= building.getMinCost() &&
+            if (requisitesHandler.containsInControl(building.getRequisites()) &&
+                    resourcesHandler.getMinerals() >= building.getMinCost() &&
                     resourcesHandler.getGas() >= building.getGasCost() && unitHandler.hasDrone()) {
                 if (timeHandler.isTimeRunning()) {
                     unitHandler.consumeDrone();
@@ -142,6 +147,7 @@ public class BuildingHandler {
                     resourcesHandler.decreaseMin(building.getMinCost());
                     resourcesHandler.decreaseGas(building.getGasCost());
                     buildingPriorityQueue.add(building);
+                    requisitesHandler.addToControl(building.getName());
                     System.out.println("BUILDING ORDERED: " + building.getName());
                 }
             }

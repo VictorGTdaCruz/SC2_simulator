@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
+                android:onClick="startTime"
                 android:textSize="50sp"/>
 
 
@@ -896,7 +897,8 @@
                     android:layout_columnWeight="1"
                     android:layout_row="0"
                     android:layout_rowWeight="1"
-                    />
+                    android:onClick="printRequisites"
+                    android:text="REQ"/>
 
                 <Button
                     android:id="@+id/stcButton12"

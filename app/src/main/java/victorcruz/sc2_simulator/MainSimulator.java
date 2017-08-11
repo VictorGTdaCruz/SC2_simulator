@@ -12,6 +12,7 @@ import android.widget.GridLayout;
 import android.widget.TextView;
 
 import victorcruz.sc2_simulator.Buildings.BuildingHandler;
+import victorcruz.sc2_simulator.Requisites.RequisitesHandler;
 import victorcruz.sc2_simulator.Resources.ResourcesHandler;
 import victorcruz.sc2_simulator.Supply.SupplyHandler;
 import victorcruz.sc2_simulator.Time.ChronometerModified;
@@ -42,6 +43,7 @@ public class MainSimulator extends AppCompatActivity {
     private TimeHandler timeHandler;
     private UnitHandler unitHandler;
     private BuildingHandler buildingHandler;
+    private RequisitesHandler requisitesHandler;
 
 
 
@@ -138,7 +140,6 @@ public class MainSimulator extends AppCompatActivity {
         stcButton34 = (Button) findViewById(R.id.stcButton34);
 
         //game variables
-        //chronometer = (Chronometer) findViewById(R.id.chronometer);
         chronometerModified = (ChronometerModified) findViewById(R.id.chronometerModified);
 
         // player variables
@@ -149,11 +150,12 @@ public class MainSimulator extends AppCompatActivity {
         larvaTextView = (TextView) findViewById(R.id.LarvaTextView);
 
         // handlers
+        requisitesHandler = new RequisitesHandler();
         supplyHandler = new SupplyHandler(supplyTextView, supplyMaxTextView);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
         timeHandler = new TimeHandler(stcButton34, chronometerModified);
-        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, larvaTextView);
-        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler);
+        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, requisitesHandler, larvaTextView);
+        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, requisitesHandler);
 
         // onTick method
         /*chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -204,11 +206,12 @@ public class MainSimulator extends AppCompatActivity {
     }
 
     public void resetMatch(View view) throws InterruptedException {
+        requisitesHandler = new RequisitesHandler();
         timeHandler.resetChrono(view);
         supplyHandler = new SupplyHandler(supplyTextView, supplyMaxTextView);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
-        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, larvaTextView);
-        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler);
+        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, requisitesHandler, larvaTextView);
+        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, requisitesHandler);
     }
 
     public void makeUnit(View view){
@@ -254,6 +257,10 @@ public class MainSimulator extends AppCompatActivity {
         }
     }
 
+    public void printRequisites(View view){
+        requisitesHandler.printElemets();
+    }
+
 }
 
 /*
@@ -262,7 +269,11 @@ public class MainSimulator extends AppCompatActivity {
 
     ver se precisa de fragmentos
 
+    criar metodo de criacao inicial de drones e hatchery quando jogo inicia, ja incluindo nos requisites e supply
+        sem depender do cronometro, ou seja, nao pode usar nenhum metodo ja existente dentro de unithandler
+        ja q nao tem um sistema q mantem registro das unidades vivas (a nao ser as variaveis), pq n pode ser marretado nesse novo metodo?
     melhorar precisao do consumeDrone (drone andando) (dependendo da construcao)
-    melhorar income
+    melhorar income (talvez de pra tirar algo da API nova)
     implementar requisitos
+    implementar sistema de larva escalonavel
  */

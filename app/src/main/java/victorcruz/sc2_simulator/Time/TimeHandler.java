@@ -10,11 +10,9 @@ import victorcruz.sc2_simulator.R;
 
 public class TimeHandler {
 
-    //private Chronometer chronometer;
     private ChronometerModified chronometerModified;
     private Button stcButton34;
 
-    //private long timeWhenStopped;
     private long timeWhenStoppedModified;
 
     private boolean gameStarted;
@@ -22,7 +20,6 @@ public class TimeHandler {
 
     public TimeHandler (Button stcButton34, ChronometerModified chronometerModified){
 
-        //this.chronometer = chronometer;
         this.chronometerModified = chronometerModified;
         this.stcButton34 = stcButton34;
 
@@ -32,20 +29,14 @@ public class TimeHandler {
 
     public void startChrono(View view) {
         switch (view.getId()) {
-            case R.id.chronometer:
+            case R.id.chronometerModified:
                 if (stcButton34.getText().equals("START")) {
-                    //chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
-                    //chronometer.start();
-
                     chronometerModified.setBase(SystemClock.elapsedRealtime() + timeWhenStoppedModified);
                     chronometerModified.start();
 
                     stcButton34.setText("STOP");
                     if (!(gameStarted)) gameStarted = true;
                 } else if (stcButton34.getText().equals("STOP")) {
-                    //timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
-                    //chronometer.stop();
-
                     timeWhenStoppedModified = chronometerModified.getBase() - SystemClock.elapsedRealtime();
                     chronometerModified.stop();
 
@@ -54,18 +45,12 @@ public class TimeHandler {
                 break;
             case R.id.stcButton34:
                 if (stcButton34.getText().equals("START")) {
-                    //chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
-                    //chronometer.start();
-
                     chronometerModified.setBase(SystemClock.elapsedRealtime() + timeWhenStoppedModified);
                     chronometerModified.start();
 
                     stcButton34.setText("STOP");
                     if (!(gameStarted)) gameStarted = true;
                 } else if (stcButton34.getText().equals("STOP")) {
-                    //timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
-                    //chronometer.stop();
-
                     timeWhenStoppedModified = chronometerModified.getBase() - SystemClock.elapsedRealtime();
                     chronometerModified.stop();
 
@@ -104,8 +89,6 @@ public class TimeHandler {
     public long getTime(){
         return SystemClock.elapsedRealtime() - chronometerModified.getBase();
     }
-
-    public void getTestTime(){ System.out.println(SystemClock.elapsedRealtime() - chronometerModified.getBase());   }
 
     public boolean isGameStarted(){
         return gameStarted;
