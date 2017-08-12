@@ -12,7 +12,7 @@ import android.widget.GridLayout;
 import android.widget.TextView;
 
 import victorcruz.sc2_simulator.Buildings.BuildingHandler;
-import victorcruz.sc2_simulator.Requisites.RequisitesHandler;
+import victorcruz.sc2_simulator.Requisites.TechHandler;
 import victorcruz.sc2_simulator.Resources.ResourcesHandler;
 import victorcruz.sc2_simulator.Supply.SupplyHandler;
 import victorcruz.sc2_simulator.Time.ChronometerModified;
@@ -26,7 +26,25 @@ public class MainSimulator extends AppCompatActivity {
     private GridLayout statsLayouts, optionsLayouts, buildingsLayouts, advbdLayout, mutbdLayout,
             unitsLayout, mutUnitsLayout, shortcutsLayout;
 
-    private Button stcButton34;
+    private Button stcButton34; // Time controler
+
+    private Button unitButton11, unitButton12, unitButton13,  unitButton14,
+                    unitButton21, unitButton22, unitButton23, unitButton24,
+                    unitButton31, unitButton32, unitButton33,
+                    mutunitButton11, mutunitButton12,
+                    mutunitButton21, mutunitButton22,
+                    mutunitButton31,
+                    bdButton11, bdButton12,
+                    bdButton21, bdButton22, bdButton23, bdButton24,
+                    bdButton31, bdButton32,
+                    advbdButton11, advbdButton12,
+                    advbdButton21, advbdButton22,
+                    advbdButton31,
+                    mutbdButton11, mutbdButton12,
+                    mutbdButton21, mutbdButton22,
+                    mutbdButton31;
+
+    private Button[] buttons;
 
     //private Chronometer chronometer;
     private ChronometerModified chronometerModified;
@@ -43,7 +61,7 @@ public class MainSimulator extends AppCompatActivity {
     private TimeHandler timeHandler;
     private UnitHandler unitHandler;
     private BuildingHandler buildingHandler;
-    private RequisitesHandler requisitesHandler;
+    private TechHandler techHandler;
 
 
 
@@ -137,7 +155,43 @@ public class MainSimulator extends AppCompatActivity {
         shortcutsLayout = (GridLayout) findViewById(R.id.ShortcutsLayout);
 
         // buttons
+        buttons = new Button[34];
         stcButton34 = (Button) findViewById(R.id.stcButton34);
+        unitButton11 = (Button) findViewById(R.id.unitButton11);
+        unitButton12 = (Button) findViewById(R.id.unitButton12);
+        unitButton13 = (Button) findViewById(R.id.unitButton13);
+        unitButton14 = (Button) findViewById(R.id.unitButton14);
+        unitButton21 = (Button) findViewById(R.id.unitButton21);
+        unitButton22 = (Button) findViewById(R.id.unitButton22);
+        unitButton23 = (Button) findViewById(R.id.unitButton23);
+        unitButton24 = (Button) findViewById(R.id.unitButton24);
+        unitButton31 = (Button) findViewById(R.id.unitButton31);
+        unitButton32 = (Button) findViewById(R.id.unitButton32);
+        unitButton33 = (Button) findViewById(R.id.unitButton33);
+        mutunitButton11 = (Button) findViewById(R.id.mutunitButton11);
+        mutunitButton12 = (Button) findViewById(R.id.mutunitButton12);
+        mutunitButton21 = (Button) findViewById(R.id.mutunitButton21);
+        mutunitButton22 = (Button) findViewById(R.id.mutunitButton22);
+        mutunitButton31 = (Button) findViewById(R.id.mutunitButton31);
+        bdButton11 = (Button) findViewById(R.id.bdButton11);
+        bdButton12 = (Button) findViewById(R.id.bdButton12);
+        bdButton21 = (Button) findViewById(R.id.bdButton21);
+        bdButton22 = (Button) findViewById(R.id.bdButton22);
+        bdButton23 = (Button) findViewById(R.id.bdButton23);
+        bdButton24 = (Button) findViewById(R.id.bdButton24);
+        bdButton31 = (Button) findViewById(R.id.bdButton31);
+        bdButton32 = (Button) findViewById(R.id.bdButton32);
+        advbdButton11 = (Button) findViewById(R.id.advbdButton11);
+        advbdButton12 = (Button) findViewById(R.id.advbdButton12);
+        advbdButton21 = (Button) findViewById(R.id.advbdButton21);
+        advbdButton22 = (Button) findViewById(R.id.advbdButton22);
+        advbdButton31 = (Button) findViewById(R.id.advbdButton31);
+        mutbdButton11 = (Button) findViewById(R.id.mutbdButton11);
+        mutbdButton12 = (Button) findViewById(R.id.mutbdButton12);
+        mutbdButton21 = (Button) findViewById(R.id.mutbdButton21);
+        mutbdButton22 = (Button) findViewById(R.id.mutbdButton22);
+        mutbdButton31 = (Button) findViewById(R.id.mutbdButton31);
+        organizeButtons();
 
         //game variables
         chronometerModified = (ChronometerModified) findViewById(R.id.chronometerModified);
@@ -150,12 +204,12 @@ public class MainSimulator extends AppCompatActivity {
         larvaTextView = (TextView) findViewById(R.id.LarvaTextView);
 
         // handlers
-        requisitesHandler = new RequisitesHandler();
+        techHandler = new TechHandler(buttons);
         supplyHandler = new SupplyHandler(supplyTextView, supplyMaxTextView);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
         timeHandler = new TimeHandler(stcButton34, chronometerModified);
-        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, requisitesHandler, larvaTextView);
-        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, requisitesHandler);
+        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, techHandler, larvaTextView);
+        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, techHandler);
 
         // onTick method
         /*chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -206,19 +260,35 @@ public class MainSimulator extends AppCompatActivity {
     }
 
     public void resetMatch(View view) throws InterruptedException {
-        requisitesHandler = new RequisitesHandler();
+        techHandler = new TechHandler(buttons);
         timeHandler.resetChrono(view);
         supplyHandler = new SupplyHandler(supplyTextView, supplyMaxTextView);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
-        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, requisitesHandler, larvaTextView);
-        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, requisitesHandler);
+        unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, techHandler, larvaTextView);
+        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, techHandler);
     }
 
     public void makeUnit(View view){
         unitHandler.makeUnit(view);
     }
 
-    public void makeBuilding(View view){buildingHandler.makeBuilding(view);}
+    public void makeBuilding(View view){ buildingHandler.makeBuilding(view); }
+
+    public void organizeButtons(){
+        buttons[0] = unitButton11; buttons[1] = unitButton12; buttons[2] = unitButton13;
+        buttons[3] = unitButton14; buttons[4] = unitButton21; buttons[5] = unitButton22;
+        buttons[6] = unitButton23; buttons[7] = unitButton24; buttons[8] = unitButton31;
+        buttons[9] = unitButton32; buttons[10] = unitButton33; buttons[11] = mutunitButton11;
+        buttons[12] = mutunitButton12; buttons[13] = mutunitButton21; buttons[14] = mutunitButton22;
+        buttons[15] = mutunitButton31; buttons[16] = bdButton11; buttons[17] = bdButton12;
+        buttons[18] = bdButton21; buttons[19] = bdButton22; buttons[20] = bdButton23;
+        buttons[21] = bdButton24; buttons[22] = bdButton31; buttons[23] = bdButton32;
+        buttons[24] = advbdButton11; buttons[25] = advbdButton12; buttons[26] = advbdButton21;
+        buttons[27] = advbdButton22; buttons[28] = advbdButton31; buttons[29] = mutbdButton11;
+        buttons[30] = mutbdButton12; buttons[31] = mutbdButton21; buttons[32] = mutbdButton22;
+        buttons[33] = mutbdButton31;
+
+    }
 
     public void showUnitsLayout(View view){
         unitsLayout.setVisibility(View.VISIBLE);
@@ -258,7 +328,7 @@ public class MainSimulator extends AppCompatActivity {
     }
 
     public void printRequisites(View view){
-        requisitesHandler.printElemets();
+        techHandler.printElemets();
     }
 
 }
@@ -274,6 +344,6 @@ public class MainSimulator extends AppCompatActivity {
         ja q nao tem um sistema q mantem registro das unidades vivas (a nao ser as variaveis), pq n pode ser marretado nesse novo metodo?
     melhorar precisao do consumeDrone (drone andando) (dependendo da construcao)
     melhorar income (talvez de pra tirar algo da API nova)
-    implementar requisitos
     implementar sistema de larva escalonavel
+    pensar em como resolver o problema de dual requisito
  */
