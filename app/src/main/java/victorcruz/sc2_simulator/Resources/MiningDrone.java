@@ -45,9 +45,9 @@ public class MiningDrone {
         // the longs returned are added to the production time of the drone
         // in other words, the result should be the duration of the cycle of mining 5 minerals
         // Ex: 12000 + (-7000) = 5000 for close mineral patches
-        if (random >= 35) return -7000;
-        else if (random <= 80 ) return -6300;
-        else return -6100;
+        if (random >= 35) return -7000; // 65% 5000
+        else if (random <= 20 ) return -6300; // 20% 5700
+        else return -6100; // 15% 5900
 
         /*if (random >= 37.5) return -7100;
         else if (random <= 80 ) return -6200;

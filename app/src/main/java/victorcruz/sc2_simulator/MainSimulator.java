@@ -321,10 +321,11 @@ public class MainSimulator extends AppCompatActivity {
 
 
     public void printQueue(View view){
-        while(unitHandler.unitPriorityQueue.size() != 0){
-            System.out.println(unitHandler.unitPriorityQueue.peek().getReady());
-            System.out.println(unitHandler.unitPriorityQueue.remove());
-        }
+        System.out.println(resourcesHandler.minPriorityQueue.size());
+        //while(unitHandler.unitPriorityQueue.size() != 0){
+            //System.out.println(resourcesHandler.minPriorityQueue.peek().getReady());
+            //System.out.println(resourcesHandler.minPriorityQueue.remove());
+        //}
     }
 
     public void printRequisites(View view){
@@ -343,7 +344,11 @@ public class MainSimulator extends AppCompatActivity {
         sem depender do cronometro, ou seja, nao pode usar nenhum metodo ja existente dentro de unithandler
         ja q nao tem um sistema q mantem registro das unidades vivas (a nao ser as variaveis), pq n pode ser marretado nesse novo metodo?
     melhorar precisao do consumeDrone (drone andando) (dependendo da construcao)
+        talvez cancelar uma iteração de mine após a construcao, hatch = 2
     melhorar income (talvez de pra tirar algo da API nova)
     implementar sistema de larva escalonavel
     pensar em como resolver o problema de dual requisito
+        fazer um metodo que usa o sistema antigo de requisitos pra analisar o dual?
+        ou um metodo independente em techhandler que simplesmente faz essa checkagem?
+    larva mechanics not working properly
  */

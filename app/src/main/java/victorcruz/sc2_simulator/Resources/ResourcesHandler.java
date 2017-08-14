@@ -33,18 +33,18 @@ public class ResourcesHandler {
 
         minPriorityQueue = new PriorityQueue<>(100, resourceMiningComparator);
 
-        minPriorityQueue.add(new MiningDrone( -11950, true));
-        minPriorityQueue.add(new MiningDrone( -11700, true));
-        minPriorityQueue.add(new MiningDrone( -11700, true));
-        minPriorityQueue.add(new MiningDrone( -11400, true));
-        minPriorityQueue.add(new MiningDrone( -11400, true));
+        minPriorityQueue.add(new MiningDrone( -11450, true));
+        minPriorityQueue.add(new MiningDrone( -11200, true));
+        minPriorityQueue.add(new MiningDrone( -11100, true));
         minPriorityQueue.add(new MiningDrone( -10800, true));
-        minPriorityQueue.add(new MiningDrone( -10300, true));
-        minPriorityQueue.add(new MiningDrone( -9900, true));
-        minPriorityQueue.add(new MiningDrone( -9500, true));
-        minPriorityQueue.add(new MiningDrone( -9100, true));
-        minPriorityQueue.add(new MiningDrone( -8900, true));
+        minPriorityQueue.add(new MiningDrone( -10200, true));
+        minPriorityQueue.add(new MiningDrone( -9800, true));
+        minPriorityQueue.add(new MiningDrone( -9400, true));
         minPriorityQueue.add(new MiningDrone( -8800, true));
+        minPriorityQueue.add(new MiningDrone( -8400, true));
+        minPriorityQueue.add(new MiningDrone( -7800, true));
+        minPriorityQueue.add(new MiningDrone( -7600, true));
+        minPriorityQueue.add(new MiningDrone( -7300, true));
 
     }
 
@@ -70,9 +70,21 @@ public class ResourcesHandler {
         }
     }
 
-    public void miningPQPeekRemove(){
+    public void miningPQPeekRemove(String buildingName){ // used when zerg makebuilding
         minPriorityQueue.remove();
         System.out.println("PQ size: " + minPriorityQueue.size());
+
+        // Compensates the distance the dorne has to walk before making a building:
+        // basically it recreates the next mining drone with the flag true, making the next 5 min increase not happen
+        // if the building is a hatchery, the next 2 cicles dont happen
+        long auxReady = minPriorityQueue.peek().getReady();
+        minPriorityQueue.remove();
+        if (buildingName.equals("Hatchery")){
+            long auxReady2 = minPriorityQueue.peek().getReady();
+            minPriorityQueue.remove();
+            minPriorityQueue.add(new MiningDrone(auxReady2, true));
+        }
+        minPriorityQueue.add(new MiningDrone(auxReady, true));
     }
 
     public int getMinerals(){

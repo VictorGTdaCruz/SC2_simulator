@@ -161,10 +161,10 @@ public class UnitHandler {
     }
 
     // only for zerg makebuilding
-    public void consumeDrone(){
+    public void consumeDrone(String buildingName){
         workerNumber--;
         resourcesHandler.decreaseMin(5);
-        resourcesHandler.miningPQPeekRemove();
+        resourcesHandler.miningPQPeekRemove(buildingName);
         supplyHandler.decreaseSupply(xUnit[0].getSupply());
     }
 

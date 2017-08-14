@@ -158,10 +158,10 @@ public class BuildingHandler {
                     resourcesHandler.getMinerals() >= building.getMinCost() &&
                     resourcesHandler.getGas() >= building.getGasCost() && unitHandler.hasDrone()) {
                 if (timeHandler.isTimeRunning()) {
-                    unitHandler.consumeDrone();
+                    unitHandler.consumeDrone(building.getName());
                     building.setOrderedTime(timeHandler.getTime());
                 } else {
-                    unitHandler.consumeDrone();
+                    unitHandler.consumeDrone(building.getName());
                     building.setOrderedTime(-timeHandler.getTimeWhenStopped());
                 }
                 if (true) { // consumed drone
