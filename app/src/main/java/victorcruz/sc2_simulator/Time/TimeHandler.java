@@ -13,6 +13,7 @@ public class TimeHandler {
     private ChronometerModified chronometerModified;
     private Button stcButton34;
 
+    private boolean isStopped;
     private long timeWhenStoppedModified;
 
     private boolean gameStarted;
@@ -24,7 +25,7 @@ public class TimeHandler {
         this.stcButton34 = stcButton34;
 
         gameStarted = false;
-
+        isStopped = true;
     }
 
     public void startChrono(View view) {
@@ -33,12 +34,14 @@ public class TimeHandler {
                 if (stcButton34.getText().equals("START")) {
                     chronometerModified.setBase(SystemClock.elapsedRealtime() + timeWhenStoppedModified);
                     chronometerModified.start();
+                    isStopped = false;
 
                     stcButton34.setText("STOP");
                     if (!(gameStarted)) gameStarted = true;
                 } else if (stcButton34.getText().equals("STOP")) {
                     timeWhenStoppedModified = chronometerModified.getBase() - SystemClock.elapsedRealtime();
                     chronometerModified.stop();
+                    isStopped = true;
 
                     stcButton34.setText("START");
                 }
@@ -47,12 +50,14 @@ public class TimeHandler {
                 if (stcButton34.getText().equals("START")) {
                     chronometerModified.setBase(SystemClock.elapsedRealtime() + timeWhenStoppedModified);
                     chronometerModified.start();
+                    isStopped = false;
 
                     stcButton34.setText("STOP");
                     if (!(gameStarted)) gameStarted = true;
                 } else if (stcButton34.getText().equals("STOP")) {
                     timeWhenStoppedModified = chronometerModified.getBase() - SystemClock.elapsedRealtime();
                     chronometerModified.stop();
+                    isStopped = true;
 
                     stcButton34.setText("START");
                 }
@@ -75,6 +80,7 @@ public class TimeHandler {
         chronometerModified.setBase(SystemClock.elapsedRealtime());
         timeWhenStoppedModified = chronometerModified.getBase() - SystemClock.elapsedRealtime();
         gameStarted = false;
+        isStopped = true;
     }
 
     public boolean isTimeRunning (){
@@ -87,7 +93,15 @@ public class TimeHandler {
     }
 
     public long getTime(){
-        return SystemClock.elapsedRealtime() - chronometerModified.getBase();
+
+        if (isStopped) {
+            //System.out.println("TIME: " + (-timeWhenStoppedModified));
+            return -timeWhenStoppedModified;
+        }
+        else {
+            //System.out.println("TIME: " + (SystemClock.elapsedRealtime() - chronometerModified.getBase()));
+            return SystemClock.elapsedRealtime() - chronometerModified.getBase();
+        }
     }
 
     public boolean isGameStarted(){

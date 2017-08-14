@@ -350,5 +350,4 @@ public class MainSimulator extends AppCompatActivity {
     pensar em como resolver o problema de dual requisito
         fazer um metodo que usa o sistema antigo de requisitos pra analisar o dual?
         ou um metodo independente em techhandler que simplesmente faz essa checkagem?
-    larva mechanics not working properly
  */

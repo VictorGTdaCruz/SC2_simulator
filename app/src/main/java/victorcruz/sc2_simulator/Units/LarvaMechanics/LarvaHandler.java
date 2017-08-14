@@ -66,6 +66,7 @@ public class LarvaHandler {
     public boolean useLarva(long currentTime){
 
         // Chooses a larva to be used/destroyed and then calls scheduleLarva
+        System.out.println("First current time of all" + currentTime);
         int larvaSystemIndex = 0;
         for (;larvaSystemIndex < larvaSystem.size(); larvaSystemIndex = larvaSystemIndex + 2){
 
@@ -91,7 +92,7 @@ public class LarvaHandler {
         if (larvaSystem.get(larvaSystemIndex).size() < 3 && !(isProducingLarva[larvaSystemIndex + 1])) {
             //System.out.println("Larva number: " + larvaSystem.get(larvaSystemIndex).size());
             isProducingLarva[larvaSystemIndex + 1] = true;
-            System.out.println("Producing larva...");
+            System.out.println("Producing larva..." + currentTime);
             larvaSystem.get(larvaSystemIndex + 1).add(new Larva(currentTime));
         }
 
