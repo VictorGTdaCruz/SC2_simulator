@@ -234,8 +234,6 @@ public class MainSimulator extends AppCompatActivity {
         chronometerModified.setOnChronometerTickListener(new ChronometerModified.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(ChronometerModified chronometerModified) {
-                /*System.out.println("TICKED!!!!!!!");
-                timeHandler.getTestTime();*/
 
                 currentTimeModified = SystemClock.elapsedRealtime() - chronometerModified.getBase();
 
@@ -346,6 +344,7 @@ public class MainSimulator extends AppCompatActivity {
     melhorar precisao do consumeDrone (drone andando) (dependendo da construcao)
         talvez cancelar uma iteração de mine após a construcao, hatch = 2
     melhorar income (talvez de pra tirar algo da API nova)
+    implementar gas mining
     implementar sistema de larva escalonavel
     pensar em como resolver o problema de dual requisito
         fazer um metodo que usa o sistema antigo de requisitos pra analisar o dual?

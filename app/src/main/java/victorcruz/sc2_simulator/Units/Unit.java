@@ -172,8 +172,8 @@ public class Unit {
         this.gasCost = gasCost;
         this.supply = supply;
         this.supplyMax = supplyMax;
-        this.energyInitial = energyInitial;
-        this.energyMax = energyMax;
+        this.energyInitial = -1;
+        this.energyMax = -1;
         this.armor = armor;
         this.armorScalability = armorScalability;
         this.shieldArmor = shieldArmor;
@@ -182,7 +182,7 @@ public class Unit {
         this.sight = sight;
         this.productionTime = productionTime;
         this.speed = speed;
-        this.speedOnCreep = speedOnCreep;
+        this.speedOnCreep = -1;
         this.requisites = requisites;
         this.attributes = attributes;
         this.attacks = attacks;
@@ -268,7 +268,7 @@ public class Unit {
     public void setOrderedTime(long orderedTime){
         this.orderedTime = orderedTime;
         ready = orderedTime + productionTime;
-        System.out.println("------------------------------------------------------------" + ready);
+        System.out.println("------------------------------------------------------------ unit ready: " + ready);
 
     }
 

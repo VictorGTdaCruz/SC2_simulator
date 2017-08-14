@@ -66,11 +66,6 @@ public class TimeHandler {
     }
 
     public void resetChrono(View view) throws InterruptedException {
-        /*chronometer.setBase(SystemClock.elapsedRealtime());
-        chronometer.stop();
-        timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
-        */
-
 
         Thread.sleep(200);
 

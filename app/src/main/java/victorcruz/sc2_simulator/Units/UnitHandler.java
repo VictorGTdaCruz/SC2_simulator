@@ -125,7 +125,7 @@ public class UnitHandler {
             prodHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    System.out.println("UNIT IS READY: " + name + " " + (ready - currentTime));
+                    System.out.println("UNIT IS READY: " + name + " " + ready);
 
                     if (name.equals("Drone")){
                         ResourcesHandler.minPriorityQueue.add(new MiningDrone(ready - productionTime, true));
@@ -163,7 +163,7 @@ public class UnitHandler {
     // only for zerg makebuilding
     public void consumeDrone(String buildingName){
         workerNumber--;
-        resourcesHandler.decreaseMin(5);
+        //resourcesHandler.decreaseMin(5); //NAO LEMBRO PQ ENTAO VOU TIRAR PQ TA BUGANDO
         resourcesHandler.miningPQPeekRemove(buildingName);
         supplyHandler.decreaseSupply(xUnit[0].getSupply());
     }
