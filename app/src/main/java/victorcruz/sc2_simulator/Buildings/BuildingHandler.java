@@ -16,6 +16,8 @@ import victorcruz.sc2_simulator.Units.UnitHandler;
 
 public class BuildingHandler {
 
+    private Button stcButton22;
+
     // handlers
     private SupplyHandler supplyHandler;
     private ResourcesHandler resourcesHandler;
@@ -30,7 +32,7 @@ public class BuildingHandler {
     private Building[] xBuilding;
 
     //zerg buildings
-    private int hatcheryNumber = 1, spawningPoolNumber = 0, banelingNestNumner = 0, RoachWarrenNumber = 0;
+    private int hatcheryNumber = 1, extractorNumber = 0, spawningPoolNumber = 0, banelingNestNumner = 0, RoachWarrenNumber = 0;
 
     //building production mechanic variables
     private PriorityQueue<Building> buildingPriorityQueue;
@@ -39,13 +41,15 @@ public class BuildingHandler {
 
     public BuildingHandler(ResourcesHandler resourcesHandler, TimeHandler timeHandler,
                            SupplyHandler supplyHandler, UnitHandler unitHandler,
-                           TechHandler techHandler){
+                           TechHandler techHandler, Button button){
 
         this.resourcesHandler = resourcesHandler;
         this.timeHandler = timeHandler;
         this.supplyHandler = supplyHandler;
         this.unitHandler = unitHandler;
         this.techHandler = techHandler;
+
+        this.stcButton22 = button;
 
         buildingPriorityQueue = new PriorityQueue<>(10, buildingComparator);
 
@@ -117,6 +121,10 @@ public class BuildingHandler {
                         // xbuildingBoolean[1] = true
                         // ling.setClickable(true)
                     }
+                    else if (name.equals("Extractor")){
+                        extractorNumber++;
+                        setDroneToGasButtonAlpha();
+                    }
 //                    else if (name.equals("+QUEEN")) queenNumber++;
 //                    else if (name.equals("+LING")) lingNumber = lingNumber + 2;
 //                    else if (name.equals("+BANE")) banelingNumber++;
@@ -174,5 +182,16 @@ public class BuildingHandler {
             }
         }
 
+    }
+
+    public int getExtractorNumber(){
+        return extractorNumber;
+    }
+
+
+    public void setDroneToGasButtonAlpha(){
+        if (resourcesHandler.getDronesInGas() / 3 < extractorNumber){
+            stcButton22.setAlpha(1);
+        } else stcButton22.setAlpha(0.3f);
     }
 }

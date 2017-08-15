@@ -38,7 +38,7 @@ public class MiningDrone {
 
     //public boolean getIsMiningHandlered(){return isMiningHandlered;}
 
-    public long calcDistance(){
+    public long calcMineralDistance(){
 
         long random = randomGenerator.nextInt(101);
 
@@ -53,6 +53,10 @@ public class MiningDrone {
         else if (random <= 80 ) return -6200;
         else return -6200;
 */
+    }
+
+    public long calcGasDistance(){
+        return -8000; // 4000
     }
 
 }

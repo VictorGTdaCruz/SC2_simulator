@@ -26,7 +26,8 @@ public class MainSimulator extends AppCompatActivity {
     private GridLayout statsLayouts, optionsLayouts, buildingsLayouts, advbdLayout, mutbdLayout,
             unitsLayout, mutUnitsLayout, shortcutsLayout;
 
-    private Button stcButton34; // Time controler
+    private Button stcButton34, // Time controler
+                    stcButton22;
 
     private Button unitButton11, unitButton12, unitButton13,  unitButton14,
                     unitButton21, unitButton22, unitButton23, unitButton24,
@@ -62,7 +63,6 @@ public class MainSimulator extends AppCompatActivity {
     private UnitHandler unitHandler;
     private BuildingHandler buildingHandler;
     private TechHandler techHandler;
-
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -157,6 +157,7 @@ public class MainSimulator extends AppCompatActivity {
         // buttons
         buttons = new Button[34];
         stcButton34 = (Button) findViewById(R.id.stcButton34);
+        stcButton22 = (Button) findViewById(R.id.stcButton22);
         unitButton11 = (Button) findViewById(R.id.unitButton11);
         unitButton12 = (Button) findViewById(R.id.unitButton12);
         unitButton13 = (Button) findViewById(R.id.unitButton13);
@@ -209,7 +210,8 @@ public class MainSimulator extends AppCompatActivity {
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
         timeHandler = new TimeHandler(stcButton34, chronometerModified);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, techHandler, larvaTextView);
-        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, techHandler);
+        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, techHandler, stcButton22);
+        resourcesHandler.setBuildingHandler(buildingHandler);
 
         // onTick method
         /*chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -253,17 +255,24 @@ public class MainSimulator extends AppCompatActivity {
         });
     }
 
+
     public void startTime(View view){
         timeHandler.startChrono(view);
     }
 
     public void resetMatch(View view) throws InterruptedException {
         techHandler = new TechHandler(buttons);
-        timeHandler.resetChrono(view);
+        timeHandler.resetChrono();
         supplyHandler = new SupplyHandler(supplyTextView, supplyMaxTextView);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, techHandler, larvaTextView);
-        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, techHandler);
+        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, techHandler, stcButton22);
+        resourcesHandler.setBuildingHandler(buildingHandler);
+    }
+
+    public void sendWorkerToGas(View view){
+        resourcesHandler.sendWorkerToGas(timeHandler.getTime());
+        System.out.println("time " + timeHandler.getTime());
     }
 
     public void makeUnit(View view){
@@ -341,10 +350,13 @@ public class MainSimulator extends AppCompatActivity {
     criar metodo de criacao inicial de drones e hatchery quando jogo inicia, ja incluindo nos requisites e supply
         sem depender do cronometro, ou seja, nao pode usar nenhum metodo ja existente dentro de unithandler
         ja q nao tem um sistema q mantem registro das unidades vivas (a nao ser as variaveis), pq n pode ser marretado nesse novo metodo?
+
     melhorar precisao do consumeDrone (drone andando) (dependendo da construcao)
         talvez cancelar uma iteração de mine após a construcao, hatch = 2
-    melhorar income (talvez de pra tirar algo da API nova)
+
+
     implementar gas mining
+        tentar passar buildinghandler msm assim
     implementar sistema de larva escalonavel
     pensar em como resolver o problema de dual requisito
         fazer um metodo que usa o sistema antigo de requisitos pra analisar o dual?

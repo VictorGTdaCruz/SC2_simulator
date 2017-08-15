@@ -4,7 +4,6 @@ package victorcruz.sc2_simulator.Time;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
 
 import victorcruz.sc2_simulator.R;
 
@@ -65,7 +64,7 @@ public class TimeHandler {
         }
     }
 
-    public void resetChrono(View view) throws InterruptedException {
+    public void resetChrono() throws InterruptedException {
 
         Thread.sleep(200);
 
