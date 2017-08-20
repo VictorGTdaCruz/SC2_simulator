@@ -329,10 +329,12 @@ public class MainSimulator extends AppCompatActivity {
 
     public void printQueue(View view){
         System.out.println(resourcesHandler.minPriorityQueue.size());
-        //while(unitHandler.unitPriorityQueue.size() != 0){
-            //System.out.println(resourcesHandler.minPriorityQueue.peek().getReady());
-            //System.out.println(resourcesHandler.minPriorityQueue.remove());
-        //}
+        System.out.println(resourcesHandler.gasPriorityQueue.size());
+
+        while(resourcesHandler.gasPriorityQueue.size() != 0){
+            System.out.println(resourcesHandler.gasPriorityQueue.peek().getReady());
+            System.out.println(resourcesHandler.gasPriorityQueue.remove());
+        }
     }
 
     public void printRequisites(View view){
@@ -356,7 +358,8 @@ public class MainSimulator extends AppCompatActivity {
 
 
     implementar gas mining
-        tentar passar buildinghandler msm assim
+    handler para mineral e gas?
+    limpar codigo
     implementar sistema de larva escalonavel
     pensar em como resolver o problema de dual requisito
         fazer um metodo que usa o sistema antigo de requisitos pra analisar o dual?

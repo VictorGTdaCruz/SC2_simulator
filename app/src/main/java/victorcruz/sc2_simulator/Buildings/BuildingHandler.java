@@ -50,6 +50,7 @@ public class BuildingHandler {
         this.techHandler = techHandler;
 
         this.stcButton22 = button;
+        setDroneToGasButtonAlpha();
 
         buildingPriorityQueue = new PriorityQueue<>(10, buildingComparator);
 
@@ -93,7 +94,6 @@ public class BuildingHandler {
         xBuilding[15] = new Building(-1, "Hive", 2500, 200, 150, 0, 71000, 1, new String[]{"UltraliskCavern", "GreaterSpire", "Viper"}, new String[]{"Structure", "Armored", "Biological"});
         xBuilding[16] = new Building(-1, "UltraliskCavern", 850, 150, 200, 0, 46000, 1, new String[]{"Ultralisk"}, new String[]{"Structure", "Armored", "Biological"});
         xBuilding[17] = new Building(-1, "GreaterSpire", 1000, 100, 150, 0, 71000, 1, new String[]{"BroodLord"}, new String[]{"Structure", "Armored", "Biological"});
-
 
     }
 
