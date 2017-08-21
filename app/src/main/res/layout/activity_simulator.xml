@@ -941,7 +941,8 @@
                     android:layout_columnWeight="1"
                     android:layout_row="1"
                     android:layout_rowWeight="1"
-                    />
+                    android:onClick="takeWorkerOutOfGas"
+                    android:text="-1 GAS"/>
 
                 <Button
                     android:id="@+id/stcButton22"
@@ -951,7 +952,6 @@
                     android:layout_columnWeight="1"
                     android:layout_row="1"
                     android:layout_rowWeight="1"
-                    android:alpha="0.3"
                     android:onClick="sendWorkerToGas"
                     android:text="+1 GAS"/>
 

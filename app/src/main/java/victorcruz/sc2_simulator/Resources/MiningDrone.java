@@ -56,7 +56,7 @@ public class MiningDrone {
     }
 
     public long calcGasDistance(){
-        return -8000; // 4000
+        return -7700; // 4300
     }
 
 }

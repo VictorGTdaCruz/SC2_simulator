@@ -12,7 +12,7 @@ public class ResourcesHandler {
 
     private TextView  minTextView, gasTextView;
 
-    private int minerals = 50, gas = 0, dronesInGas = 0;
+    private int minerals = 50, gas = 0, workersInGas = 0;
 
     public static PriorityQueue<MiningDrone> minPriorityQueue;
     public static PriorityQueue<MiningDrone> gasPriorityQueue;
@@ -127,7 +127,7 @@ public class ResourcesHandler {
         } else if (gasPriorityQueue.size() == 1){ // ONE DRONE MINING GAS
 
             System.out.println("TINHA 1 DRONE!");
-            if ( gasPriorityQueue.peek().getReady() - currentTime < (4000 / 3)){ // if the chosen drone is not going to be on peek
+            if ( gasPriorityQueue.peek().getReady() - currentTime < (4200 / 3)){ // if the chosen drone is not going to be on peek
                 System.out.println("2 IS NOT ON PEEK");
                 gasPriorityQueue.add(new MiningDrone(gasPriorityQueue.peek().getReady() + (4000/3) - 12000, true));
             } else { // if the chosen drone IS going to be on peek
@@ -140,7 +140,7 @@ public class ResourcesHandler {
         } else if (gasPriorityQueue.size() == 2){ // TWO DRONES MINING GAS
 
             System.out.println("TINHA 2 DRONE!");
-            if ( gasPriorityQueue.peek().getReady() - currentTime < (4000 / 3) * 2){
+            if ( gasPriorityQueue.peek().getReady() - currentTime < (4200 / 3) * 2){
                 System.out.println("3 IS NOT ON PEEK");
                 gasPriorityQueue.add(new MiningDrone(gasPriorityQueue.peek().getReady() + ((4000 / 3) * 2) - 12000, true));
             } else {
@@ -158,31 +158,42 @@ public class ResourcesHandler {
 
     public void sendWorkerToGas(long currentTime){
 
-        if (buildingHandler.getExtractorNumber() > dronesInGas / 3 ) {
+        if (buildingHandler.getExtractorNumber() > workersInGas / 3 ) {
 
             minPriorityQueue.remove();
 
             //if (currentTime - lastCurrentTime > 2000) { // first click
                 setCorrectTimeinGasPQ(currentTime, -10000);
-                dronesInGas++;
+                workersInGas++;
             /*} else if (currentTime - lastlastCurrentTime < 2000) { // third click
                 setCorrectTimeinGasPQ(currentTime, - 6000);
-                dronesInGas++;
+                workersInGas++;
             } else { // second click
                 setCorrectTimeinGasPQ(currentTime, - 8000);
-                dronesInGas++;
+                workersInGas++;
             }*/
-            System.out.println(dronesInGas);
+            System.out.println(workersInGas);
 
             lastlastCurrentTime = lastCurrentTime;
             lastCurrentTime = currentTime;
-            buildingHandler.setDroneToGasButtonAlpha();
+            buildingHandler.setWorkerToGasButtonAlpha();
 
         }
     }
 
-    public int getDronesInGas(){
-        return dronesInGas;
+    public void takeWorkerOutOfGas(long currentTime){
+        if (workersInGas > 0) {
+            gasPriorityQueue.remove();
+            minPriorityQueue.add(new MiningDrone(currentTime - 11000, true));
+            workersInGas--;
+            buildingHandler.setWorkerToGasButtonAlpha();
+            System.out.println("took drone out!");
+            System.out.println(workersInGas);
+        }
+    }
+
+    public int getWorkersInGas(){
+        return workersInGas;
     }
 
     public int getMinerals(){

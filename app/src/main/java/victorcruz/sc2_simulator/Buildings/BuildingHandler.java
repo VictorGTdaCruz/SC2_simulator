@@ -16,7 +16,7 @@ import victorcruz.sc2_simulator.Units.UnitHandler;
 
 public class BuildingHandler {
 
-    private Button stcButton22;
+    private Button stcButton22, stcButton21;
 
     // handlers
     private SupplyHandler supplyHandler;
@@ -41,7 +41,7 @@ public class BuildingHandler {
 
     public BuildingHandler(ResourcesHandler resourcesHandler, TimeHandler timeHandler,
                            SupplyHandler supplyHandler, UnitHandler unitHandler,
-                           TechHandler techHandler, Button button){
+                           TechHandler techHandler, Button stcButton22, Button stcButton21){
 
         this.resourcesHandler = resourcesHandler;
         this.timeHandler = timeHandler;
@@ -49,8 +49,9 @@ public class BuildingHandler {
         this.unitHandler = unitHandler;
         this.techHandler = techHandler;
 
-        this.stcButton22 = button;
-        setDroneToGasButtonAlpha();
+        this.stcButton22 = stcButton22;
+        this.stcButton21 = stcButton21;
+        setWorkerToGasButtonAlpha();
 
         buildingPriorityQueue = new PriorityQueue<>(10, buildingComparator);
 
@@ -123,7 +124,7 @@ public class BuildingHandler {
                     }
                     else if (name.equals("Extractor")){
                         extractorNumber++;
-                        setDroneToGasButtonAlpha();
+                        setWorkerToGasButtonAlpha();
                     }
 //                    else if (name.equals("+QUEEN")) queenNumber++;
 //                    else if (name.equals("+LING")) lingNumber = lingNumber + 2;
@@ -189,9 +190,23 @@ public class BuildingHandler {
     }
 
 
-    public void setDroneToGasButtonAlpha(){
-        if (resourcesHandler.getDronesInGas() / 3 < extractorNumber){
-            stcButton22.setAlpha(1);
-        } else stcButton22.setAlpha(0.3f);
+    public void setWorkerToGasButtonAlpha(){
+        if (extractorNumber != 0) {
+            if (resourcesHandler.getWorkersInGas() / 3 < extractorNumber) {
+                if (resourcesHandler.getWorkersInGas() == 0){
+                    stcButton21.setAlpha(0.3f);
+                    stcButton22.setAlpha(1);
+                } else{
+                    stcButton21.setAlpha(1);
+                    stcButton22.setAlpha(1);
+                }
+            } else {
+                stcButton21.setAlpha(1);
+                stcButton22.setAlpha(0.3f);
+            }
+        } else {
+                stcButton21.setAlpha(0.3f);
+                stcButton22.setAlpha(0.3f);
+            }
     }
 }

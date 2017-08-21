@@ -27,7 +27,7 @@ public class MainSimulator extends AppCompatActivity {
             unitsLayout, mutUnitsLayout, shortcutsLayout;
 
     private Button stcButton34, // Time controler
-                    stcButton22;
+                    stcButton22, stcButton21;
 
     private Button unitButton11, unitButton12, unitButton13,  unitButton14,
                     unitButton21, unitButton22, unitButton23, unitButton24,
@@ -158,6 +158,7 @@ public class MainSimulator extends AppCompatActivity {
         buttons = new Button[34];
         stcButton34 = (Button) findViewById(R.id.stcButton34);
         stcButton22 = (Button) findViewById(R.id.stcButton22);
+        stcButton21 = (Button) findViewById(R.id.stcButton21);
         unitButton11 = (Button) findViewById(R.id.unitButton11);
         unitButton12 = (Button) findViewById(R.id.unitButton12);
         unitButton13 = (Button) findViewById(R.id.unitButton13);
@@ -210,7 +211,7 @@ public class MainSimulator extends AppCompatActivity {
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
         timeHandler = new TimeHandler(stcButton34, chronometerModified);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, techHandler, larvaTextView);
-        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, techHandler, stcButton22);
+        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, techHandler, stcButton22, stcButton21);
         resourcesHandler.setBuildingHandler(buildingHandler);
 
         // onTick method
@@ -266,12 +267,17 @@ public class MainSimulator extends AppCompatActivity {
         supplyHandler = new SupplyHandler(supplyTextView, supplyMaxTextView);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, techHandler, larvaTextView);
-        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, techHandler, stcButton22);
+        buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, techHandler, stcButton22, stcButton21);
         resourcesHandler.setBuildingHandler(buildingHandler);
     }
 
     public void sendWorkerToGas(View view){
         resourcesHandler.sendWorkerToGas(timeHandler.getTime());
+        System.out.println("time " + timeHandler.getTime());
+    }
+
+    public void takeWorkerOutOfGas(View view){
+        resourcesHandler.takeWorkerOutOfGas(timeHandler.getTime());
         System.out.println("time " + timeHandler.getTime());
     }
 
@@ -357,10 +363,10 @@ public class MainSimulator extends AppCompatActivity {
         talvez cancelar uma iteração de mine após a construcao, hatch = 2
 
 
-    implementar gas mining
     handler para mineral e gas?
     limpar codigo
     implementar sistema de larva escalonavel
+    implementar mining minerals e gas escalonavel
     pensar em como resolver o problema de dual requisito
         fazer um metodo que usa o sistema antigo de requisitos pra analisar o dual?
         ou um metodo independente em techhandler que simplesmente faz essa checkagem?
