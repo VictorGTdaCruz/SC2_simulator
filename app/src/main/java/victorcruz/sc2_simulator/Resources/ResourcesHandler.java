@@ -54,6 +54,8 @@ public class ResourcesHandler {
 
     }
 
+
+    //main method
     public void resourceMining(final long currentTime){
 
         // mineral mining
@@ -99,6 +101,7 @@ public class ResourcesHandler {
 
     }
 
+
     // used when zerg makebuilding
     public void miningPQPeekRemove(String buildingName){
         minPriorityQueue.remove();
@@ -117,6 +120,8 @@ public class ResourcesHandler {
         minPriorityQueue.add(new MiningDrone(auxReady, true));
     }
 
+
+    // 4 gas methods
     public void setCorrectTimeinGasPQ (long currentTime, long correctTime){
 
         if (gasPriorityQueue.size() == 0) { // NO DRONES MINING
@@ -196,6 +201,9 @@ public class ResourcesHandler {
         return workersInGas;
     }
 
+
+
+    // aux methods
     public int getMinerals(){
         return  minerals;
     }
@@ -242,5 +250,11 @@ public class ResourcesHandler {
         this.buildingHandler = buildingHandler;
     }
 
+    public PriorityQueue<MiningDrone> getMinPriorityQueue() {
+        return minPriorityQueue;
+    }
 
+    public PriorityQueue<MiningDrone> getGasPriorityQueue() {
+        return gasPriorityQueue;
+    }
 }

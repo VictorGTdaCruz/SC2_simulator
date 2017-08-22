@@ -98,12 +98,13 @@ public class BuildingHandler {
 
     }
 
+    // main methods
     public void buildingProduction(final long currentTime) {
         if (buildingPriorityQueue.peek() != null && 150 > buildingPriorityQueue.peek().getReady() - currentTime) {
 
             final String name = buildingPriorityQueue.peek().getName();
-            final long ready = buildingPriorityQueue.peek().getReady();
-            final long productionTime = buildingPriorityQueue.peek().getProductionTime();
+            //final long ready = buildingPriorityQueue.peek().getReady();
+            //final long productionTime = buildingPriorityQueue.peek().getProductionTime();
             final int supplyMax = buildingPriorityQueue.peek().getSupplyMax();
 
             prodHandler.postDelayed(new Runnable() {
@@ -144,8 +145,6 @@ public class BuildingHandler {
         }
     }
 
-
-
     public int checkBuildingIndex(String buttonTag){
         for (int i = 0; i < xBuilding.length; i++){
             if (buttonTag.equals(xBuilding[i].getName())){
@@ -185,9 +184,6 @@ public class BuildingHandler {
 
     }
 
-    public int getExtractorNumber(){
-        return extractorNumber;
-    }
 
 
     public void setWorkerToGasButtonAlpha(){
@@ -205,8 +201,15 @@ public class BuildingHandler {
                 stcButton22.setAlpha(0.3f);
             }
         } else {
-                stcButton21.setAlpha(0.3f);
-                stcButton22.setAlpha(0.3f);
-            }
+            stcButton21.setAlpha(0.3f);
+            stcButton22.setAlpha(0.3f);
+        }
     }
+
+
+    //aux methods
+    public int getExtractorNumber(){
+        return extractorNumber;
+    }
+
 }

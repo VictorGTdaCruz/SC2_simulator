@@ -26,8 +26,8 @@ public class MainSimulator extends AppCompatActivity {
     private GridLayout statsLayouts, optionsLayouts, buildingsLayouts, advbdLayout, mutbdLayout,
             unitsLayout, mutUnitsLayout, shortcutsLayout;
 
-    private Button stcButton34, // Time controler
-                    stcButton22, stcButton21;
+    private Button stcButton34, // start/stop button
+                    stcButton22, stcButton21; // send to gas/ take out of gas buttons
 
     private Button unitButton11, unitButton12, unitButton13,  unitButton14,
                     unitButton21, unitButton22, unitButton23, unitButton24,
@@ -47,9 +47,7 @@ public class MainSimulator extends AppCompatActivity {
 
     private Button[] buttons;
 
-    //private Chronometer chronometer;
     private ChronometerModified chronometerModified;
-
 
     private TextView minTextView, gasTextView, supplyTextView, supplyMaxTextView, larvaTextView;
 
@@ -257,6 +255,25 @@ public class MainSimulator extends AppCompatActivity {
     }
 
 
+
+    public void sendWorkerToGas(View view){
+        resourcesHandler.sendWorkerToGas(timeHandler.getTime());
+        System.out.println("time " + timeHandler.getTime());
+    }
+
+    public void takeWorkerOutOfGas(View view){
+        resourcesHandler.takeWorkerOutOfGas(timeHandler.getTime());
+        System.out.println("time " + timeHandler.getTime());
+    }
+
+
+
+    public void makeUnit(View view){
+        unitHandler.makeUnit(view);
+    }
+
+    public void makeBuilding(View view){ buildingHandler.makeBuilding(view); }
+
     public void startTime(View view){
         timeHandler.startChrono(view);
     }
@@ -269,38 +286,6 @@ public class MainSimulator extends AppCompatActivity {
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, techHandler, larvaTextView);
         buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, techHandler, stcButton22, stcButton21);
         resourcesHandler.setBuildingHandler(buildingHandler);
-    }
-
-    public void sendWorkerToGas(View view){
-        resourcesHandler.sendWorkerToGas(timeHandler.getTime());
-        System.out.println("time " + timeHandler.getTime());
-    }
-
-    public void takeWorkerOutOfGas(View view){
-        resourcesHandler.takeWorkerOutOfGas(timeHandler.getTime());
-        System.out.println("time " + timeHandler.getTime());
-    }
-
-    public void makeUnit(View view){
-        unitHandler.makeUnit(view);
-    }
-
-    public void makeBuilding(View view){ buildingHandler.makeBuilding(view); }
-
-    public void organizeButtons(){
-        buttons[0] = unitButton11; buttons[1] = unitButton12; buttons[2] = unitButton13;
-        buttons[3] = unitButton14; buttons[4] = unitButton21; buttons[5] = unitButton22;
-        buttons[6] = unitButton23; buttons[7] = unitButton24; buttons[8] = unitButton31;
-        buttons[9] = unitButton32; buttons[10] = unitButton33; buttons[11] = mutunitButton11;
-        buttons[12] = mutunitButton12; buttons[13] = mutunitButton21; buttons[14] = mutunitButton22;
-        buttons[15] = mutunitButton31; buttons[16] = bdButton11; buttons[17] = bdButton12;
-        buttons[18] = bdButton21; buttons[19] = bdButton22; buttons[20] = bdButton23;
-        buttons[21] = bdButton24; buttons[22] = bdButton31; buttons[23] = bdButton32;
-        buttons[24] = advbdButton11; buttons[25] = advbdButton12; buttons[26] = advbdButton21;
-        buttons[27] = advbdButton22; buttons[28] = advbdButton31; buttons[29] = mutbdButton11;
-        buttons[30] = mutbdButton12; buttons[31] = mutbdButton21; buttons[32] = mutbdButton22;
-        buttons[33] = mutbdButton31;
-
     }
 
     public void showUnitsLayout(View view){
@@ -331,15 +316,32 @@ public class MainSimulator extends AppCompatActivity {
         mutbdLayout.setVisibility(View.VISIBLE);
     }
 
+    public void organizeButtons(){
+        buttons[0] = unitButton11; buttons[1] = unitButton12; buttons[2] = unitButton13;
+        buttons[3] = unitButton14; buttons[4] = unitButton21; buttons[5] = unitButton22;
+        buttons[6] = unitButton23; buttons[7] = unitButton24; buttons[8] = unitButton31;
+        buttons[9] = unitButton32; buttons[10] = unitButton33; buttons[11] = mutunitButton11;
+        buttons[12] = mutunitButton12; buttons[13] = mutunitButton21; buttons[14] = mutunitButton22;
+        buttons[15] = mutunitButton31; buttons[16] = bdButton11; buttons[17] = bdButton12;
+        buttons[18] = bdButton21; buttons[19] = bdButton22; buttons[20] = bdButton23;
+        buttons[21] = bdButton24; buttons[22] = bdButton31; buttons[23] = bdButton32;
+        buttons[24] = advbdButton11; buttons[25] = advbdButton12; buttons[26] = advbdButton21;
+        buttons[27] = advbdButton22; buttons[28] = advbdButton31; buttons[29] = mutbdButton11;
+        buttons[30] = mutbdButton12; buttons[31] = mutbdButton21; buttons[32] = mutbdButton22;
+        buttons[33] = mutbdButton31;
+
+    }
+
 
 
     public void printQueue(View view){
-        System.out.println(resourcesHandler.minPriorityQueue.size());
-        System.out.println(resourcesHandler.gasPriorityQueue.size());
+        System.out.println(resourcesHandler.getMinPriorityQueue().size());
+        System.out.println(resourcesHandler.getMinPriorityQueue().size());
+        System.out.println(resourcesHandler.getGasPriorityQueue().size());
 
-        while(resourcesHandler.gasPriorityQueue.size() != 0){
-            System.out.println(resourcesHandler.gasPriorityQueue.peek().getReady());
-            System.out.println(resourcesHandler.gasPriorityQueue.remove());
+        while(resourcesHandler.getGasPriorityQueue().size() != 0){
+            System.out.println(resourcesHandler.getGasPriorityQueue().peek().getReady());
+            System.out.println(resourcesHandler.getGasPriorityQueue().remove());
         }
     }
 
@@ -362,9 +364,11 @@ public class MainSimulator extends AppCompatActivity {
     melhorar precisao do consumeDrone (drone andando) (dependendo da construcao)
         talvez cancelar uma iteração de mine após a construcao, hatch = 2
 
+    pq ter um getter static? PODE AJUDAR COM 2 ACIMA
 
     handler para mineral e gas?
-    limpar codigo
+        resources handler ja faz esse papel, n tem problema ser dos dois ao mesmo tempo, soh deixar o codigo limpo
+
     implementar sistema de larva escalonavel
     implementar mining minerals e gas escalonavel
     pensar em como resolver o problema de dual requisito

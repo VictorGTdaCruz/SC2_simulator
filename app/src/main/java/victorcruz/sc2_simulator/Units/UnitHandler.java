@@ -101,6 +101,9 @@ public class UnitHandler {
         xUnit[16] = new Unit(-1, "BroodLord", 25, 150, 150, 2, 0, 1, 1, -1, 12, 24000, 1.97, -1, new String[]{}, new String[]{"Biological", "Armored", "Massive"}, new UnitAttackInfo[]{}, new UnitAbility[]{} );
 
     }
+
+
+
     /*
      I had a class dedicated to every unit in the game, but then i had to write a bunch of
      code to create each different unit, as you can see on the comments of the makeUnit method.
@@ -108,13 +111,7 @@ public class UnitHandler {
      "Unit" the universal class and the NAME variable is what compares each unit ingame.
     */
 
-
-
-    public void growLarva(long currentTimeModified){
-        larvaHandler.growLarva(currentTimeModified);
-    }
-
-
+    // main methods
     public void unitProduction(final long currentTime) {
         if (unitPriorityQueue.peek() != null && 150 > unitPriorityQueue.peek().getReady() - currentTime) {
 
@@ -153,21 +150,6 @@ public class UnitHandler {
         }
     }
 
-    // only for zerg makebuilding
-    public boolean hasDrone(){
-        if (workerNumber > 0)
-            return true;
-        else return false;
-    }
-
-    // only for zerg makebuilding
-    public void consumeDrone(String buildingName){
-        workerNumber--;
-        //resourcesHandler.decreaseMin(5); //NAO LEMBRO PQ ENTAO VOU TIRAR PQ TA BUGANDO
-        resourcesHandler.miningPQPeekRemove(buildingName);
-        supplyHandler.decreaseSupply(xUnit[0].getSupply());
-    }
-
     public int checkUnitIndex(String buttonTag){
         for (int i = 0; i < xUnit.length; i++){
             if (buttonTag.equals(xUnit[i].getName())){
@@ -176,7 +158,6 @@ public class UnitHandler {
         }
         return -1;
     }
-
 
     public void makeUnit(View view){
 
@@ -208,7 +189,10 @@ public class UnitHandler {
                     System.out.println("UNIT ORDERED: " + unit.getName());
                 }
             }
+
         }
+
+
 
 
         /*if(button.getText().equals("+DRONE")){
@@ -254,5 +238,26 @@ public class UnitHandler {
 
     }
 
+
+
+    // only for zerg makebuilding
+    public boolean hasDrone(){
+        if (workerNumber > 0)
+            return true;
+        else return false;
+    }
+
+    // only for zerg makebuilding
+    public void consumeDrone(String buildingName){
+        workerNumber--;
+        //resourcesHandler.decreaseMin(5); //NAO LEMBRO PQ ENTAO VOU TIRAR PQ TA BUGANDO
+        resourcesHandler.miningPQPeekRemove(buildingName);
+        supplyHandler.decreaseSupply(xUnit[0].getSupply());
+    }
+
+
+    public void growLarva(long currentTimeModified){
+        larvaHandler.growLarva(currentTimeModified);
+    }
 
 }

@@ -63,6 +63,8 @@ public class LarvaHandler {
 
     }
 
+
+    // main methods
     public boolean useLarva(long currentTime){
 
         // Chooses a larva to be used/destroyed and then calls scheduleLarva
@@ -84,7 +86,6 @@ public class LarvaHandler {
         return false;
 
     }
-
 
     public void scheduleLarva(final long currentTime, final int larvaSystemIndex){
 
@@ -128,6 +129,8 @@ public class LarvaHandler {
 
     }
 
+
+    // aux methods
     public boolean getConsumedLarva(){
         return consumedLarva;
     }
