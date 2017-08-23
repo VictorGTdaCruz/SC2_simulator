@@ -166,19 +166,19 @@ public class UnitHandler {
         int index = checkUnitIndex(button.getTag().toString());
         Unit unit = new Unit(xUnit[index]);
 
-        if (timeHandler.isGameStarted()){
+        if (TimeHandler.isGameStarted()){
             if (techHandler.containsInControl(view.getTag().toString()) && //techHandler.containsInControl(unit.getRequisites())
                     resourcesHandler.getMinerals() >= unit.getMinCost() && resourcesHandler.getGas() >= unit.getGasCost()
                     && supplyHandler.getSupply() + xUnit[index].getSupply() <= supplyHandler.getSupplyMax()) {
 
-                if (timeHandler.isTimeRunning()) {
+                if (TimeHandler.isTimeRunning()) {
                     //set consumedLarva, a flow control variable that checks if the player had a larva to use and used it
-                    larvaHandler.setConsumedLarva(larvaHandler.useLarva(timeHandler.getTime()));
-                    unit.setOrderedTime(timeHandler.getTime());
+                    larvaHandler.setConsumedLarva(larvaHandler.useLarva(TimeHandler.getTime()));
+                    unit.setOrderedTime(TimeHandler.getTime());
                 } else {
                     //set consumedLarva, a flow control variable that checks if the player had a larva to use and used it
-                    larvaHandler.setConsumedLarva(larvaHandler.useLarva(timeHandler.getTime()));
-                    unit.setOrderedTime(-timeHandler.getTimeWhenStopped());
+                    larvaHandler.setConsumedLarva(larvaHandler.useLarva(TimeHandler.getTime()));
+                    unit.setOrderedTime(-TimeHandler.getTimeWhenStopped());
                 }
                 if (larvaHandler.getConsumedLarva()) {
                     resourcesHandler.decreaseMin(unit.getMinCost());
