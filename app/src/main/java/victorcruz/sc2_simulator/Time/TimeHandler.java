@@ -9,31 +9,27 @@ import android.widget.Chronometer;
 import victorcruz.sc2_simulator.R;
 
 
-public final class TimeHandler {
+public class TimeHandler {
 
-    private static ChronometerModified chronometerModified;
-    private static Button stcButton34;
+    private ChronometerModified chronometerModified;
+    private Button stcButton34;
 
-    private static boolean isStopped = true;
-    private static long timeWhenStoppedModified;
+    private boolean isStopped = true;
+    private long timeWhenStoppedModified;
 
-    private static boolean gameStarted = false;
+    private boolean gameStarted = false;
 
 
-    private TimeHandler (){
+    public TimeHandler ( Button stcButton34, ChronometerModified chronometerModified){
 
+        this.chronometerModified = chronometerModified;
+        this.stcButton34 = stcButton34;
+
+        gameStarted = false;
+        isStopped = true;
     }
 
-    public static void getComponents(ChronometerModified _chronometerModified, Button _stcButton34){
-
-        chronometerModified = _chronometerModified;
-        stcButton34 = _stcButton34;
-
-        chronometerModified.setBase(SystemClock.elapsedRealtime());
-
-    }
-
-    public static void resetChrono() throws InterruptedException {
+    public void resetChrono() throws InterruptedException {
 
         Thread.sleep(200);
 
@@ -46,7 +42,7 @@ public final class TimeHandler {
         isStopped = true;
     }
 
-    public static void startChrono(View view) {
+    public void startChrono(View view) {
         switch (view.getId()) {
             case R.id.chronometerModified:
                 if (stcButton34.getText().equals("START")) {
@@ -83,16 +79,16 @@ public final class TimeHandler {
         }
     }
 
-    public static boolean isTimeRunning (){
+    public boolean isTimeRunning (){
         if (stcButton34.getText().equals("STOP")) return true;
         else return false;
     }
 
-    public static long getTimeWhenStopped(){
+    public long getTimeWhenStopped(){
         return timeWhenStoppedModified;
     }
 
-    public static long getTime(){
+    public long getTime(){
 
         if (isStopped) {
             //System.out.println("TIME: " + (-timeWhenStoppedModified));
@@ -104,7 +100,7 @@ public final class TimeHandler {
         }
     }
 
-    public static boolean isGameStarted(){
+    public boolean isGameStarted(){
         return gameStarted;
     }
 

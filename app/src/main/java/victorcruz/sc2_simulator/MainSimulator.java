@@ -207,8 +207,7 @@ public class MainSimulator extends AppCompatActivity {
         techHandler = new TechHandler(buttons);
         supplyHandler = new SupplyHandler(supplyTextView, supplyMaxTextView);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
-        //timeHandler = new TimeHandler(stcButton34, chronometerModified);
-        TimeHandler.getComponents(chronometerModified, stcButton34);
+        timeHandler = new TimeHandler(stcButton34, chronometerModified);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, techHandler, larvaTextView);
         buildingHandler = new BuildingHandler(resourcesHandler, timeHandler, supplyHandler, unitHandler, techHandler, stcButton22, stcButton21);
         resourcesHandler.setBuildingHandler(buildingHandler);
@@ -276,12 +275,12 @@ public class MainSimulator extends AppCompatActivity {
     public void makeBuilding(View view){ buildingHandler.makeBuilding(view); }
 
     public void startTime(View view){
-        TimeHandler.startChrono(view);
+        timeHandler.startChrono(view);
     }
 
     public void resetMatch(View view) throws InterruptedException {
         techHandler = new TechHandler(buttons);
-        TimeHandler.resetChrono();
+        timeHandler.resetChrono();
         supplyHandler = new SupplyHandler(supplyTextView, supplyMaxTextView);
         resourcesHandler = new ResourcesHandler(minTextView, gasTextView);
         unitHandler = new UnitHandler(resourcesHandler, timeHandler, supplyHandler, techHandler, larvaTextView);

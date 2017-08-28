@@ -161,16 +161,16 @@ public class BuildingHandler {
         int index = checkBuildingIndex(button.getTag().toString());
         Building building = new Building(xBuilding[index]);
 
-        if (TimeHandler.isGameStarted()) {
+        if (timeHandler.isGameStarted()) {
             if (techHandler.containsInControl(view.getTag().toString()) &&
                     resourcesHandler.getMinerals() >= building.getMinCost() &&
                     resourcesHandler.getGas() >= building.getGasCost() && unitHandler.hasDrone()) {
-                if (TimeHandler.isTimeRunning()) {
+                if (timeHandler.isTimeRunning()) {
                     unitHandler.consumeDrone(building.getName());
-                    building.setOrderedTime(TimeHandler.getTime());
+                    building.setOrderedTime(timeHandler.getTime());
                 } else {
                     unitHandler.consumeDrone(building.getName());
-                    building.setOrderedTime(-TimeHandler.getTimeWhenStopped());
+                    building.setOrderedTime(-timeHandler.getTimeWhenStopped());
                 }
                 if (true) { // consumed drone
                     resourcesHandler.decreaseMin(building.getMinCost());

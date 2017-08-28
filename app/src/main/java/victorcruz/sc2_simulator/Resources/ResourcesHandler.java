@@ -32,7 +32,6 @@ public class ResourcesHandler {
         setMinerals(minerals);
         setGas(gas);
 
-
         handler = new Handler();
 
         gasPriorityQueue = new PriorityQueue<>(3, resourceMiningComparator);
@@ -164,7 +163,7 @@ public class ResourcesHandler {
     public void sendWorkerToGas(long currentTime){
 
         if (buildingHandler.getExtractorNumber() > workersInGas / 3 ) {
-
+            System.out.println("Extractor number:" + buildingHandler.getExtractorNumber());
             minPriorityQueue.remove();
 
             //if (currentTime - lastCurrentTime > 2000) { // first click
