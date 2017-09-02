@@ -125,7 +125,7 @@ public class UnitHandler {
                     System.out.println("UNIT IS READY: " + name + " " + ready);
 
                     if (name.equals("Drone")){
-                        ResourcesHandler.minPriorityQueue.add(new MiningDrone(ready - productionTime, true));
+                        ResourcesHandler.minPriorityQueue[1].add(new MiningDrone(ready - productionTime, true));
                         workerNumber++;
                     }
                     else if (name.equals("Overlord")) {
