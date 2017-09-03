@@ -32,7 +32,7 @@ public class BuildingHandler {
     private Building[] xBuilding;
 
     //zerg buildings
-    private int hatcheryNumber = 1, extractorNumber = 0, spawningPoolNumber = 0, banelingNestNumner = 0, RoachWarrenNumber = 0;
+    private int hatcheryNumber = 1, gasNumber = 0, spawningPoolNumber = 0, banelingNestNumner = 0, RoachWarrenNumber = 0;
 
     //building production mechanic variables
     private PriorityQueue<Building> buildingPriorityQueue;
@@ -117,6 +117,7 @@ public class BuildingHandler {
                         supplyHandler.increaseSupplyMax(supplyMax);
                         System.out.println("hatch ready............");
                         hatcheryNumber++;
+                        resourcesHandler.increaseMinPQSize(hatcheryNumber);
                     }
                     else if (name.equals("SpawningPool")) {
 
@@ -124,8 +125,9 @@ public class BuildingHandler {
                         // ling.setClickable(true)
                     }
                     else if (name.equals("Extractor")){
-                        extractorNumber++;
+                        gasNumber++;
                         setWorkerToGasButtonAlpha();
+                        resourcesHandler.increaseGasPQSize(gasNumber);
                     }
 //                    else if (name.equals("+QUEEN")) queenNumber++;
 //                    else if (name.equals("+LING")) lingNumber = lingNumber + 2;
@@ -187,8 +189,8 @@ public class BuildingHandler {
 
 
     public void setWorkerToGasButtonAlpha(){
-        if (extractorNumber != 0) {
-            if (resourcesHandler.getWorkersInGas() / 3 < extractorNumber) {
+        if (gasNumber != 0) {
+            if (resourcesHandler.getWorkersInGas() / 3 < gasNumber) {
                 if (resourcesHandler.getWorkersInGas() == 0){
                     stcButton21.setAlpha(0.3f);
                     stcButton22.setAlpha(1);
@@ -208,8 +210,8 @@ public class BuildingHandler {
 
 
     //aux methods
-    public int getExtractorNumber(){
-        return extractorNumber;
+    public int getGasNumber(){
+        return gasNumber;
     }
 
 }

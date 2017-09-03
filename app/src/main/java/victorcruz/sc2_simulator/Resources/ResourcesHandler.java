@@ -12,10 +12,10 @@ public class ResourcesHandler {
 
     private TextView  minTextView, gasTextView;
 
-    private int minerals = 50, gas = 0, workersInGas = 0;
+    private int minerals = 50, gas = 0, workersInMinerals = 12, workersInGas = 0, idleWorkers = 0;
 
-    public static PriorityQueue<MiningDrone>[] minPriorityQueue = new PriorityQueue[5];
-    public static PriorityQueue<MiningDrone>[] gasPriorityQueue = new PriorityQueue[10];
+    public static PriorityQueue<MiningDrone>[] minPriorityQueue = new PriorityQueue[2];
+    public static PriorityQueue<MiningDrone>[] gasPriorityQueue = new PriorityQueue[1];
     private ResourceMiningComparator resourceMiningComparator = new ResourceMiningComparator();
 
     private BuildingHandler buildingHandler;
@@ -34,11 +34,7 @@ public class ResourcesHandler {
 
         handler = new Handler();
 
-        gasPriorityQueue[0] = new PriorityQueue<>(3, resourceMiningComparator);
-
         minPriorityQueue[0] = new PriorityQueue<>(16, resourceMiningComparator);
-        minPriorityQueue[1] = new PriorityQueue<>(16, resourceMiningComparator);
-
 
         minPriorityQueue[0].add(new MiningDrone( -11450, true));
         minPriorityQueue[0].add(new MiningDrone( -11200, true));
@@ -107,10 +103,96 @@ public class ResourcesHandler {
 
     }
 
+    // 3 gas methods
+    public void setCorrectTimeinGasPQ (long currentTime, long correctTime){
+
+        PriorityQueue nextGasPriorityQueue = gasPriorityQueue[getNextGasPriorityQueueIndex()];
+
+        if (nextGasPriorityQueue.size() == 0) { // NO DRONES MINING
+
+            System.out.println("NAO TINHA DRONE!");
+            nextGasPriorityQueue.add(new MiningDrone(currentTime - 11000, true));
+
+        } else if (nextGasPriorityQueue.size() == 1){ // ONE DRONE MINING GAS
+
+            System.out.println("TINHA 1 DRONE!");
+            if ( gasPriorityQueue[getLastGasPriorityQueueIndex()].peek().getReady() - currentTime < (4200 / 3)){ // if the chosen drone is not going to be on peek
+                System.out.println("2 IS NOT ON PEEK");
+                nextGasPriorityQueue.add(new MiningDrone(gasPriorityQueue[getNextGasPriorityQueueIndex()].peek().getReady() + (4000/3) - 12000, true));
+            } else { // if the chosen drone IS going to be on peek
+                System.out.println("2 IS ON PEEK");
+                nextGasPriorityQueue.remove();
+                nextGasPriorityQueue.add(new MiningDrone(currentTime - 12000, true)); // precisa ver um caso do tempo ainda
+                nextGasPriorityQueue.add(new MiningDrone(gasPriorityQueue[getNextGasPriorityQueueIndex()].peek().getReady() + (4000 / 3) - 12000, false));
+            }
+
+        } else if (gasPriorityQueue[getLastGasPriorityQueueIndex()].size() == 2){ // TWO DRONES MINING GAS
+
+            System.out.println("TINHA 2 DRONE!");
+            if ( gasPriorityQueue[getLastGasPriorityQueueIndex()].peek().getReady() - currentTime < (4200 / 3) * 2){
+                System.out.println("3 IS NOT ON PEEK");
+                nextGasPriorityQueue.add(new MiningDrone(gasPriorityQueue[getNextGasPriorityQueueIndex()].peek().getReady() + ((4000 / 3) * 2) - 12000, true));
+            } else {
+                System.out.println("3 IS ON PEEK");
+                nextGasPriorityQueue.remove();
+                nextGasPriorityQueue.remove();
+                nextGasPriorityQueue.add(new MiningDrone(currentTime - 12000, true));
+                nextGasPriorityQueue.add(new MiningDrone(gasPriorityQueue[getNextGasPriorityQueueIndex()].peek().getReady() + (4000 / 3) - 12000, false));
+                nextGasPriorityQueue.add(new MiningDrone(gasPriorityQueue[getNextGasPriorityQueueIndex()].peek().getReady() + ((4000 / 3) * 2) - 12000, false));
+
+            }
+        }
+
+    }
+
+    public void sendWorkerToGas(long currentTime){
+
+        if (buildingHandler.getGasNumber() > workersInGas / 3 ) {
+            System.out.println("Extractor number:" + buildingHandler.getGasNumber());
+            if (idleWorkers > 0){
+                decreaseIdleWorkers();
+            } else {
+                minPriorityQueue[getLastMinPriorityQueueIndex()].remove();
+            }
+
+            setCorrectTimeinGasPQ(currentTime, -10000);
+            workersInGas++;
+            System.out.println(workersInGas);
+
+            lastlastCurrentTime = lastCurrentTime;
+            lastCurrentTime = currentTime;
+            buildingHandler.setWorkerToGasButtonAlpha();
+
+        }
+    }
+
+    public void takeWorkerOutOfGas(long currentTime){
+        if (workersInGas > 0) {
+            gasPriorityQueue[getLastGasPriorityQueueIndex()].remove();
+            minPriorityQueue[getNextMinPriorityQueueIndex()].add(new MiningDrone(currentTime - 11000, true));
+            workersInGas--;
+            buildingHandler.setWorkerToGasButtonAlpha();
+            System.out.println("took drone out!");
+            System.out.println(workersInGas);
+        }
+    }
+
+    // used on new Drone
+    public void newWorker(long ready, long productionTime) {
+        if (getNextMinPriorityQueueIndex() == -1) {
+            increaseIdleWorkers();
+        } else {
+            minPriorityQueue[getNextMinPriorityQueueIndex()].add(new MiningDrone(ready - productionTime, true));
+        }
+    }
 
     // used when zerg makebuilding
     public void miningPQPeekRemove(String buildingName){
-        minPriorityQueue[getLastMinPriorityQueueIndex()].remove();
+        if (idleWorkers > 0){
+            decreaseIdleWorkers();
+        } else {
+            minPriorityQueue[getLastMinPriorityQueueIndex()].remove();
+        }
 
         System.out.println("PQ size: " + minPriorityQueue[0].size());
 
@@ -129,93 +211,23 @@ public class ResourcesHandler {
         minPriorityQueue[0].add(new MiningDrone(auxReady, true));
     }
 
-
-    // 4 gas methods
-    public void setCorrectTimeinGasPQ (long currentTime, long correctTime){
-
-        PriorityQueue lastGasPriorityQueue = gasPriorityQueue[getLastGasPriorityQueueIndex()];
-
-        if (lastGasPriorityQueue.size() == 0) { // NO DRONES MINING
-
-            System.out.println("NAO TINHA DRONE!");
-            lastGasPriorityQueue.add(new MiningDrone(currentTime - 11000, true));
-
-        } else if (lastGasPriorityQueue.size() == 1){ // ONE DRONE MINING GAS
-
-            System.out.println("TINHA 1 DRONE!");
-            if ( gasPriorityQueue[getLastGasPriorityQueueIndex()].peek().getReady() - currentTime < (4200 / 3)){ // if the chosen drone is not going to be on peek
-                System.out.println("2 IS NOT ON PEEK");
-                lastGasPriorityQueue.add(new MiningDrone(gasPriorityQueue[getLastGasPriorityQueueIndex()].peek().getReady() + (4000/3) - 12000, true));
-            } else { // if the chosen drone IS going to be on peek
-                System.out.println("2 IS ON PEEK");
-                lastGasPriorityQueue.remove();
-                lastGasPriorityQueue.add(new MiningDrone(currentTime - 12000, true)); // precisa ver um caso do tempo ainda
-                lastGasPriorityQueue.add(new MiningDrone(gasPriorityQueue[getLastGasPriorityQueueIndex()].peek().getReady() + (4000 / 3) - 12000, false));
-            }
-
-        } else if (gasPriorityQueue[getLastGasPriorityQueueIndex()].size() == 2){ // TWO DRONES MINING GAS
-
-            System.out.println("TINHA 2 DRONE!");
-            if ( gasPriorityQueue[getLastGasPriorityQueueIndex()].peek().getReady() - currentTime < (4200 / 3) * 2){
-                System.out.println("3 IS NOT ON PEEK");
-                lastGasPriorityQueue.add(new MiningDrone(gasPriorityQueue[getLastGasPriorityQueueIndex()].peek().getReady() + ((4000 / 3) * 2) - 12000, true));
-            } else {
-                System.out.println("3 IS ON PEEK");
-                lastGasPriorityQueue.remove();
-                lastGasPriorityQueue.remove();
-                lastGasPriorityQueue.add(new MiningDrone(currentTime - 12000, true));
-                lastGasPriorityQueue.add(new MiningDrone(gasPriorityQueue[getLastGasPriorityQueueIndex()].peek().getReady() + (4000 / 3) - 12000, false));
-                lastGasPriorityQueue.add(new MiningDrone(gasPriorityQueue[getLastGasPriorityQueueIndex()].peek().getReady() + ((4000 / 3) * 2) - 12000, false));
-
-            }
-        }
-
-    }
-
-    public void sendWorkerToGas(long currentTime){
-
-        if (buildingHandler.getExtractorNumber() > workersInGas / 3 ) {
-            System.out.println("Extractor number:" + buildingHandler.getExtractorNumber());
-            minPriorityQueue[getLastMinPriorityQueueIndex()].remove();
-
-            //if (currentTime - lastCurrentTime > 2000) { // first click
-                setCorrectTimeinGasPQ(currentTime, -10000);
-                workersInGas++;
-            /*} else if (currentTime - lastlastCurrentTime < 2000) { // third click
-                setCorrectTimeinGasPQ(currentTime, - 6000);
-                workersInGas++;
-            } else { // second click
-                setCorrectTimeinGasPQ(currentTime, - 8000);
-                workersInGas++;
-            }*/
-            System.out.println(workersInGas);
-
-            lastlastCurrentTime = lastCurrentTime;
-            lastCurrentTime = currentTime;
-            buildingHandler.setWorkerToGasButtonAlpha();
-
-        }
-    }
-
-    public void takeWorkerOutOfGas(long currentTime){
-        if (workersInGas > 0) {
-            gasPriorityQueue[getLastGasPriorityQueueIndex()].remove();
-            //if (minPriorityQueue[getLastMinPriorityQueueIndex()].size() == 16) {
-                minPriorityQueue[getLastMinPriorityQueueIndex()].add(new MiningDrone(currentTime - 11000, true));
-            //}
-            workersInGas--;
-            buildingHandler.setWorkerToGasButtonAlpha();
-            System.out.println("took drone out!");
-            System.out.println(workersInGas);
-        }
-    }
-
+    // getNext and get last for PQs
+    // getNext will return the first PQ that is not full
+    // getLast will return the last PQ that has an element
     public static int getLastMinPriorityQueueIndex(){
         for (int i = minPriorityQueue.length; i >= 0; i--){
             if (minPriorityQueue[i].size() > 0)
                 return i;
         }
-        return 0;
+        return -1;
+    }
+
+    public int getNextMinPriorityQueueIndex(){
+        for (int i = 0; i < minPriorityQueue.length; i++){
+            if (minPriorityQueue[i].size() < 16)
+                return i;
+        }
+        return -1;
     }
 
     public static int getLastGasPriorityQueueIndex(){
@@ -223,11 +235,37 @@ public class ResourcesHandler {
             if (gasPriorityQueue[i].size() > 0)
                 return i;
         }
-        return 0;
+        return -1;
+    }
+
+    public static int getNextGasPriorityQueueIndex(){
+        for (int i = 0; i < gasPriorityQueue.length; i++){
+            if (gasPriorityQueue[i].size() < 3)
+                return i;
+        }
+        return -1;
     }
 
 
     // aux methods
+    public void increaseIdleWorkers(){
+        idleWorkers++;
+        System.out.println("Worker is idle!");
+    }
+
+    public void decreaseIdleWorkers(){
+        idleWorkers--;
+        System.out.println("-1 worker idle!");
+    }
+
+    public void increaseMinPQSize(int hatcheryNumber){
+        minPriorityQueue[hatcheryNumber - 1] = new PriorityQueue<>(16, resourceMiningComparator);
+    }
+
+    public void increaseGasPQSize(int gasNumber){
+        gasPriorityQueue[gasNumber - 1] = new PriorityQueue<>(3, resourceMiningComparator);
+    }
+
     public int getWorkersInGas(){
         return workersInGas;
     }
