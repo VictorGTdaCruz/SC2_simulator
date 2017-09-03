@@ -14,8 +14,8 @@ public class ResourcesHandler {
 
     private int minerals = 50, gas = 0, workersInMinerals = 12, workersInGas = 0, idleWorkers = 0;
 
-    public static PriorityQueue<MiningDrone>[] minPriorityQueue = new PriorityQueue[2];
-    public static PriorityQueue<MiningDrone>[] gasPriorityQueue = new PriorityQueue[1];
+    public PriorityQueue<MiningDrone>[] minPriorityQueue = new PriorityQueue[2];
+    public PriorityQueue<MiningDrone>[] gasPriorityQueue = new PriorityQueue[4];
     private ResourceMiningComparator resourceMiningComparator = new ResourceMiningComparator();
 
     private BuildingHandler buildingHandler;
@@ -35,6 +35,13 @@ public class ResourcesHandler {
         handler = new Handler();
 
         minPriorityQueue[0] = new PriorityQueue<>(16, resourceMiningComparator);
+        /*minPriorityQueue[1] = new PriorityQueue<>(16, resourceMiningComparator);
+
+        gasPriorityQueue[0] = new PriorityQueue<>(3, resourceMiningComparator);
+        gasPriorityQueue[1] = new PriorityQueue<>(3, resourceMiningComparator);
+        gasPriorityQueue[2] = new PriorityQueue<>(3, resourceMiningComparator);
+        gasPriorityQueue[3] = new PriorityQueue<>(3, resourceMiningComparator);*/
+
 
         minPriorityQueue[0].add(new MiningDrone( -11450, true));
         minPriorityQueue[0].add(new MiningDrone( -11200, true));
@@ -55,7 +62,7 @@ public class ResourcesHandler {
     //main method
     public void resourceMining(final long currentTime){
 
-        for (int i = 1; i < minPriorityQueue.length; i++) {
+        for (int i = 0; i < buildingHandler.getHatcheryNumber(); i++) {
             // mineral mining
             if (minPriorityQueue[i].peek() != null && 150 >= minPriorityQueue[i].peek().getReady() - currentTime) {
 
@@ -78,7 +85,7 @@ public class ResourcesHandler {
             }
         }
 
-        for (int i = 0; i < gasPriorityQueue.length; i++) {
+        for (int i = 0; i < buildingHandler.getGasNumber(); i++) {
             // gas mining
             if (gasPriorityQueue[i].peek() != null && 150 >= gasPriorityQueue[i].peek().getReady() - currentTime) {
 
@@ -211,11 +218,11 @@ public class ResourcesHandler {
         minPriorityQueue[0].add(new MiningDrone(auxReady, true));
     }
 
-    // getNext and get last for PQs
+    // getNext and getLast for PQs
     // getNext will return the first PQ that is not full
     // getLast will return the last PQ that has an element
-    public static int getLastMinPriorityQueueIndex(){
-        for (int i = minPriorityQueue.length; i >= 0; i--){
+    public int getLastMinPriorityQueueIndex(){
+        for (int i = buildingHandler.getHatcheryNumber() - 1; i >= 0; i--){
             if (minPriorityQueue[i].size() > 0)
                 return i;
         }
@@ -223,23 +230,23 @@ public class ResourcesHandler {
     }
 
     public int getNextMinPriorityQueueIndex(){
-        for (int i = 0; i < minPriorityQueue.length; i++){
+        for (int i = 0; i < buildingHandler.getHatcheryNumber(); i++){
             if (minPriorityQueue[i].size() < 16)
                 return i;
         }
         return -1;
     }
 
-    public static int getLastGasPriorityQueueIndex(){
-        for (int i = gasPriorityQueue.length; i >= 0; i--){
+    public int getLastGasPriorityQueueIndex(){
+        for (int i = buildingHandler.getGasNumber() - 1; i >= 0; i--){
             if (gasPriorityQueue[i].size() > 0)
                 return i;
         }
         return -1;
     }
 
-    public static int getNextGasPriorityQueueIndex(){
-        for (int i = 0; i < gasPriorityQueue.length; i++){
+    public int getNextGasPriorityQueueIndex(){
+        for (int i = 0; i < buildingHandler.getGasNumber(); i++){
             if (gasPriorityQueue[i].size() < 3)
                 return i;
         }
@@ -256,10 +263,17 @@ public class ResourcesHandler {
     public void decreaseIdleWorkers(){
         idleWorkers--;
         System.out.println("-1 worker idle!");
+        System.out.println(idleWorkers + " still remaining!");
     }
 
-    public void increaseMinPQSize(int hatcheryNumber){
+    public void increaseMinPQSize(int hatcheryNumber, long currentTime){
         minPriorityQueue[hatcheryNumber - 1] = new PriorityQueue<>(16, resourceMiningComparator);
+        if (idleWorkers > 0){
+            for (int i = idleWorkers; i >= idleWorkers - 16 && i > 0; i--){
+                minPriorityQueue[hatcheryNumber - 1].add(new MiningDrone(currentTime, true));
+                decreaseIdleWorkers();
+            }
+        }
     }
 
     public void increaseGasPQSize(int gasNumber){

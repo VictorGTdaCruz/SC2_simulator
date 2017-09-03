@@ -337,15 +337,15 @@ public class MainSimulator extends AppCompatActivity {
     public void printQueue(View view){
         System.out.println(resourcesHandler.getMinPriorityQueue()[0].size());
         System.out.println(resourcesHandler.getMinPriorityQueue()[1].size());
-        System.out.println(resourcesHandler.getGasPriorityQueue()[0].size());
-        System.out.println(resourcesHandler.getGasPriorityQueue()[1].size());
-        System.out.println(resourcesHandler.getGasPriorityQueue()[2].size());
-        System.out.println(resourcesHandler.getGasPriorityQueue()[3].size());
-
+        //System.out.println(resourcesHandler.getGasPriorityQueue()[0].size());
+        //System.out.println(resourcesHandler.getGasPriorityQueue()[1].size());
+        //System.out.println(resourcesHandler.getGasPriorityQueue()[2].size());
+        //System.out.println(resourcesHandler.getGasPriorityQueue()[3].size());
+/*
         while(resourcesHandler.getGasPriorityQueue()[0].size() != 0){
             System.out.println(resourcesHandler.getGasPriorityQueue()[0].peek().getReady());
             System.out.println(resourcesHandler.getGasPriorityQueue()[0].remove());
-        }
+        }*/
     }
 
     public void printRequisites(View view){
@@ -374,8 +374,6 @@ public class MainSimulator extends AppCompatActivity {
 
     implementar sistema de larva escalonavel
     implementar mining minerals e gas escalonavel
-        implementar getnext (ao contrario de get last)
-        fazer as PQ do resourcehandler nao ser static
     pensar em como resolver o problema de dual requisito
         fazer um metodo que usa o sistema antigo de requisitos pra analisar o dual?
         ou um metodo independente em techhandler que simplesmente faz essa checkagem?

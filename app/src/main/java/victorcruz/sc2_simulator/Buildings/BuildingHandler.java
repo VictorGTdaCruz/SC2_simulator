@@ -103,7 +103,7 @@ public class BuildingHandler {
         if (buildingPriorityQueue.peek() != null && 150 > buildingPriorityQueue.peek().getReady() - currentTime) {
 
             final String name = buildingPriorityQueue.peek().getName();
-            //final long ready = buildingPriorityQueue.peek().getReady();
+            final long ready = buildingPriorityQueue.peek().getReady();
             //final long productionTime = buildingPriorityQueue.peek().getProductionTime();
             final int supplyMax = buildingPriorityQueue.peek().getSupplyMax();
 
@@ -117,7 +117,8 @@ public class BuildingHandler {
                         supplyHandler.increaseSupplyMax(supplyMax);
                         System.out.println("hatch ready............");
                         hatcheryNumber++;
-                        resourcesHandler.increaseMinPQSize(hatcheryNumber);
+                        resourcesHandler.increaseMinPQSize(hatcheryNumber,
+                                currentTime + (ready - currentTime));
                     }
                     else if (name.equals("SpawningPool")) {
 
@@ -212,6 +213,10 @@ public class BuildingHandler {
     //aux methods
     public int getGasNumber(){
         return gasNumber;
+    }
+
+    public int getHatcheryNumber(){
+        return hatcheryNumber;
     }
 
 }
